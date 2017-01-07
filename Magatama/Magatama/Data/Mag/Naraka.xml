@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Naraka</Name>
+	<Stage>3</Stage>
+	<Table>6</Table>
+	<PhotonBlast>Golla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Resta</PB_Filled>
+	<LowHP>Resta</LowHP>
+	<Boss>Resta</Boss>
+	<Death>Reverser</Death>
+	<Activation>30</Activation>
+</root>

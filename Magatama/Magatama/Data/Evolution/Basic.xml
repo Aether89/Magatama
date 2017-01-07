@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Evolution-->
+<Root>
+<Stage01_HU Mag="Varuna" />
+<Stage01_RA Mag="Kalki" />
+<Stage01_FO Mag="Vritra" />
+
+<Stage02_Varuna POW="Rudra"  DEX="Marutah" MIND="Vayu" />
+<Stage02_Kalki POW="Surya"  DEX="Mitra" MIND="Tapas" />
+<Stage02_Vritra POW="Sumba"  DEX="Ashvinau" MIND="Namuci" />
+
+</Root>

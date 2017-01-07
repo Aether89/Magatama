@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<GameVersion Ep1 ="57" Ep2="66" Ep4="76"/> <!-- The number of Mag to add for each version, Add + 1 to the value otherwise will miss the last one. -->
+	
+	<Mag0 name="Mag"/>
+
+	<!-- Stage 01 -->
+	<Mag1 name="Varuna"/>
+	<Mag2 name="Kalki"/>
+	<Mag3 name="Vritra"/>
+
+	<!-- Stage 02-->
+	<Mag4 name="Rudra"/>
+	<Mag5 name="Marutah"/>
+	<Mag6 name="Vayu"/>
+	<Mag7 name="Surya"/>
+	<Mag8 name="Mitra"/>
+	<Mag9 name="Tapas"/>
+	<Mag10 name="Sumba"/>
+	<Mag11 name="Ashvinau"/>
+	<Mag12 name="Namuci"/>
+
+	<!-- Stage 03-->
+	<Mag13 name="Varaha"/>
+	<Mag14 name="Kama"/>
+	<Mag15 name="Bhirava"/>
+	<Mag16 name="Apsaras"/>
+	<Mag17 name="Ila"/>
+	<Mag18 name="Garuda"/>
+	<Mag19 name="Nandin"/>
+	<Mag20 name="Yaksa"/>
+	<Mag21 name="Kabanda"/>
+	<Mag22 name="Durga"/>
+	<Mag23 name="Ushasu"/>
+	<Mag24 name="Soma"/>
+	<Mag25 name="Madhu"/>
+	<Mag26 name="Kaitabha"/>
+	<Mag27 name="Naraka"/>
+	<Mag28 name="Marica"/>
+	<Mag29 name="Ravana"/>
+	<Mag30 name="Naga"/>
+	<Mag31 name="Ribhava"/>
+	<Mag32 name="Sita"/>
+	<Mag33 name="Kumara"/>
+	<Mag34 name="Andhaka"/>
+	<Mag35 name="Bana"/>
+
+	<!-- Stage 04 : Mag Cells-->
+	<Mag36 name="Preta"/>
+	<Mag37 name="Churel"/>
+	<Mag38 name="Pitri"/>
+	<Mag39 name="Soniti"/>
+	<Mag40 name="Chao"/>
+	<Mag41 name="Robochao"/>
+	<Mag42 name="Pian"/>
+	<Mag43 name="Opa Opa"/>
+	<Mag44 name="Chu Chu"/>
+	<Mag45 name="Kapu Kapu"/>
+	<Mag46 name="Angel's Wings"/>
+	<Mag47 name="Devil's Wings"/>
+	<Mag48 name="Devil's Tail"/>
+	<Mag49 name="Panzer's Tail"/>
+	<Mag50 name="Hamburger"/>
+	<Mag51 name="Mark III"/>
+	<Mag52 name="Master System"/>
+	<Mag53 name="Genesis"/>
+	<Mag54 name="Saturn"/>
+	<Mag55 name="Dreamcast"/>
+	<Mag56 name="Elenor"/>
+
+	<!-- Stage 04 : Episode 2-->
+	<Mag57 name="Deva"/>
+	<Mag58 name="Rati"/>
+	<Mag59 name="Savitri"/>
+	<Mag60 name="Pushan"/>
+	<Mag61 name="Rukmin"/>
+	<Mag62 name="Diwari"/>
+	<Mag63 name="Nidra"/>
+	<Mag64 name="Sato"/>
+	<Mag65 name="Bhima"/>
+
+	<!-- Stage 04 : Mag Cells BlueBurst-->
+	<Mag66 name="Agastya"/>
+	<Mag67 name="Gael-Giel"/>
+	<Mag68 name="Geung-si"/>
+	<Mag69 name="Morolian"/>
+	<Mag70 name="Pioneer 2"/>
+	<Mag71 name="Puyo"/>
+	<Mag72 name="Rappy"/>
+	<Mag73 name="Striker Unit"/>
+	<Mag74 name="Tellusis"/>
+	<Mag75 name="Yahoo!"/>
+
+</Root>

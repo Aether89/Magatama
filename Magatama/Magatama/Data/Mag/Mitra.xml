@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Mitra</Name>
+	<Stage>2</Stage>
+	<Table>3</Table>
+	<PhotonBlast>Pilla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Shifta / Deband</LowHP>
+	<Boss />
+	<Death />
+	<Activation>40</Activation>
+</root>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Opa Opa</Name>
+	<Stage>4</Stage>
+	<Table>7</Table>
+	<PhotonBlast>None</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Resta</LowHP>
+	<Boss>Shifta / Deband</Boss>
+	<Death>Reverser</Death>
+	<Activation>50</Activation>
+</root>

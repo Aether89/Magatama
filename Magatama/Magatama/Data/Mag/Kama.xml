@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Kama</Name>
+	<Stage>3</Stage>
+	<Table>4</Table>
+	<PhotonBlast>Pilla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled />
+	<LowHP>Shifta / Deband</LowHP>
+	<Boss>Shifta / Deband</Boss>
+	<Death>Reverser</Death>
+	<Activation>25</Activation>
+</root>

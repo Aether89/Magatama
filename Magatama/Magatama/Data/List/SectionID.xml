@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<SectionID Total="10"/> <!-- The number of Mag to add for each version, Add + 1 to the value otherwise will miss the last one. -->
+	
+	<ID0 name="Bluefull"/>
+	<ID1 name="Greenill"/>
+	<ID2 name="Oran"/>
+	<ID3 name="Pinkal"/>
+	<ID4 name="Purplenum"/>
+	<ID5 name="Redria"/>
+	<ID6 name="Skyly"/>
+	<ID7 name="Viridia"/>
+	<ID8 name="Yellowboze"/>
+	<ID9 name="Whitill"/>
+	
+
+</Root>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Monomate Sync="0" IQ="-1" DEF="0" POW="3" DEX="0" MIND="0" />
+	<Dimate Sync="2" IQ="0" DEF="5" POW="7" DEX="0" MIND="-5" />
+	<Trimate Sync="3" IQ="1" DEF="4" POW="14" DEX="6" MIND="-10" />
+	<Monofluid Sync="0" IQ="0" DEF="0" POW="0" DEX="0" MIND="4" />
+	<Difluid Sync="0" IQ="1" DEF="4" POW="-5" DEX="0" MIND="8" />
+	<Trifluid Sync="2" IQ="2" DEF="4" POW="-10" DEX="3" MIND="15" />
+	<Antidote Sync="-3" IQ="3" DEF="0" POW="0" DEX="7" MIND="0" />
+	<Antiparalysis Sync="3" IQ="0" DEF="-4" POW="-5" DEX="20" MIND="-5" />
+	<SolAtomizer Sync="3" IQ="-2" DEF="-10" POW="9" DEX="6" MIND="9" />
+	<MoonAtomizer Sync="-2" IQ="2" DEF="8" POW="5" DEX="-8" MIND="7" />
+	<StarAtomizer Sync="3" IQ="2" DEF="7" POW="7" DEX="7" MIND="7" />
+</root>

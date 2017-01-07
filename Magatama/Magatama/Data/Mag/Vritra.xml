@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Vitra</Name>
+	<Stage>1</Stage>
+	<Table>1</Table>
+	<PhotonBlast>Leilla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP />
+	<Boss>Resta</Boss>
+	<Death />
+	<Activation>40</Activation>
+</root>

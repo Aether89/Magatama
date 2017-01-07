@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Nidra</Name>
+	<Stage>4</Stage>
+	<Table>7</Table>
+	<PhotonBlast>None</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Invulnerability</LowHP>
+	<Boss>Invulnerability</Boss>
+	<Death>Reverser</Death>
+	<Activation>50</Activation>
+</root>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<Class Total ="12"/> <!-- The number of Mag to add for each version, Add + 1 to the value otherwise will miss the last one. -->
+	
+	<Class0 Ep1="YES" Ep2="YES" Ep4="YES" Name="HUmar" />
+	<Class1 Ep1="YES" Ep2="YES" Ep4="YES" Name="HUnewearl" />
+	<Class2 Ep1="YES" Ep2="YES" Ep4="YES" Name="HUcast" />
+	<Class3 Ep1="NO" Ep2="YES" Ep4="YES" Name="HUcaseal" /><!--RAmar-->
+	<Class4 Ep1="YES" Ep2="YES" Ep4="YES" Name="RAmar" /><!--RAcast-->
+	<Class5 Ep1="NO" Ep2="YES" Ep4="YES" Name="RAmarl" /><!--RAcaseal-->
+	<Class6 Ep1="YES" Ep2="YES" Ep4="YES" Name="RAcast" /><!--FOmarl-->
+	<Class7 Ep1="YES" Ep2="YES" Ep4="YES" Name="RAcaseal" /><!--FOnewm-->
+	<Class8 Ep1="NO" Ep2="YES" Ep4="YES" Name="FOmar" /><!--FOnewearl-->
+	<Class9 Ep1="YES" Ep2="YES" Ep4="YES" Name="FOmarl" />
+	<Class10 Ep1="YES" Ep2="YES" Ep4="YES" Name="FOnewm" />
+	<Class11 Ep1="YES" Ep2="YES" Ep4="YES" Name="FOnewearl" />
+
+</Root>

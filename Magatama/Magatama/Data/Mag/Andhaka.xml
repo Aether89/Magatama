@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Andhaka</Name>
+	<Stage>3</Stage>
+	<Table>6</Table>
+	<PhotonBlast>Estlla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Resta</LowHP>
+	<Boss>Shifta / Deband</Boss>
+	<Death>Reverser</Death>
+	<Activation>25</Activation>
+</root>

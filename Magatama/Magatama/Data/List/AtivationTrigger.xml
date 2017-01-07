@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<ActivationTrigger Total ="5"/> 
+
+	<AT0  name="" PB="YES" LowHP="YES" Boss="YES" Death="YES"/>
+
+	<AT1 name="Invulnerability" PB="YES" LowHP="YES" Boss="YES" Death="NO" />
+	<AT2 name="Shifta / Deband" PB="YES" LowHP="YES" Boss="YES" Death="NO" />
+	<AT3 name="Resta" PB="YES" LowHP="YES" Boss="YES" Death="NO" />
+	<AT4 name="Reverser" PB="NO" LowHP="NO" Boss="NO" Death="YES"/> <!-- Death ID 01 --> 
+	
+</Root>
+

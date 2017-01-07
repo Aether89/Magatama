@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Kumara</Name>
+	<Stage>3</Stage>
+	<Table>4</Table>
+	<PhotonBlast>Golla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Resta</PB_Filled>
+	<LowHP>Resta</LowHP>
+	<Boss>Resta</Boss>
+	<Death>Reverser</Death>
+	<Activation>35</Activation>
+</root>

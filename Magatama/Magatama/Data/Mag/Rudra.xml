@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Rudra</Name>
+	<Stage>2</Stage>
+	<Table>2</Table>
+	<PhotonBlast>Golla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Resta</LowHP>
+	<Boss>Shifta / Deband</Boss>
+	<Death />
+	<Activation>50</Activation>
+</root>

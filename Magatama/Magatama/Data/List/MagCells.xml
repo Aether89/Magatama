@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<GameVersion Ep1="19" Ep2="19" Ep4="29"/> <!-- The number of Mag Cell to add for each version, Add + 1 to the value otherwise will miss the last one. -->
+	
+	<Cell0 name="No Mag Cell"/>
+
+	<!-- Ver1  Mag Cells-->
+	<Cell1 name="Cell of MAG 213"/>
+	<Cell2 name="Cell of MAG 502"/>
+	<Cell3 name="Heart of Chao"/>
+	<Cell4 name="Heart of RoboChao"/>
+	<Cell5 name="Heart of Pian"/>
+	<Cell6 name="Heart of Opa Opa"/>
+	<Cell7 name="Heart of Chu Chu"/>
+	<Cell8 name="Heart of Kapu Kapu"/>
+	<Cell9 name="Heart of Angel's"/>
+	<Cell10 name="Heart of Devil's"/>
+	<Cell11 name="Panter's Spirit"/>
+	<Cell12 name="Kit of Hamburger"/>
+	<Cell13 name="Kit of Mark III"/>
+	<Cell14 name="Kit of Master System"/>
+	<Cell15 name="Kit of Genesis"/>
+	<Cell16 name="Kit of Saturn"/>
+	<Cell17 name="Kit of Dreamcase"/>
+	<Cell18 name="Heart of YN-1107"/>
+	
+	<!-- BlueBurst  Mag Cells-->
+	<Cell19 name="Liberta Kit"/>
+	<Cell20 name="D-Photon Core"/>
+	<Cell21 name="Tablet"/>
+	<Cell22 name="Heart of Morolian"/>
+	<Cell23 name="Pioneer Parts"/>
+	<Cell24 name="Amitie's Meno"/>
+	<Cell25 name="Rappy Beak"/>
+	<Cell26 name="Heaven Striket Coat"/>
+	<Cell27 name="Dragon Scale"/>
+	<Cell28 name="Yahoo! Engine"/>
+	
+
+</Root>

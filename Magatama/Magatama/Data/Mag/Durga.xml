@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Name>Durga</Name>
+	<Stage>3</Stage>
+	<Table>5</Table>
+	<PhotonBlast>Estlla</PhotonBlast>
+	<!--Triggered Actions-->
+	<PB_Filled>Invulnerability</PB_Filled>
+	<LowHP>Invulnerability</LowHP>
+	<Boss>Invulnerability</Boss>
+	<Death>Reverser</Death>
+	<Activation>25</Activation>
+</root>
