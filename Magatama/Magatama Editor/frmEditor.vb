@@ -60,7 +60,7 @@ Public Class frmEditor
         cboEditorBoss.Items.Clear()
         cboEditorDeath.Items.Clear()
 
-        Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/List/AtivationTrigger.xml")
+        Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/List/ActivationTrigger.xml")
 
             XmlLoadEditor.ReadToFollowing("ActivationTrigger")
             XmlLoadEditor.MoveToAttribute("Total")
@@ -130,10 +130,11 @@ Public Class frmEditor
     Public Sub EditorInit()
 
         Call EditorTriggerList()
-        Call EditorcboMagList()
+
         Call EditorPhotonBlastList()
 
         Call EditorPhotonBlastXML()
+        Call EditorcboMagList()
         Call LoadFeedingChart()
 
     End Sub
@@ -344,25 +345,37 @@ Public Class frmEditor
 
     Public Sub LoadMagData()
 
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & lsbEditorMag.SelectedItem & ".xml")
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & lsbEditorMag.SelectedIndex & ".xml")
 
-            XmlLoadMag.ReadToFollowing("Stage")
-            nudEditorStage.Value = XmlLoadMag.ReadInnerXml
+            XmlLoadMag.ReadToFollowing("Mag")
+            XmlLoadMag.MoveToAttribute("Stage")
+            nudEditorStage.Value = XmlLoadMag.Value
+
             XmlLoadMag.ReadToFollowing("Table")
-            nudEditorFeedingTables.Value = XmlLoadMag.ReadInnerXml
+            XmlLoadMag.MoveToFirstAttribute()
+            nudEditorFeedingTables.Value = XmlLoadMag.Value
 
             XmlLoadMag.ReadToFollowing("PhotonBlast")
-            cboEditorPhotonBlast.SelectedItem = XmlLoadMag.ReadInnerXml
-            XmlLoadMag.ReadToFollowing("PB_Filled")
-            cboEditorPBFilled.SelectedItem = XmlLoadMag.ReadInnerXml
-            XmlLoadMag.ReadToFollowing("LowHP")
-            cboEditor1HP10.SelectedItem = XmlLoadMag.ReadInnerXml
-            XmlLoadMag.ReadToFollowing("Boss")
-            cboEditorBoss.SelectedItem = XmlLoadMag.ReadInnerXml
-            XmlLoadMag.ReadToFollowing("Death")
-            cboEditorDeath.SelectedItem = XmlLoadMag.ReadInnerXml
+            XmlLoadMag.MoveToFirstAttribute()
+            cboEditorPhotonBlast.SelectedIndex = XmlLoadMag.Value
+
             XmlLoadMag.ReadToFollowing("Activation")
-            nudEditorActivation.Value = XmlLoadMag.ReadInnerXml
+            XmlLoadMag.MoveToFirstAttribute()
+            nudEditorActivation.Value = XmlLoadMag.Value
+
+            XmlLoadMag.ReadToFollowing("PB_Filled")
+            XmlLoadMag.MoveToFirstAttribute()
+            cboEditorPBFilled.SelectedIndex = XmlLoadMag.Value
+            XmlLoadMag.ReadToFollowing("LowHP")
+            XmlLoadMag.MoveToFirstAttribute()
+            cboEditor1HP10.SelectedIndex = XmlLoadMag.Value
+            XmlLoadMag.ReadToFollowing("Boss")
+            XmlLoadMag.MoveToFirstAttribute()
+            cboEditorBoss.SelectedIndex = XmlLoadMag.Value
+            XmlLoadMag.ReadToFollowing("Death")
+            XmlLoadMag.MoveToFirstAttribute()
+            cboEditorDeath.SelectedIndex = XmlLoadMag.Value
+
         End Using
 
     End Sub
@@ -566,7 +579,7 @@ Public Class frmEditor
 
 #Region "Value Change"
     Private Sub lsbEditorMag_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbEditorMag.SelectedValueChanged
-        strPathEditorPicMag = Image.FromFile("./Graphics/Mag/" & lsbEditorMag.SelectedItem & ".png")
+        strPathEditorPicMag = Image.FromFile("./Graphics/Mag/" & lsbEditorMag.SelectedIndex & ".png")
         picEditorMag.Image = strPathEditorPicMag
         ttEditor.SetToolTip(picEditorMag, lsbEditorMag.SelectedItem)
         lblEditorMagName.Text = lsbEditorMag.SelectedItem

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="36" Name="Preta" Stage="4" />
+	<Table ID="7" />
+	<PhotonBlast ID="0" Name="None" />
+	<!--Triggered Actions-->
+	<Activation Chance="50" />
+	<PB_Filled ID="2" desc="Shifta / Deband" />
+	<LowHP ID="2" desc="Shifta / Deband" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

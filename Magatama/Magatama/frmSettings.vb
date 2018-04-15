@@ -80,8 +80,10 @@ Public Class frmSettings
             strSettingsGameVer = XmlLoadMag.Value 'GameVersion
         End Using
 
+
         Call cboSettingsSectionIdList()
         Call LoadInit()
+        btnGeneral.PerformClick()
 
     End Sub
 
@@ -92,12 +94,26 @@ Public Class frmSettings
             XmlLoadSettingsInit.ReadToFollowing("Default")
             XmlLoadSettingsInit.MoveToFirstAttribute()
             cboSettingsSectionID.SelectedIndex = XmlLoadSettingsInit.Value 'SectionID
-            XmlLoadSettingsInit.MoveToAttribute("Synchro")
-            nudSettingsSynchro.Value = XmlLoadSettingsInit.Value 'Default Synchro
-            XmlLoadSettingsInit.MoveToNextAttribute()
+            XmlLoadSettingsInit.MoveToAttribute("FeedingTime")
             nudSettingsFeedingTime.Value = XmlLoadSettingsInit.Value 'Time between feeding cycle
-            XmlLoadSettingsInit.MoveToNextAttribute()
+            XmlLoadSettingsInit.MoveToAttribute("RacialRestriction")
             chkRacialRestriction.Checked = XmlLoadSettingsInit.Value 'Mag Racial Restriction
+
+            XmlLoadSettingsInit.ReadToFollowing("Mag")
+            XmlLoadSettingsInit.MoveToFirstAttribute() 'Max Level
+            nudMaxLevel.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Synchro
+            nudSettingsSynchro.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'IQ
+            nudSettingsIQ.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'DEF
+            nudSettingsDEF.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'POW
+            nudSettingsPOW.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'DEX
+            nudSettingsDEX.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'MIND
+            nudSettingsMIND.Value = XmlLoadSettingsInit.Value
 
             XmlLoadSettingsInit.ReadToFollowing("Monomate")
             XmlLoadSettingsInit.MoveToFirstAttribute()
@@ -212,10 +228,18 @@ Public Class frmSettings
             .WriteStartElement("Default")
             .WriteAttributeString("SectionIDNumber", cboSettingsSectionID.SelectedIndex)
             .WriteAttributeString("SectionIDName", cboSettingsSectionID.SelectedItem)
-            .WriteAttributeString("Synchro", nudSettingsSynchro.Value)
             .WriteAttributeString("FeedingTime", nudSettingsFeedingTime.Value)
             .WriteAttributeString("RacialRestriction", chkRacialRestriction.Checked)
             .WriteEndElement()
+
+            .WriteStartElement("Mag")
+            .WriteAttributeString("MaxLevel", nudMaxLevel.Value)
+            .WriteAttributeString("Synchro", nudSettingsSynchro.Value)
+            .WriteAttributeString("IQ", nudSettingsIQ.Value)
+            .WriteAttributeString("DEF", nudSettingsDEF.Value)
+            .WriteAttributeString("POW", nudSettingsPOW.Value)
+            .WriteAttributeString("DEX", nudSettingsDEX.Value)
+            .WriteAttributeString("MIND", nudSettingsMIND.Value)
 
             .WriteComment("Item Cost ")
 
@@ -423,6 +447,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         XmlSettings.Indent = True
         XmlSettings.IndentChars = (ControlChars.Tab)
         Me.Text = My.Settings.strSoft & " Settings"
@@ -471,6 +496,31 @@ Public Class frmSettings
             strSettingsGameVer = "Ep4"
             Call cboSettingsClassList()
         End If
+    End Sub
+
+    Private Sub btnGeneral_Click(sender As Object, e As EventArgs) Handles btnGeneral.Click
+
+        pnlGeneral.Visible = True
+        pnlMag.Visible = False
+        pnlCost.Visible = False
+        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab1.png")
+
+    End Sub
+
+    Private Sub btnMag_Click(sender As Object, e As EventArgs) Handles btnMag.Click
+        pnlGeneral.Visible = False
+        pnlMag.Visible = True
+        pnlCost.Visible = False
+        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab2.png")
+
+    End Sub
+
+    Private Sub btnCost_Click(sender As Object, e As EventArgs) Handles btnCost.Click
+        pnlGeneral.Visible = False
+        pnlMag.Visible = False
+        pnlCost.Visible = True
+        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab3.png")
+
     End Sub
 
 End Class

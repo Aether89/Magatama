@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="18" Name="Garuda" Stage="3" />
+	<Table ID="5" />
+	<PhotonBlast ID="5" Name="Pilla" />
+	<!--Triggered Actions-->
+	<Activation Chance="30" />
+	<PB_Filled ID="3" desc="Resta" />
+	<LowHP ID="3" desc="Resta" />
+	<Boss ID="3" desc="Resta" />
+	<Death ID="1" desc="Reverser" />
+</root>

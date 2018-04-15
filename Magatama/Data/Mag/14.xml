@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="14" Name="Kama" Stage="3" />
+	<Table ID="4" />
+	<PhotonBlast ID="5" Name="Pilla" />
+	<!--Triggered Actions-->
+	<Activation Chance="25" />
+	<PB_Filled ID="0" desc="" />
+	<LowHP ID="2" desc="Shifta / Deband" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

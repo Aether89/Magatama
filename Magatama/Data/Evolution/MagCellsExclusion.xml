@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Cell Evolution Rarity Check Exclusion List-->
+<Root>
+
+<!--Classic Mag Cells-->
+
+<Cell_1 cnd="NO"/> <!-- CellofMAG213 -->
+<Cell_2 cnd="NO"/><!-- CellofMAG502 -->
+<Cell_3 cnd="NO"/><!-- HeartofChao -->
+<Cell_4 cnd="NO"/><!-- HeartofRoboChao -->
+<Cell_5 cnd="NO"/><!-- HeartofPian -->
+<Cell_6 cnd="NO"/><!-- HeartofOpaOpa -->
+<Cell_7 cnd="NO"/><!-- HeartofChuChu -->
+<Cell_8 cnd="NO"/><!-- HeartofKapuKapu -->
+<Cell_9 ccnd="NO"/><!-- HeartofAngel -->
+<Cell_10 cnd="YES"/> <!-- HeartofDevil --><!--Excluded to Allow evolving into a Devil's Tail-->
+<Cell_11 cnd="NO"/><!-- PanthersSpirit -->
+<Cell_12 cnd="NO"/><!-- KitofHamburger -->
+
+<Cell_13 cnd="NO"/><!-- KitofMarkIII -->
+<Cell_14 cnd="YES"/><!-- KitofMasterSystem -->
+<Cell_15 cnd="YES"/><!-- KitofGenesis -->
+<Cell_16 cnd="YES"/><!-- KitofSaturn -->
+<Cell_17 cnd="YES"/><!-- KitofDreamcast -->
+
+<Cell_18 cnd="NO"/><!-- HeartofYN1107 / Ashura -->
+
+<!--Blue Burst Mag Cells-->
+
+<Cell_19 cnd="NO"/><!-- LibertaKit -->
+<Cell_20 cnd="NO"/><!-- DPhotonCore -->
+<Cell_21 cnd="Yes"/><!-- Tablet -->
+<Cell_22 cnd="NO"/><!-- HeartofMorolian -->
+<Cell_23 cnd="NO"/><!-- PioneerParts -->
+<Cell_24 cnd="Yes"/><!-- AmitiesMeno -->
+<Cell_25 cnd="NO"/><!-- RappyBeak -->
+<Cell_26 cnd="NO"/><!-- HeavenStrikerCoat -->
+<Cell_27 cnd="NO"/><!-- DragonScale -->
+<Cell_28 cnd="NO"/><!-- YahoosEngine -->
+
+</Root>

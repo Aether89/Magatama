@@ -235,21 +235,25 @@ Public Class frmMagatama
         ' we don't use cboSectionID.SelectedIndex = 0 because we use the init to set the initial value 
     End Sub
 
+
     Public Sub Init()
+        blnEditMode = True
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Init.xml")
 
+            XmlLoadMag.ReadToFollowing("GameVersion")
+            XmlLoadMag.MoveToFirstAttribute()
+            strGameVer = XmlLoadMag.Value 'GameVersion
+        End Using
 
+        Call cboClassList()
+        Call cboSectionIdList()
+        Call cboMagList()
+
+        Call LoadInit()
 
 #Region "Reset NUD"
 
         'nudLevel.Value = 5
-        'nudSynchro.Value = 0 : Replaced with the Default value from "init.xml"
-        nudIQ.Value = 0
-
-        nudDEF.Value = 5
-        nudPOW.Value = 0
-        nudDEX.Value = 0
-        nudMIND.Value = 0
-
         nudProgressDEF.Value = 0
         nudProgressPOW.Value = 0
         nudProgressDEX.Value = 0
@@ -281,21 +285,8 @@ Public Class frmMagatama
 
         Call MagLevel() 'Calculated the Mag Level depending on it current Stats
 
-        rtfOutput.Text = ""
-
 #End Region
 
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Init.xml")
-
-            XmlLoadMag.ReadToFollowing("GameVersion")
-            XmlLoadMag.MoveToFirstAttribute()
-            strGameVer = XmlLoadMag.Value 'GameVersion
-        End Using
-
-
-        Call cboClassList()
-        Call cboSectionIDList()
-        Call cboMagList()
 
 #Region "Photon Blast"
         With cboPhotonBlast01
@@ -321,21 +312,10 @@ Public Class frmMagatama
 
         Call cboMagCellList()
 
-        lblPBFilled.Text = "PB Full :"
-        lbl1HP10.Text = "10% HP  :"
-        lblBoss.Text = "Boss    :"
-        lblDeath.Text = "Death   :"
-        lblActivationPercent.Text = "0%"
-        lblCyclesCount.Text = "0"
-        lblTime.Text = "0"
-        lblCost.Text = "0"
-
         bytFeedingCount = 0
         lngEstimatedCost = 0
         lngEstimatedTime = 0
 
-        strPathPicClass = Image.FromFile("./Graphics/Class/blank.png")
-        strPathPicSectionID = Image.FromFile("./Graphics/SectionID/blank.png")
         picClass.Image = strPathPicClass
         picSectionID.Image = strPathPicSectionID
 
@@ -343,12 +323,15 @@ Public Class frmMagatama
         Call MagatamaTitle()
         sdfSave.FileName = ""
 
+        lblCyclesCount.Text = 0
+
         Call Cost()
         Call ResetQty()
         Call PhotonBlastXML()
-        Call LoadInit()
 
-        Call Saved()
+        strTmp = ""
+
+
 
         bytMagCheck = cboMag.SelectedIndex
 
@@ -368,6 +351,16 @@ Public Class frmMagatama
         shoUndo = 0
         shoRedo = 0
 
+
+    End Sub
+
+    Public Sub InitFinalize() 'This had to be separated so New Blank Mag Work
+
+        rtfOutput.Text = ""
+        rtfOutput.AppendText(strChangedClass & cboClass.SelectedItem & vbNewLine & Chr(13))
+        rtfOutput.AppendText(strChangedSectionID & cboSectionID.SelectedItem & vbNewLine & Chr(13))
+
+        Call Saved()
         If (Not System.IO.Directory.Exists("./Tmp/")) Then
             System.IO.Directory.CreateDirectory("./Tmp/")
         End If
@@ -455,13 +448,10 @@ Public Class frmMagatama
 
     Public Sub PhotonBlastXML() 'PhotonBlast Tooltips Text
 
-        strPhotonBlast01 = cboPhotonBlast01.SelectedItem
-        strPhotonBlast02 = cboPhotonBlast02.SelectedItem
-        strPhotonBlast03 = cboPhotonBlast03.SelectedItem
+        strPhotonBlast01 = cboPhotonBlast01.Tag
+        strPhotonBlast02 = cboPhotonBlast02.Tag
+        strPhotonBlast03 = cboPhotonBlast03.Tag
 
-        strPhotonBlast01 = cboPhotonBlast01.Text.Replace(" ", "")
-        strPhotonBlast02 = cboPhotonBlast02.Text.Replace(" ", "")
-        strPhotonBlast03 = cboPhotonBlast03.Text.Replace(" ", "")
 
         If cboPhotonBlast01.SelectedIndex = 0 Then
             strPhotonBlast01 = "PhotonBlast01"
@@ -542,12 +532,15 @@ Public Class frmMagatama
 
 
             .WriteStartElement("Owner")
+            .WriteAttributeString("Class_ID", cboClass.SelectedIndex)
             .WriteAttributeString("Class", cboClass.SelectedItem)
+            .WriteAttributeString("SectionID_ID", cboSectionID.SelectedIndex)
             .WriteAttributeString("SectionID", cboSectionID.SelectedItem)
             .WriteEndElement()
 
 
             .WriteStartElement("Mag")
+            .WriteAttributeString("ID", cboMag.SelectedIndex)
             .WriteAttributeString("Name", cboMag.SelectedItem)
             .WriteAttributeString("Level", nudLevel.Value.ToString)
             .WriteAttributeString("Synchro", nudSynchro.Value.ToString)
@@ -697,18 +690,17 @@ Public Class frmMagatama
 
         Using XmlLoadMag As XmlReader = XmlReader.Create(ofdMagatama.FileName)
             XmlLoadMag.ReadToFollowing("Owner")
-            XmlLoadMag.MoveToFirstAttribute()
-            cboClass.SelectedItem = XmlLoadMag.Value 'Class
-            XmlLoadMag.MoveToNextAttribute()
-            cboSectionID.SelectedItem = XmlLoadMag.Value 'Section ID
+            XmlLoadMag.MoveToAttribute("Class_ID")
+            cboClass.SelectedIndex = XmlLoadMag.Value 'Class
+            XmlLoadMag.MoveToAttribute("SectionID_ID")
+            cboSectionID.SelectedIndex = XmlLoadMag.Value 'Section ID
 
             XmlLoadMag.ReadToFollowing("Mag")
-            XmlLoadMag.MoveToFirstAttribute()
-            cboMag.SelectedItem = XmlLoadMag.Value 'Name
-            XmlLoadMag.MoveToNextAttribute()
-            XmlLoadMag.MoveToNextAttribute() ' We Skip the Level Attribute because it is Recalculated in function of it stats
+            XmlLoadMag.MoveToAttribute("ID")
+            cboMag.SelectedIndex = XmlLoadMag.Value 'Mag ID Number
+            XmlLoadMag.MoveToAttribute("Synchro")
             nudSynchro.Value = XmlLoadMag.Value
-            XmlLoadMag.MoveToNextAttribute()
+            XmlLoadMag.MoveToAttribute("IQ")
             nudIQ.Value = XmlLoadMag.Value
 
             XmlLoadMag.ReadToFollowing("NextLevel")
@@ -836,17 +828,32 @@ Public Class frmMagatama
 
             XmlLoadMag.ReadToFollowing("Class")
             XmlLoadMag.MoveToAttribute(strGameVer)
-            cboClass.SelectedIndex = XmlLoadMag.Value 'SectionID
+            cboClass.SelectedIndex = XmlLoadMag.Value 'Class
 
             XmlLoadMag.ReadToFollowing("Default")
             XmlLoadMag.MoveToFirstAttribute()
             cboSectionID.SelectedIndex = XmlLoadMag.Value 'SectionID
-            XmlLoadMag.MoveToAttribute("Synchro")
-            nudSynchro.Value = XmlLoadMag.Value 'Default Synchro
-            XmlLoadMag.MoveToNextAttribute()
+            XmlLoadMag.MoveToAttribute("FeedingTime")
             shoFeedingTime = XmlLoadMag.Value 'Time between feeding cycle
-            XmlLoadMag.MoveToNextAttribute()
+            XmlLoadMag.MoveToAttribute("RacialRestriction")
             blnMagRacialRestriction = XmlLoadMag.Value 'Mag Racial Restriction
+
+            XmlLoadMag.ReadToFollowing("Mag")
+            XmlLoadMag.MoveToFirstAttribute() 'Max Level
+            nudLevel.Maximum = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Synchro
+            nudSynchro.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'IQ
+            nudIQ.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'DEF
+            nudDEF.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'POW
+            nudPOW.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'DEX
+            nudDEX.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'MIND
+            nudMIND.Value = XmlLoadMag.Value
+
 
             XmlLoadMag.ReadToFollowing("Monomate")
             XmlLoadMag.MoveToFirstAttribute()
@@ -1173,14 +1180,6 @@ Public Class frmMagatama
         End Using
     End Sub
 
-    Public Sub LoadLang()
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Strings.xml")
-            XmlLoadMag.ReadToFollowing("Level")
-            XmlLoadMag.MoveToFirstAttribute()
-            lblLevel.Text = XmlLoadMag.Value 'Text
-        End Using
-
-    End Sub
 
 #End Region
 
@@ -1277,6 +1276,8 @@ Public Class frmMagatama
         XmlSettings.IndentChars = (ControlChars.Tab)
         Call LoadTheme()
         Call Init()
+        Call InitFinalize()
+
     End Sub
 
     Private Sub frmMagatama_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -1489,7 +1490,7 @@ Public Class frmMagatama
             .BackgroundImage = strPathPicClassBackground
         End With
         Call Tooltips()
-        If mnuEditStat.Checked = False Then
+        If blnEditMode = False Then
             rtfOutput.AppendText(strChangedClass & cboClass.SelectedItem & vbNewLine & Chr(13))
         End If
         Call Unsaved()
@@ -1500,36 +1501,65 @@ Public Class frmMagatama
         picSectionID.Image = strPathPicSectionID
         Call Tooltips()
 
-        If mnuEditStat.Checked = False Then
+        If blnEditMode = False Then
             rtfOutput.AppendText(strChangedSectionID & cboSectionID.SelectedItem & vbNewLine & Chr(13))
         End If
         Call Unsaved()
     End Sub
 
     Private Sub cboMag_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMag.SelectedValueChanged
-        strPathPicMag = Image.FromFile("./Graphics/Mag/" & cboMag.SelectedItem & ".png")
+        strPathPicMag = Image.FromFile("./Graphics/Mag/" & cboMag.SelectedIndex & ".png")
         picMag.Image = strPathPicMag
 
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedItem & ".xml")
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedIndex & ".xml")
 
-            XmlLoadMag.ReadToFollowing("Stage")
-            picMag.Tag = XmlLoadMag.ReadInnerXml.ToString()
+            XmlLoadMag.ReadToFollowing("Mag")
+            XmlLoadMag.MoveToAttribute("Stage")
+            picMag.Tag = XmlLoadMag.Value
+
             XmlLoadMag.ReadToFollowing("Table")
-            strFeedingChart = XmlLoadMag.ReadInnerXml.ToString()
-            XmlLoadMag.ReadToFollowing("PB_Filled")
-            lblPBFilledText.Text = XmlLoadMag.ReadInnerXml.ToString()
-            XmlLoadMag.ReadToFollowing("LowHP")
-            lbl1HP10Text.Text = XmlLoadMag.ReadInnerXml.ToString()
-            XmlLoadMag.ReadToFollowing("Boss")
-            lblBossText.Text = XmlLoadMag.ReadInnerXml.ToString()
-            XmlLoadMag.ReadToFollowing("Death")
-            lblDeathText.Text = XmlLoadMag.ReadInnerXml.ToString()
+            XmlLoadMag.MoveToFirstAttribute()
+            strFeedingChart = XmlLoadMag.Value
+
             XmlLoadMag.ReadToFollowing("Activation")
-            lblActivationPercent.Text = XmlLoadMag.ReadInnerXml.ToString()
+            XmlLoadMag.MoveToFirstAttribute()
+            lblActivationPercent.Text = XmlLoadMag.Value
+
+            XmlLoadMag.ReadToFollowing("PB_Filled")
+            XmlLoadMag.MoveToFirstAttribute()
+            Using XmlLoadTrigger As XmlReader = XmlReader.Create("./Data/List/ActivationTrigger.xml")
+                XmlLoadTrigger.ReadToFollowing("AT" & XmlLoadMag.Value)
+                XmlLoadTrigger.MoveToFirstAttribute()
+                lblPBFilledText.Text = XmlLoadTrigger.Value
+            End Using
+
+            XmlLoadMag.ReadToFollowing("LowHP")
+            XmlLoadMag.MoveToFirstAttribute()
+            Using XmlLoadTrigger As XmlReader = XmlReader.Create("./Data/List/ActivationTrigger.xml")
+                XmlLoadTrigger.ReadToFollowing("AT" & XmlLoadMag.Value)
+                XmlLoadTrigger.MoveToFirstAttribute()
+                lbl1HP10Text.Text = XmlLoadTrigger.Value
+            End Using
+
+            XmlLoadMag.ReadToFollowing("Boss")
+            XmlLoadMag.MoveToFirstAttribute()
+            Using XmlLoadTrigger As XmlReader = XmlReader.Create("./Data/List/ActivationTrigger.xml")
+                XmlLoadTrigger.ReadToFollowing("AT" & XmlLoadMag.Value)
+                XmlLoadTrigger.MoveToFirstAttribute()
+                lblBossText.Text = XmlLoadTrigger.Value
+            End Using
+
+            XmlLoadMag.ReadToFollowing("Death")
+            XmlLoadMag.MoveToFirstAttribute()
+            Using XmlLoadTrigger As XmlReader = XmlReader.Create("./Data/List/ActivationTrigger.xml")
+                XmlLoadTrigger.ReadToFollowing("AT" & XmlLoadMag.Value)
+                XmlLoadTrigger.MoveToFirstAttribute()
+                lblDeathText.Text = XmlLoadTrigger.Value
+            End Using
 
         End Using
 
-        If mnuEditStat.Checked = False Then
+            If mnuEditStat.Checked = False Then
 
             If cboMag.SelectedItem = "Mag" Then
 
@@ -1867,10 +1897,25 @@ Public Class frmMagatama
 #Region "Menu Strip"
 
     Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
+        Call SavePrompt()
+        Call Init()
+        Call InitFinalize()
 
+    End Sub
+
+    Private Sub mnuFileNewBlank_Click(sender As Object, e As EventArgs) Handles mnuFileNewBlank.Click
         Call SavePrompt()
 
         Call Init()
+
+        nudSynchro.Value = 0
+        nudIQ.Value = 0
+        nudDEF.Value = 0
+        nudPOW.Value = 0
+        nudDEX.Value = 0
+        nudMIND.Value = 0
+        Call InitFinalize()
+
     End Sub
 
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
@@ -1901,6 +1946,7 @@ Public Class frmMagatama
 
         If ofdMagatama.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Call Init() 'Used to Reset the Maximum  value of the stats nud
+            Call InitFinalize()
             Call MagLoad()
         End If
         Call Saved()
@@ -2232,7 +2278,7 @@ Public Class frmMagatama
 #Region "Evolution"
 
     Public Sub MagCellEvolutionCheck()
-        strTmp = cboMagCell.SelectedItem.Replace(" ", "").Replace("'", "").Replace("-", "").Replace("!", "")
+        strTmp = "Cell_" & cboMagCell.SelectedIndex
         If picMag.Tag = "4" Then
 
             Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/Evolution/MagCellsExclusion.xml")
@@ -2255,10 +2301,7 @@ Public Class frmMagatama
     Public Sub MagCellError()
 
         Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/Evolution/MagCellsError.xml")
-
-
             XmlLoadTable.ReadToFollowing(strTmp)
-
             XmlLoadTable.MoveToFirstAttribute()
             strTmp = XmlLoadTable.Value
         End Using
@@ -2277,14 +2320,16 @@ Public Class frmMagatama
 
             XmlLoadMag.ReadToFollowing("Stage01_" & cboClass.SelectedItem.Substring(0, 2))
             XmlLoadMag.MoveToFirstAttribute()
-            cboMag.SelectedItem = XmlLoadMag.Value
+            cboMag.SelectedIndex = XmlLoadMag.Value
         End Using
 
 
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedItem & ".xml")
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedIndex & ".xml")
 
             XmlLoadMag.ReadToFollowing("PhotonBlast")
-            cboPhotonBlast01.SelectedItem = XmlLoadMag.ReadInnerXml.ToString()
+            XmlLoadMag.MoveToFirstAttribute()
+            XmlLoadMag.MoveToNextAttribute()
+            cboPhotonBlast01.SelectedItem = XmlLoadMag.Value
 
         End Using
 
@@ -2380,15 +2425,17 @@ Public Class frmMagatama
 
 
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Evolution/Basic.xml")
-                XmlLoadMag.ReadToFollowing("Stage02_" & cboMag.SelectedItem)
-                XmlLoadMag.MoveToAttribute(strEvo)
-            cboMag.SelectedItem = XmlLoadMag.Value
+            XmlLoadMag.ReadToFollowing("Stage02_" & cboMag.SelectedIndex)
+            XmlLoadMag.MoveToAttribute(strEvo)
+            cboMag.SelectedIndex = XmlLoadMag.Value
         End Using
 
-        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedItem & ".xml")
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedIndex & ".xml")
 
             XmlLoadMag.ReadToFollowing("PhotonBlast")
-            cboPhotonBlast02.SelectedItem = XmlLoadMag.ReadInnerXml.ToString()
+            XmlLoadMag.MoveToFirstAttribute()
+            XmlLoadMag.MoveToNextAttribute()
+            cboPhotonBlast02.SelectedItem = XmlLoadMag.Value
 
 
         End Using
@@ -2575,21 +2622,21 @@ Public Class frmMagatama
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Evolution/" & cboClass.SelectedItem.Substring(0, 2) & "_Stage03.xml")
                         XmlLoadMag.ReadToFollowing(strEvoCND)
                         XmlLoadMag.MoveToAttribute(strEvo)
-            cboMag.SelectedItem = XmlLoadMag.Value
+            cboMag.SelectedIndex = XmlLoadMag.Value
         End Using
 
-                    Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedItem & ".xml")
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & cboMag.SelectedIndex & ".xml")
 
-                        XmlLoadMag.ReadToFollowing("PhotonBlast")
+            XmlLoadMag.ReadToFollowing("PhotonBlast")
+            XmlLoadMag.MoveToFirstAttribute()
+            XmlLoadMag.MoveToNextAttribute()
+            strEvo = XmlLoadMag.Value
 
-                        strEvo = XmlLoadMag.ReadInnerXml.ToString()
-
-
-                    End Using
+        End Using
 
 
 
-                    If cboPhotonBlast01.SelectedItem = strEvo Then
+        If cboPhotonBlast01.SelectedItem = strEvo Then
 
                     ElseIf cboPhotonBlast02.SelectedItem = strEvo Then
 
@@ -2684,7 +2731,7 @@ Evolve:
                 Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Evolution/" & cboClass.SelectedItem.Substring(0, 2) & "_Stage04.xml")
                     XmlLoadMag.ReadToFollowing(strEvoCND)
                     XmlLoadMag.MoveToAttribute(strEvo)
-                    cboMag.SelectedItem = XmlLoadMag.Value
+                    cboMag.SelectedIndex = XmlLoadMag.Value
                 End Using
             End If
 
@@ -2696,12 +2743,14 @@ Evolve:
 
 #Region "Mag Cells"
 
-    Public Sub NoMagCell()
+    Public Sub Cell_0() 'No Mag Cell
         'Exist only so the program doesn't crash
     End Sub
 
 #Region "Classic"
-    Public Sub CellofMAG213()
+
+    'CellofMAG213
+    Public Sub Cell_1()
 
         If nudLevel.Value >= 100 Then
 
@@ -2742,16 +2791,17 @@ Evolve:
 
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
             If strEvo = "A" Then
-                cboMag.SelectedItem = "Churel"
+                cboMag.SelectedIndex = 37 'Churel
             ElseIf strEvo = "B" Then
-                cboMag.SelectedItem = "Preta"
+                cboMag.SelectedIndex = 36 'Preta
             End If
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub CellofMAG502()
+    'CellofMAG502
+    Public Sub Cell_2()
 
         If nudLevel.Value >= 100 Then
 
@@ -2794,9 +2844,9 @@ Evolve:
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
 
             If strEvo = "A" Then
-                cboMag.SelectedItem = "Soniti"
+                cboMag.SelectedIndex = 39 'Soniti
             ElseIf strEvo = "B" Then
-                cboMag.SelectedItem = "Pitri"
+                cboMag.SelectedIndex = 38 'Pitri
             End If
 
         Else
@@ -2804,14 +2854,15 @@ Evolve:
         End If
     End Sub
 
-    Public Sub HeartofChao()
+    'HeartofChao
+    Public Sub Cell_3()
 
         If nudDEF.Value >= 35 Then
             If nudPOW.Value >= 35 Then
                 If nudDEX.Value >= 35 Then
                     If nudMIND.Value >= 35 Then
                         rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                        cboMag.SelectedItem = "Chao"
+                        cboMag.SelectedIndex = 40 'Chao
                     End If
                 End If
             End If
@@ -2820,7 +2871,8 @@ Evolve:
         End If
     End Sub
 
-    Public Sub HeartofRoboChao()
+    'HeartofRoboChao
+    Public Sub Cell_4()
 
         If nudDEF.Value >= 70 Then
             shoCount = 1
@@ -2840,20 +2892,21 @@ Evolve:
 
         If shoCount >= 2 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Chao"
+            cboMag.SelectedIndex = 41 'Robochao
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofPian()
+    'HeartofPian
+    Public Sub Cell_5()
 
         If nudLevel.Value >= 120 Then
             If nudSynchro.Value >= 120 Then
                 If nudIQ.Value >= 180 Then
                     rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                    cboMag.SelectedItem = "Pian"
+                    cboMag.SelectedIndex = 42 'Pian
                 End If
 
             End If
@@ -2863,40 +2916,44 @@ Evolve:
 
     End Sub
 
-    Public Sub HeartofOpaOpa()
+    'HeartofOpaOpa
+    Public Sub Cell_6()
 
         If nudLevel.Value >= 100 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Opa Opa"
+            cboMag.SelectedIndex = 43 'OpaOpa
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofChuChu()
+    'HeartofChuChu
+    Public Sub Cell_7()
 
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Chu Chu"
+            cboMag.SelectedIndex = 44 'Chu CHu
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofKapuKapu()
+    'HeartofKapuKapu
+    Public Sub Cell_8()
 
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Kapu Kapu"
+            cboMag.SelectedIndex = 45 'Kapu Kapu
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofAngel()
+    'HeartofAngel
+    Public Sub Cell_9()
 
 
         Select Case cboClass.SelectedItem.Remove(0, 2)
@@ -2916,18 +2973,19 @@ Evolve:
         If strEvo = "OK" Then
             If nudLevel.Value >= 100 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Angel's Wings"
+                cboMag.SelectedIndex = 46 'Angel's Wings
             Else
-            Call MagCellError()
+                Call MagCellError()
             End If
         Else
-            strTmp = strTmp & "Droid"
+            strTmp = strTmp & "_Droid"
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofDevil()
+    'HeartofDevil
+    Public Sub Cell_10()
 
         Select Case cboClass.SelectedItem.Remove(0, 2)
 
@@ -2945,30 +3003,31 @@ Evolve:
 
         If strEvo = "OK" Then
 
-            If cboMag.SelectedItem = "Devil's Wings" Then
+            If cboMag.SelectedIndex = 47 Then 'Devíl's Wings
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Devil's Tail"
+                cboMag.SelectedIndex = 48 'Devil's Tail
             ElseIf nudLevel.Value >= 100 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Devil's Wings"
+                cboMag.SelectedIndex = 47 'Devíl's Wings
             Else
                 Call MagCellError()
             End If
         Else
-            strTmp = strTmp & "Droid"
+            strTmp = strTmp & "_Droid"
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub PanthersSpirit()
-        If cboMag.SelectedItem = "Naga" Then
+    'PanthersSpirit
+    Public Sub Cell_11()
+        If cboMag.SelectedIndex = 30 Then 'Naga
 
             If nudLevel.Value >= 50 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Panzer's Tail"
+                cboMag.SelectedIndex = 49 'Panzer's Tail
             Else
-                strTmp = strTmp & "Lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
 
             End If
@@ -2978,15 +3037,16 @@ Evolve:
 
     End Sub
 
-    Public Sub KitofHamburger()
-        If cboMag.SelectedItem = "Kaitabha " Then
+    'KitofHamburger
+    Public Sub Cell_12()
+        If cboMag.SelectedIndex = 26 Then 'Kaithabha
 
             If nudLevel.Value >= 50 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Hamburger"
+                cboMag.SelectedIndex = 50 'Hamburger
 
             Else
-                strTmp = strTmp & "Lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -2994,22 +3054,24 @@ Evolve:
         End If
     End Sub
 
-    Public Sub KitofMarkIII()
+    'KitofMarkIII
+    Public Sub Cell_13()
         If nudLevel.Value <= 9 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Mark III"
+            cboMag.SelectedIndex = 51 'Mark III
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub KitofMasterSystem()
-        If cboMag.SelectedItem = "Mark III" Then
+    'KitofMasterSystem
+    Public Sub Cell_14()
+        If cboMag.SelectedIndex = 51 Then 'Mark III
             If nudLevel.Value >= 60 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Master System"
+                cboMag.SelectedIndex = 52 'Master System
             Else
-                strTmp = strTmp & "lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -3017,13 +3079,14 @@ Evolve:
         End If
     End Sub
 
-    Public Sub KitofGenesis()
-        If cboMag.SelectedItem = "Master System" Then
+    'Kit of Genesis
+    Public Sub Cell_15()
+        If cboMag.SelectedIndex = 52 Then 'Master System
             If nudLevel.Value >= 70 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Genesis"
+                cboMag.SelectedIndex = 53 'Genesis
             Else
-                strTmp = strTmp & "lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -3031,13 +3094,14 @@ Evolve:
         End If
     End Sub
 
-    Public Sub KitofSaturn()
-        If cboMag.SelectedItem = "Genesis" Then
+    'Kit of Saturn
+    Public Sub Cell_16()
+        If cboMag.SelectedIndex = 53 Then 'Genesis
             If nudLevel.Value >= 90 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Saturn"
+                cboMag.SelectedIndex = "54" 'Saturn
             Else
-                strTmp = strTmp & "lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -3045,13 +3109,14 @@ Evolve:
         End If
     End Sub
 
-    Public Sub KitifDreancast()
-        If cboMag.SelectedItem = "Saturn" Then
+    'Kit of Dreamcast
+    Public Sub Cell_17()
+        If cboMag.SelectedIndex = "54" Then 'Saturn
             If nudLevel.Value >= 165 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Dreamcast"
+                cboMag.SelectedIndex = "55" 'Dreamcast
             Else
-                strTmp = strTmp & "lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -3059,7 +3124,8 @@ Evolve:
         End If
     End Sub
 
-    Public Sub HeartofYN1107()
+    'HeartofYN1107
+    Public Sub Cell_18()
 
 
         Select Case cboClass.SelectedItem.Remove(0, 2)
@@ -3067,7 +3133,7 @@ Evolve:
             Case "cast"
                 strEvo = "OK"
             Case "caseal"
-                strEvo = "Ok"
+                strEvo = "OK"
             Case Else
                 strEvo = ""
         End Select
@@ -3079,12 +3145,12 @@ Evolve:
         If strEvo = "OK" Then
             If nudLevel.Value >= 50 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Elenor"
+                cboMag.SelectedIndex = 56
             Else
                 Call MagCellError()
             End If
         Else
-            strTmp = strTmp & "Droid"
+            strTmp = strTmp & "_Droid"
             Call MagCellError()
         End If
     End Sub
@@ -3092,23 +3158,26 @@ Evolve:
 #End Region
 
 #Region "Blue Burst"
-    Public Sub LibertaKit()
+
+    'LibertaKit
+    Public Sub Cell_19()
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Agastya"
+            cboMag.SelectedIndex = 66 'Agastya
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub DPhotonCore()
+    'DPhotonCore
+    Public Sub Cell_20()
 
-        If cboMag.SelectedItem = "Kama" Then
+        If cboMag.SelectedIndex = 14 Then 'Kama
             If nudLevel.Value >= 100 Then
                 rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-                cboMag.SelectedItem = "Gael-Giel"
+                cboMag.SelectedIndex = 67 'Gael-Giel
             Else
-                strTmp = strTmp & "Lvl"
+                strTmp = strTmp & "_lvl"
                 Call MagCellError()
             End If
         Else
@@ -3117,75 +3186,83 @@ Evolve:
 
     End Sub
 
-    Public Sub Tablet()
+    'Tablet
+    Public Sub Cell_21()
 
-        If cboMag.SelectedItem = "Rukmin" Then
+        If cboMag.SelectedIndex = 61 Then 'Rukmin
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Geung-si"
+            cboMag.SelectedIndex = 68 'sGeung-si
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub HeartofMorolian()
+    'HeartofMorolian
+    Public Sub Cell_22()
 
-        If cboMag.SelectedItem = "Kumara" Then
+        If cboMag.SelectedIndex = 33 Then 'Kumara
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Morolian"
+            cboMag.SelectedIndex = 69 'Morolian
         Else
             Call MagCellError()
         End If
 
     End Sub
 
-    Public Sub PioneerParts()
+    'Pioneer Parts
+    Public Sub Cell_23()
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Pioneer 2"
+            cboMag.SelectedItem = 70 'Pioneer 2
         End If
     End Sub
 
-    Public Sub AmitiesMeno()
-        If cboMag.SelectedItem = "Chu Chu" Then
+    'AmitiesMeno
+    Public Sub Cell_24()
+        If cboMag.SelectedIndex = 44 Then 'Chu Chu
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Puyo"
+            cboMag.SelectedIndex = 71 'Puyo
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub RappyBeak()
+    'Rappy Beak
+    Public Sub Cell_25()
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Rappy"
+            cboMag.SelectedIndex = 72 'Rappy
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub HeavenStrikerCoat()
-        If cboMag.SelectedItem = "Garuda" Then
+    'HeavenStrikerCoat
+    Public Sub cell_26()
+        If cboMag.SelectedIndex = 18 Then 'Garuda
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Striker Unit"
+            cboMag.SelectedIndex = 73 'Striker Unit
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub DragonScale()
-        If cboMag.SelectedItem = "Kama" Then
+    'DragonScale
+    Public Sub Cell_27()
+        If cboMag.SelectedIndex = 14 Then 'Kama
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Tellusis"
+            cboMag.SelectedIndex = 74 'Tellusis
         Else
             Call MagCellError()
         End If
     End Sub
 
-    Public Sub YahoosEngine()
+    'YahoosEngine
+    Public Sub Cell_28()
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedItem = "Yahoo!"
+            cboMag.SelectedIndex = 74 'Yahoo!
         Else
             Call MagCellError()
         End If

@@ -79,7 +79,6 @@ Partial Class frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.Magatama.My.Resources.Resources.bg_about
         Me.CancelButton = Me.btnOK
         Me.ClientSize = New System.Drawing.Size(284, 290)
         Me.Controls.Add(Me.btnOK)

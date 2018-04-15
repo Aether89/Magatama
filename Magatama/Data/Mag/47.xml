@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="47" Name="Devil's Wings" Stage="4" />
+	<Table ID="7" />
+	<PhotonBlast ID="0" Name="None" />
+	<!--Triggered Actions-->
+	<Activation Chance="50" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="3" desc="Resta" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

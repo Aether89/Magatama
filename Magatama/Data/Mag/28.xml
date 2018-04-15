@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="28" Name="Marica" Stage="3" />
+	<Table ID="6" />
+	<PhotonBlast ID="5" Name="Pilla" />
+	<!--Triggered Actions-->
+	<Activation Chance="30" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="3" desc="Resta" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

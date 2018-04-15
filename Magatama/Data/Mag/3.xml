@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="3" Name="Vritra" Stage="1" />
+	<Table ID="1" />
+	<PhotonBlast ID="3" Name="Leilla" />
+	<!--Triggered Actions-->
+	<Activation Chance="40" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="0" desc="" />
+	<Boss ID="3" desc="Resta" />
+	<Death ID="0" desc="" />
+</root>

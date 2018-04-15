@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="64" Name="Sato" Stage="4" />
+	<Table ID="5" />
+	<PhotonBlast ID="0" Name="None" />
+	<!--Triggered Actions-->
+	<Activation Chance="50" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="1" desc="Invulnerability" />
+	<Boss ID="1" desc="Invulnerability" />
+	<Death ID="1" desc="Reverser" />
+</root>

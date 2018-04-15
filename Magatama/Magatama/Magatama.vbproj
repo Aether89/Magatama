@@ -202,8 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Graphics\Theme\bg.png" />
-    <None Include="Graphics\Theme\bg_about.png" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -216,9 +214,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphics\Mag\Mag.png" />
-    <None Include="Graphics\Theme\bg_settings.png" />
-    <None Include="Graphics\PhotonBlast\none.png" />
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="29" Name="Ravana" Stage="3" />
+	<Table ID="6" />
+	<PhotonBlast ID="1" Name="Farlla" />
+	<!--Triggered Actions-->
+	<Activation Chance="25" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="2" desc="Shifta / Deband" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

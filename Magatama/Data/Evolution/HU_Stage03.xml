@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Evolution-->
+<Root>
+
+<!--POW > DEX > MIND-->
+<POW_DEX_MIND A="13" Aname="Varaha" B="14" Bname="Kama"/>
+<!--POW > MIND > DEX-->
+<POW_MIND_DEX A="15" Aname="Bhirava" B="16" Bname="Apsaras"/>
+<!--DEX > POW > MIND-->
+<DEX_POW_MIND A="17" Aname="Ila" B="18" Bname="Garuda"/>
+<!--DEX > MIND > POW-->
+<DEX_MIND_POW A="19" Aname="Nandin" B="20" Bname="Yaksa"/>
+<!--MIND > POW > DEX-->
+<MIND_POW_DEX A="21" Aname="Kabanda" B="22" Bname="Durga"/>
+<!--MIND > DEX > POW-->
+<MIND_DEX_POW A="23" Aname="Ushasu" B="24" Bname="Soma"/>
+
+</Root>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="2" Name="Kalki" Stage="1" />
+	<Table ID="1" />
+	<PhotonBlast ID="2" Name="Estlla" />
+	<!--Triggered Actions-->
+	<Activation Chance="40" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="0" desc="" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="0" desc="" />
+</root>

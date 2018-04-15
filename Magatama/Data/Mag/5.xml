@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="5" Name="Marutah" Stage="2" />
+	<Table ID="2" />
+	<PhotonBlast ID="5" Name="Pilla" />
+	<!--Triggered Actions-->
+	<Activation Chance="40" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="2" desc="Shifta / Deband" />
+	<Boss ID="0" desc="" />
+	<Death ID="0" desc="" />
+</root>

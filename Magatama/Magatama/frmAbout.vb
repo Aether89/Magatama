@@ -49,7 +49,8 @@ Public Class frmAbout
             & vbNewLine & "http://www.pscave.com" & vbNewLine & vbNewLine & "Phantasy Star Online Wiki" _
             & vbNewLine & "http://pso.wikia.com/" & vbNewLine & vbNewLine & "Rico Journals by Koala Cuddle Party" _
             & vbNewLine & "http://koalacuddleparty.com/" & vbNewLine & vbNewLine & "Schtack for is PSO gsl Editor and PVM/XVM Tool" _
-            & vbNewLine & vbNewLine & "-- Beta Tester --" & vbNewLine & vbNewLine & " [ Ephinea ] " & vbNewLine & "-Spuz" & vbNewLine & vbNewLine)
+            & vbNewLine & vbNewLine & "-- Beta Tester --" & vbNewLine & vbNewLine & " [ Ephinea ] " & vbNewLine & "-Spuz" & vbNewLine _
+            & "-Henonk" & vbNewLine & vbNewLine & " [ ULTIMA ] " & vbNewLine & "-Fyrewolf5" & vbNewLine & vbNewLine)
 
         btnOK.Focus()
     End Sub
@@ -57,5 +58,6 @@ Public Class frmAbout
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Me.Close()
     End Sub
+
 
 End Class

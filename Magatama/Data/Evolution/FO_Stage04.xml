@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Evolution-->
+<Root>
+
+<!--Fname=ORCE-->
+
+<!--DEFname= + MIND = POW + DEX-->
+<DEFMIND-POWDEX CND="GPO" M="63" Mname="Nidra" F="65" Fname="Bhima" />
+<!--DEFname= + DEX = POW + MIND-->
+<DEFDEX-POWMIND CND="VBRW" M="63" Mname="Nidra" F="64" Fname="Sato" />
+<!--DEFname= + POW = DEX + MIND-->
+<DEFPOW-DEXMIND CND="SKY" M="63" Mname="Nidra" F="65" Fname="Bhima" />
+
+</Root>

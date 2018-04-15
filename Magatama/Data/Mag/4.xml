@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="4" Name="Rudra" Stage="2" />
+	<Table ID="2" />
+	<PhotonBlast ID="4" Name="Golla" />
+	<!--Triggered Actions-->
+	<Activation Chance="50" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="3" desc="Resta" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="0" desc="" />
+</root>

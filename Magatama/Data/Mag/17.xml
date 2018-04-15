@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="17" Name="Ila" Stage="3" />
+	<Table ID="5" />
+	<PhotonBlast ID="6" Name="Mylla" />
+	<!--Triggered Actions-->
+	<Activation Chance="25" />
+	<PB_Filled ID="0" desc="" />
+	<LowHP ID="3" desc="Resta" />
+	<Boss ID="2" desc="Shifta / Deband" />
+	<Death ID="1" desc="Reverser" />
+</root>

@@ -33,6 +33,7 @@ Partial Class frmMagatama
         Me.mnuMagatama = New System.Windows.Forms.MenuStrip()
         Me.mnuFileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileNewBlank = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpen = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
@@ -248,7 +249,7 @@ Partial Class frmMagatama
         '
         'mnuFileMenu
         '
-        Me.mnuFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExportOutput, Me.mnuFileExit})
+        Me.mnuFileMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileNewBlank, Me.mnuFileOpen, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExportOutput, Me.mnuFileExit})
         resources.ApplyResources(Me.mnuFileMenu, "mnuFileMenu")
         Me.mnuFileMenu.Name = "mnuFileMenu"
         '
@@ -256,6 +257,11 @@ Partial Class frmMagatama
         '
         Me.mnuFileNew.Name = "mnuFileNew"
         resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
+        '
+        'mnuFileNewBlank
+        '
+        Me.mnuFileNewBlank.Name = "mnuFileNewBlank"
+        resources.ApplyResources(Me.mnuFileNewBlank, "mnuFileNewBlank")
         '
         'mnuFileOpen
         '
@@ -376,7 +382,7 @@ Partial Class frmMagatama
         'nudLevel
         '
         resources.ApplyResources(Me.nudLevel, "nudLevel")
-        Me.nudLevel.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudLevel.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
         Me.nudLevel.Name = "nudLevel"
         Me.nudLevel.ReadOnly = True
         '
@@ -470,49 +476,42 @@ Partial Class frmMagatama
         '
         Me.lblCost.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblCost, "lblCost")
-        Me.lblCost.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCost.Name = "lblCost"
         '
         'lblTime
         '
         Me.lblTime.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblTime, "lblTime")
-        Me.lblTime.ForeColor = System.Drawing.SystemColors.Control
         Me.lblTime.Name = "lblTime"
         '
         'lblPBFilled
         '
         Me.lblPBFilled.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblPBFilled, "lblPBFilled")
-        Me.lblPBFilled.ForeColor = System.Drawing.SystemColors.Control
         Me.lblPBFilled.Name = "lblPBFilled"
         '
         'lbl1HP10
         '
         Me.lbl1HP10.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lbl1HP10, "lbl1HP10")
-        Me.lbl1HP10.ForeColor = System.Drawing.SystemColors.Control
         Me.lbl1HP10.Name = "lbl1HP10"
         '
         'lblBoss
         '
         Me.lblBoss.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblBoss, "lblBoss")
-        Me.lblBoss.ForeColor = System.Drawing.SystemColors.Control
         Me.lblBoss.Name = "lblBoss"
         '
         'lblDeath
         '
         Me.lblDeath.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblDeath, "lblDeath")
-        Me.lblDeath.ForeColor = System.Drawing.SystemColors.Control
         Me.lblDeath.Name = "lblDeath"
         '
         'lblActivationPercent
         '
         Me.lblActivationPercent.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblActivationPercent, "lblActivationPercent")
-        Me.lblActivationPercent.ForeColor = System.Drawing.SystemColors.Control
         Me.lblActivationPercent.Name = "lblActivationPercent"
         '
         'btnMagCell
@@ -591,49 +590,42 @@ Partial Class frmMagatama
         '
         Me.lblLevel.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblLevel, "lblLevel")
-        Me.lblLevel.ForeColor = System.Drawing.SystemColors.Control
         Me.lblLevel.Name = "lblLevel"
         '
         'lblSynchro
         '
         Me.lblSynchro.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblSynchro, "lblSynchro")
-        Me.lblSynchro.ForeColor = System.Drawing.SystemColors.Control
         Me.lblSynchro.Name = "lblSynchro"
         '
         'lblIQ
         '
         Me.lblIQ.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblIQ, "lblIQ")
-        Me.lblIQ.ForeColor = System.Drawing.SystemColors.Control
         Me.lblIQ.Name = "lblIQ"
         '
         'lblPOW
         '
         Me.lblPOW.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblPOW, "lblPOW")
-        Me.lblPOW.ForeColor = System.Drawing.SystemColors.Control
         Me.lblPOW.Name = "lblPOW"
         '
         'lblDEX
         '
         Me.lblDEX.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblDEX, "lblDEX")
-        Me.lblDEX.ForeColor = System.Drawing.SystemColors.Control
         Me.lblDEX.Name = "lblDEX"
         '
         'lblDEF
         '
         Me.lblDEF.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblDEF, "lblDEF")
-        Me.lblDEF.ForeColor = System.Drawing.SystemColors.Control
         Me.lblDEF.Name = "lblDEF"
         '
         'lblMIND
         '
         Me.lblMIND.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblMIND, "lblMIND")
-        Me.lblMIND.ForeColor = System.Drawing.SystemColors.Control
         Me.lblMIND.Name = "lblMIND"
         '
         'picSectionID
@@ -647,7 +639,6 @@ Partial Class frmMagatama
         '
         Me.lblActivation.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblActivation, "lblActivation")
-        Me.lblActivation.ForeColor = System.Drawing.SystemColors.Control
         Me.lblActivation.Name = "lblActivation"
         '
         'nudQtyMonomate
@@ -792,14 +783,12 @@ Partial Class frmMagatama
         '
         Me.lblMinutes.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblMinutes, "lblMinutes")
-        Me.lblMinutes.ForeColor = System.Drawing.Color.SteelBlue
         Me.lblMinutes.Name = "lblMinutes"
         '
         'lblMeseta
         '
         Me.lblMeseta.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblMeseta, "lblMeseta")
-        Me.lblMeseta.ForeColor = System.Drawing.Color.Gold
         Me.lblMeseta.Name = "lblMeseta"
         '
         'lblHistory
@@ -834,42 +823,36 @@ Partial Class frmMagatama
         '
         Me.lblCycles.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblCycles, "lblCycles")
-        Me.lblCycles.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCycles.Name = "lblCycles"
         '
         'lblCyclesCount
         '
         Me.lblCyclesCount.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblCyclesCount, "lblCyclesCount")
-        Me.lblCyclesCount.ForeColor = System.Drawing.SystemColors.Control
         Me.lblCyclesCount.Name = "lblCyclesCount"
         '
         'lblDeathText
         '
         Me.lblDeathText.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblDeathText, "lblDeathText")
-        Me.lblDeathText.ForeColor = System.Drawing.SystemColors.Control
         Me.lblDeathText.Name = "lblDeathText"
         '
         'lblBossText
         '
         Me.lblBossText.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblBossText, "lblBossText")
-        Me.lblBossText.ForeColor = System.Drawing.SystemColors.Control
         Me.lblBossText.Name = "lblBossText"
         '
         'lbl1HP10Text
         '
         Me.lbl1HP10Text.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lbl1HP10Text, "lbl1HP10Text")
-        Me.lbl1HP10Text.ForeColor = System.Drawing.SystemColors.Control
         Me.lbl1HP10Text.Name = "lbl1HP10Text"
         '
         'lblPBFilledText
         '
         Me.lblPBFilledText.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblPBFilledText, "lblPBFilledText")
-        Me.lblPBFilledText.ForeColor = System.Drawing.SystemColors.Control
         Me.lblPBFilledText.Name = "lblPBFilledText"
         '
         'btnOutputSpace
@@ -974,7 +957,6 @@ Partial Class frmMagatama
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.BackgroundImage = Global.Magatama.My.Resources.Resources.bg
         Me.Controls.Add(Me.lblHistoryCost)
         Me.Controls.Add(Me.nudHistoryCostStarAtomizer)
         Me.Controls.Add(Me.nudHistoryCostMoonAtomizer)
@@ -1269,4 +1251,5 @@ Partial Class frmMagatama
     Friend WithEvents mnuEditUndo As ToolStripMenuItem
     Friend WithEvents mnuEditRedo As ToolStripMenuItem
     Friend WithEvents mnuEditResetQty As ToolStripMenuItem
+    Friend WithEvents mnuFileNewBlank As ToolStripMenuItem
 End Class

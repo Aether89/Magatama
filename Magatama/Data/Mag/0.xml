@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="0" Name="Mag" Stage="0" />
+	<Table ID="0" />
+	<PhotonBlast ID="0" Name="None" />
+	<!--Triggered Actions-->
+	<Activation Chance="0" />
+	<PB_Filled ID="0" desc="" />
+	<LowHP ID="0" desc="" />
+	<Boss ID="0" desc="" />
+	<Death ID="0" desc="" />
+</root>

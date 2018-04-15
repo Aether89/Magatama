@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+	<GameVersion value="Ep4" />
+	<Class Ep1="2" Ep2="3" Ep4="3" />
+	<Default SectionIDNumber="3" SectionIDName="Pinkal" FeedingTime="210" RacialRestriction="True" />
+	<Mag MaxLevel="200" Synchro="20" IQ="0" DEF="5" POW="0" DEX="0" MIND="0">
+		<!--Item Cost -->
+		<Monomate Cost="50" />
+		<Dimate Cost="300" />
+		<Trimate Cost="2000" />
+		<Monofluid Cost="100" />
+		<Difluid Cost="500" />
+		<Trifluid Cost="3600" />
+		<Antidote Cost="60" />
+		<Antiparalysis Cost="60" />
+		<SolAtomizer Cost="300" />
+		<MoonAtomizer Cost="500" />
+		<StarAtomizer Cost="5000" />
+	</Mag>
+</Root>

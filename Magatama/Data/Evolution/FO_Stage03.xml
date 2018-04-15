@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Evolution-->
+<Root>
+
+<!--POW > DEX > MIND-->
+<POW_DEX_MIND A="27" Aname="Naraka" B="28" Bname="Marica"/>
+<!--POW > MIND > DEX-->
+<POW_MIND_DEX A="29" Aname="Ravana" B="30" Bname="Naga"/>
+<!--DEX > POW > MIND-->
+<DEX_POW_MIND A="31" Aname="Ribhava" B="18" Bname="Garuda"/>
+<!--DEX > MIND > POW-->
+<DEX_MIND_POW A="32" Aname="Sita" B="15" Bname="Bhirava"/>
+<!--MIND > POW > DEX-->
+<MIND_POW_DEX A="30" Aname="Naga" B="33" Bname="Kumara"/>
+<!--MIND > DEX > POW-->
+<MIND_DEX_POW A="21" Aname="Kabanda" B="17" Bname="Ila"/>
+
+<!--Special Force Mag DEF at 45-->
+
+<!--POW > DEX + MIND-->
+<POW_DEXMIND A="34" Aname="Andhaka" B="34" Bname="Andhaka"/>
+<!--DEX > POW = MIND-->
+<DEX_POWMIND A="35" Aname="Bana" B="35" Bname="Bana"/>
+<!--MIND > POW + DEX-->
+<MIND_POWDEX A="35" Aname="Bana" B="35" Bname="Bana"/>
+
+</Root>

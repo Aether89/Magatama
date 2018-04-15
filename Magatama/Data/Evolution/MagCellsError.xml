@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Mag Cell Evolution Error Message-->
+<Root>
+
+<!--Classic Mag Cells-->
+
+<Cell_1 cnd="Your Mag need to be at least Level 100."/><!-- CellofMAG213 -->
+<Cell_2 cnd="Your Mag need to be at least Level 100."/><!-- CellofMAG502 -->
+<Cell_3 cnd="All your Mag Stats need to be Higher than 35."/><!-- HeartofChao -->
+<Cell_4 cnd="You need at least 2 Stats above 70."/><!-- HeartofRoboChao -->
+<Cell_5 cnd="Your Mag need to be at leas Level 120 with Maximum Synchro and at least an IQ of 180"/><!-- HeartofPian -->
+<Cell_6 cnd="Your Mag need to be at least Level 100."/><!-- HeartofOpaOpa -->
+<Cell_7 cnd="Your Mag need to be at least Level 50."/><!-- HeartofChuChu -->
+<Cell_8 cnd="Your Mag need to be at least Level 50."/><!-- HeartofKapuKapu -->
+
+<Cell_9 cnd="Your Mag need to be at least Level 100."/><!-- HeartofAngel -->
+<Cell_9_Droid cnd="Can't be used by Android."/><!-- HeartofAngelDroid --><!-- Error Message when the Cell is used by Android Character -->
+
+<Cell_10 cnd="Your Mag need to be at least Level 100."/><!-- HeartofDevil -->
+<Cell_10_Droid cnd="Can't be used by Android."/><!-- HeartofDevilDroid --><!-- Error Message when the Cell is used by Android Character -->
+
+<Cell_11 cnd="Your Mag need to be a Naga and be at least level 50"/><!-- PanthersSpirit -->
+<Cell_11_Lvl cnd="Your Naga need to be at least level 50"/><!-- PanthersSpiritLvl -->
+
+<Cell_12 cnd="Your Mag need to be a Kaitabha and be at least level 50"/><!-- KitofHamburger -->
+<Cell_12_Lvl cnd="Your Kaitabha need to be at least level 50"/><!-- KitofHamburgerLvl -->
+
+
+
+<Cell_13 cnd="Your Mag need to at most level 9"/><!-- KitofMarkIII -->
+
+<Cell_14 cnd="Your Mag need to be a Mark III and be at least Level 60"/><!-- KitofMasterSystem -->
+<Cell_14_Lvl cnd="Your Mark III need to be at least Level 60"/><!-- KitofMasterSystemLvl -->
+
+<Cell_15 cnd="Your Mag need to be a Master System and be at least Level 70"/><!-- KitofGenesis -->
+<Cell_15_Lvl cnd="Your Master System need to be at least Level 70"/><!-- KitofGenesisLvl -->
+
+<Cell_16 cnd="Your Mag need to be a Genesis and be at least Level 90"/><!-- KitofSaturn -->
+<Cell_16_Lvl cnd="Your Genesis need to be at least Level 90"/><!-- KitofSaturnLvl -->
+
+<Cell_17 cnd="Your Mag need to be a Saturn and be at least Level 160"/><!-- KitofDreamcast -->
+<Cell_17_Lvl cnd="Your Saturn need to be at least Level 160"/><!-- KitofDreamcastLvl -->
+
+
+<Cell_18 cnd="Your Mag need to be at least Level 50."/><!-- HeartofYN1107 -->
+<Cell_18_Droid cnd="Can't be used by Human and Newman."/> <!-- HeartofYN1107Droid --><!-- Error Message when the Cell is used by non Android Character -->
+
+<!--Blue Burst Mag Cells-->
+
+<Cell_19 cnd="Your Mag need to be at least Level 50."/><!-- LibertaKit -->
+
+<Cell_20 cnd="Your Mag need to be a Kama and be at least level 100"/><!-- DPhotonCore -->
+<Cell_20_Lvl cnd="Your Kama need to be at least Level 100"/><!-- DPhotonCoreLvl -->
+
+<Cell_21 cnd="Your Mag need to be a Rukmin."/><!-- Tablet -->
+
+<Cell_22 cnd="Your Mag need to be a Kumara."/><!-- HeartofMorolian -->
+
+<Cell_22 cnd="Your Mag need to be at least Level 50."/><!-- PioneerParts -->
+
+<Cell_23 cnd="Your Mag need to be a Chu Chu."/><!-- AmitiesMeno -->
+
+<Cell_24 cnd="Your Mag need to be at least Level 50."/><!-- RappyBeak -->
+
+<Cell_25 cnd="Your Mag need to be a Garuda."/><!-- HeavenStrikerCoat -->
+
+<Cell_26 cnd="Your Mag need to be a Kama."/><!-- DragonScale -->
+
+<Cell_27 cnd="Your Mag need to be at least Level 50."/><!-- YahoosEngine -->
+
+</Root>

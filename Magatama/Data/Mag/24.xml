@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<Mag ID="24" Name="Soma" Stage="3" />
+	<Table ID="5" />
+	<PhotonBlast ID="2" Name="Estlla" />
+	<!--Triggered Actions-->
+	<Activation Chance="25" />
+	<PB_Filled ID="1" desc="Invulnerability" />
+	<LowHP ID="1" desc="Invulnerability" />
+	<Boss ID="1" desc="Invulnerability" />
+	<Death ID="1" desc="Reverser" />
+</root>
