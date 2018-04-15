@@ -149,6 +149,7 @@ Partial Class frmMagatama
         Me.nudHistoryCostMoonAtomizer = New System.Windows.Forms.NumericUpDown()
         Me.nudHistoryCostStarAtomizer = New System.Windows.Forms.NumericUpDown()
         Me.lblHistoryCost = New System.Windows.Forms.Label()
+        Me.rtfExport = New System.Windows.Forms.RichTextBox()
         Me.mnuMagatama.SuspendLayout()
         CType(Me.nudDEF, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudIQ, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -524,66 +525,77 @@ Partial Class frmMagatama
         '
         resources.ApplyResources(Me.btnMonomate, "btnMonomate")
         Me.btnMonomate.Name = "btnMonomate"
+        Me.btnMonomate.Tag = "mate"
         Me.btnMonomate.UseVisualStyleBackColor = True
         '
         'btnDimate
         '
         resources.ApplyResources(Me.btnDimate, "btnDimate")
         Me.btnDimate.Name = "btnDimate"
+        Me.btnDimate.Tag = "mate"
         Me.btnDimate.UseVisualStyleBackColor = True
         '
         'btnTrimate
         '
         resources.ApplyResources(Me.btnTrimate, "btnTrimate")
         Me.btnTrimate.Name = "btnTrimate"
+        Me.btnTrimate.Tag = "mate"
         Me.btnTrimate.UseVisualStyleBackColor = True
         '
         'btnMonofluid
         '
         resources.ApplyResources(Me.btnMonofluid, "btnMonofluid")
         Me.btnMonofluid.Name = "btnMonofluid"
+        Me.btnMonofluid.Tag = "fluid"
         Me.btnMonofluid.UseVisualStyleBackColor = True
         '
         'btnDifluid
         '
         resources.ApplyResources(Me.btnDifluid, "btnDifluid")
         Me.btnDifluid.Name = "btnDifluid"
+        Me.btnDifluid.Tag = "fluid"
         Me.btnDifluid.UseVisualStyleBackColor = True
         '
         'btnTrifluid
         '
         resources.ApplyResources(Me.btnTrifluid, "btnTrifluid")
         Me.btnTrifluid.Name = "btnTrifluid"
+        Me.btnTrifluid.Tag = "fluid"
         Me.btnTrifluid.UseVisualStyleBackColor = True
         '
         'btnAntidote
         '
         resources.ApplyResources(Me.btnAntidote, "btnAntidote")
         Me.btnAntidote.Name = "btnAntidote"
+        Me.btnAntidote.Tag = "Anti"
         Me.btnAntidote.UseVisualStyleBackColor = True
         '
         'btnAntiparalysis
         '
         resources.ApplyResources(Me.btnAntiparalysis, "btnAntiparalysis")
         Me.btnAntiparalysis.Name = "btnAntiparalysis"
+        Me.btnAntiparalysis.Tag = "Anti"
         Me.btnAntiparalysis.UseVisualStyleBackColor = True
         '
         'btnSolAtomizer
         '
         resources.ApplyResources(Me.btnSolAtomizer, "btnSolAtomizer")
         Me.btnSolAtomizer.Name = "btnSolAtomizer"
+        Me.btnSolAtomizer.Tag = "Atomizer"
         Me.btnSolAtomizer.UseVisualStyleBackColor = True
         '
         'btnMoonAtomizer
         '
         resources.ApplyResources(Me.btnMoonAtomizer, "btnMoonAtomizer")
         Me.btnMoonAtomizer.Name = "btnMoonAtomizer"
+        Me.btnMoonAtomizer.Tag = "Atomizer"
         Me.btnMoonAtomizer.UseVisualStyleBackColor = True
         '
         'btnStarAtomizer
         '
         resources.ApplyResources(Me.btnStarAtomizer, "btnStarAtomizer")
         Me.btnStarAtomizer.Name = "btnStarAtomizer"
+        Me.btnStarAtomizer.Tag = "Atomizer"
         Me.btnStarAtomizer.UseVisualStyleBackColor = True
         '
         'lblLevel
@@ -952,11 +964,17 @@ Partial Class frmMagatama
         Me.lblHistoryCost.ForeColor = System.Drawing.SystemColors.Control
         Me.lblHistoryCost.Name = "lblHistoryCost"
         '
+        'rtfExport
+        '
+        resources.ApplyResources(Me.rtfExport, "rtfExport")
+        Me.rtfExport.Name = "rtfExport"
+        '
         'frmMagatama
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
+        Me.Controls.Add(Me.rtfExport)
         Me.Controls.Add(Me.lblHistoryCost)
         Me.Controls.Add(Me.nudHistoryCostStarAtomizer)
         Me.Controls.Add(Me.nudHistoryCostMoonAtomizer)
@@ -1252,4 +1270,5 @@ Partial Class frmMagatama
     Friend WithEvents mnuEditRedo As ToolStripMenuItem
     Friend WithEvents mnuEditResetQty As ToolStripMenuItem
     Friend WithEvents mnuFileNewBlank As ToolStripMenuItem
+    Friend WithEvents rtfExport As RichTextBox
 End Class

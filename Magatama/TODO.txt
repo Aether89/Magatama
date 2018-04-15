@@ -1,0 +1,23 @@
+Magatama
+
+New
+- Can set mag default stats.
+- Can load a Blank Mag from the menu
+- Settings now separated by tabs 
+- Formatting of the Output with color and  fonts.
+- Added Licenses 
+
+Changes 
+→ Output Export as been modified to allow RTF formatting when exported.
+→ Upgrade the PhotonBlast to use xml to populate list.
+→ Redesigned the Settings Interface
+→ Change the structure to use number rather than text, easier to translate and less easier to fix typo.
+→ Fixed some typo
+→ Add episode to mag data files
+
+To Do
+→ Fix mag cell evolution
+Implement change to add different version feed-table
+→ Add a Version Check on load of save file
+→ Finish MagDex
+→ Add Stats Preview

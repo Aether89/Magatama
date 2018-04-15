@@ -6,14 +6,14 @@
 <Root>
 
 <!-- Main Interface -->
-<Level text="Level" color="White"/>
-<Synchro text="Synchro" color="White"/>
-<IQ text="IQ" color="White"/>
+<Level text="Level" text1="Max Level" color="White" color1="White"/><!-- text & color is for main interface, text1 & color1 is for the Settings-->
+<Synchro text="Synchro" color="White" color1="White"/><!-- color is for main interface, color1 is for the Settings-->
+<IQ text="IQ" color="White" color1="White"/><!-- color is for main interface, color1 is for the Settings-->
 
-<DEF text="DEF" color="White" tt="One point of DEF give 1 point of DFP"/>
-<POW text="POW" color="White" tt="One point of POW give 2 point of ATP"/>
-<DEX text="DEX" color="White" tt="One point of DEX give 0.5 point of ATA"/>
-<MIND text="MIND" color="White" tt="One point of MIND give 2 point of MST"/>
+<DEF text="DEF" color="White" color1="White" tt="One point of DEF give 1 point of DFP"/> <!-- color is for main interface, color1 is for the Settings-->
+<POW text="POW" color="White" color1="White" tt="One point of POW give 2 point of ATP"/><!-- color is for main interface, color1 is for the Settings-->
+<DEX text="DEX" color="White" color1="White" tt="One point of DEX give 0.5 point of ATA"/><!-- color is for main interface, color1 is for the Settings-->
+<MIND text="MIND" color="White" color1="White" tt="One point of MIND give 2 point of MST"/><!-- color is for main interface, color1 is for the Settings-->
 
 <PBFull text="PB Full :" color="White" color2="White"/><!-- color2 is for the effect-->
 <LowHP text="10% HP  :" color="White" color2="White"/><!-- color2 is for the effect-->
@@ -68,17 +68,24 @@
 <GameVersion text="Game Version" color="White" Ver1text="Ep. 1" Ver1color="White" Ep2text="Ep. 2" Ep2color="White" BBtext="Ep. 4" BBcolor="White"/>
 <InitialClass text="Initial Class" color="White"/>
 <InitialSectionID text="Initial Section ID" color="White"/>
-<InitialSynchro text="Syncro" color="White"/>
 <Time text="Time Between Feeding" color="White"/>
 <Seconds text="Seconds" color="White"/>
 
 <SettingsItems text="Items" color="White"/>
 <SettingsCost text="Cost" color="White"/>
 <SettingsRacialRestriction text="Mag Racials Restrictions" color="White"/>
+<InitialStats text="Initial Stats" color="White"/>
 
 <!-- About  Interface -->
 
 <About color="White" color2="White"/> <!-- color is for the Title and color2 for the Version -->
+
+<!-- Output Coloration -->
+<mate color="Green"/>
+<fluid color="Blue"/>
+<Anti color="Goldenrod"/>
+<Atomizer color="Red"/>
+
 
 
 </Root>

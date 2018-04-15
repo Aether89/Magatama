@@ -350,6 +350,18 @@ Public Class frmEditor
             XmlLoadMag.ReadToFollowing("Mag")
             XmlLoadMag.MoveToAttribute("Stage")
             nudEditorStage.Value = XmlLoadMag.Value
+            XmlLoadMag.MoveToAttribute("GameVer")
+
+            Select Case XmlLoadMag.Value
+                Case = "Ep1"
+                    radEditorMagEp1.Checked = True
+                Case = "Ep2"
+                    radEditorMagEp2.Checked = True
+                Case = "Ep4"
+                    radEditorMagEp4.Checked = True
+                Case Else
+                    radEditorMagEp1.Checked = True
+            End Select
 
             XmlLoadMag.ReadToFollowing("Table")
             XmlLoadMag.MoveToFirstAttribute()
@@ -594,7 +606,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub cboEditorPhotonBlast_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedValueChanged
-        strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedItem & ".png")
+        strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedIndex & ".png")
         picEditorPhotonBlast.Image = strPathEditorPicPhotonBlast
 
         Call EditorPhotonBlastXML()

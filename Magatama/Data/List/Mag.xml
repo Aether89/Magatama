@@ -2,7 +2,7 @@
 <!--Initial Value-->
 <Root>
 
-	<GameVersion Ep1 ="57" Ep2="66" Ep4="76"/> <!-- The number of Mag to add for each version, Add + 1 to the value otherwise will miss the last one. -->
+	<GameVersion Ep1="57" Ep2="66" Ep4="76"/> <!-- The number of Mag to add for each version, Add + 1 to the value otherwise will miss the last one. -->
 	
 	<Mag0 name="Mag"/>
 

@@ -3,25 +3,19 @@
 
 <root>
 
-	<None>No Photon Blast</None>
-
-	<PhotonBlast01>No Photon Blast</PhotonBlast01>
+	<PhotonBlast00>No Photon Blast</PhotonBlast00>
 	
-	<PhotonBlast02>No Photon Blast</PhotonBlast02>
+	<PhotonBlast01>Farlla : Spinning attack that hits all nearby enemies.</PhotonBlast01><!-- Game Description -->
+	
+	<PhotonBlast02>Estlla : Linear attack that strikes enemies in front.</PhotonBlast02><!-- Game Description -->
+	
+	<PhotonBlast03>Leilla : Restores health of a player.</PhotonBlast03><!-- Game Description -->
+	
+	<PhotonBlast04>Golla : Concentrated attack that focuses on enemy.</PhotonBlast04><!-- Game Description -->
 		
-	<PhotonBlast03>No Photon Blast</PhotonBlast03>
+	<PhotonBlast05>Pilla : Aerial attack that hits nearby flying enemies.</PhotonBlast05><!-- Game Description -->
 	
-	<Farlla>Farlla : Spinning attack that hits all nearby enemies.</Farlla><!-- Game Description -->
-	
-	<Estlla>Estlla : Linear attack that strikes enemies in front.</Estlla><!-- Game Description -->
-	
-	<Leilla>Leilla : Restores health of a player.</Leilla><!-- Game Description -->
-	
-	<Golla>Golla : Concentrated attack that focuses on enemy.</Golla><!-- Game Description -->
-		
-	<Pilla>Pilla : Aerial attack that hits nearby flying enemies.</Pilla><!-- Game Description -->
-	
-	<Mylla>Mylla and Youlla : Raises attack and defense status of a player.</Mylla>><!-- Game Description -->
+	<PhotonBlast06>Mylla and Youlla : Raises attack and defense status of a player.</PhotonBlast06>><!-- Game Description -->
 	
 	
 </root>

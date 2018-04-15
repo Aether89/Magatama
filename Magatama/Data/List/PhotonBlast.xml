@@ -2,15 +2,14 @@
 <!--Initial Value-->
 <Root>
 
-	<PhotonBlast Total ="7"/> 
+	<PhotonBlast Total ="07"/> 
 
 	<PB0 name="None"/>
-
 	<PB1 name="Farlla"/>
 	<PB2 name="Estlla"/>
 	<PB3 name="Leilla"/>
 	<PB4 name="Golla"/>
 	<PB5 name="Pilla"/>
 	<PB6 name="Mylla"/>
-
+	
 </Root>

@@ -122,6 +122,12 @@ Public Class frmMagatama
     Dim strEvolveRare As String = "Your Mag is rare and can't no longer evolve "
     Dim strLevelUp As String = "--- Level UP ---"
 
+    ' String user for Colorisation of the Output
+    Dim strOutmate As String = "Black"
+    Dim strOutfluid As String = "Black"
+    Dim strOutAnti As String = "Black"
+    Dim strOutAtomizer As String = "Black"
+
 
 
 
@@ -237,7 +243,7 @@ Public Class frmMagatama
 
 
     Public Sub Init()
-        blnEditMode = True
+        blnEditMode = False
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Init.xml")
 
             XmlLoadMag.ReadToFollowing("GameVersion")
@@ -287,29 +293,7 @@ Public Class frmMagatama
 
 #End Region
 
-
-#Region "Photon Blast"
-        With cboPhotonBlast01
-            .Items.Clear()
-            .Items.Add("None")
-            .Items.Add("Farlla")
-            .Items.Add("Estlla")
-            .Items.Add("Leilla")
-            .SelectedIndex = 0
-        End With
-
-        With cboPhotonBlast02
-            .Items.Clear()
-            .Items.Add("None")
-            .Items.Add("Golla")
-            .Items.Add("Pilla")
-            .Items.Add("Mylla")
-            .SelectedIndex = 0
-        End With
-
-        Call PhotonBlast03()
-#End Region
-
+        Call PhotonBlast()
         Call cboMagCellList()
 
         bytFeedingCount = 0
@@ -399,72 +383,44 @@ Public Class frmMagatama
 
 #Region "Photon Blast Public Sub"
 
-    Public Sub PhotonBlast03()
-        With cboPhotonBlast03
-            .Items.Clear()
-            .Items.Add("None")
-            .Items.Add("Farlla")
-            .Items.Add("Estlla")
-            .Items.Add("Golla")
-            .Items.Add("Pilla")
-            .Items.Add("Mylla")
-            .SelectedIndex = 0
-        End With
+    Public Sub PhotonBlast()
+        shocboCount = 0
+        shocboCountMax = 0
+        cboPhotonBlast01.Items.Clear()
+        cboPhotonBlast02.Items.Clear()
+        cboPhotonBlast03.Items.Clear()
+
+        Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/List/PhotonBlast.xml")
+
+            XmlLoadMag.ReadToFollowing("PhotonBlast")
+            XmlLoadMag.MoveToAttribute("Total")
+            shocboCountMax = XmlLoadMag.Value
+
+            While shocboCount < shocboCountMax
+
+                XmlLoadMag.ReadToFollowing("PB" & shocboCount)
+                XmlLoadMag.MoveToFirstAttribute()
+                cboPhotonBlast01.Items.Add(XmlLoadMag.Value)
+                cboPhotonBlast02.Items.Add(XmlLoadMag.Value)
+                cboPhotonBlast03.Items.Add(XmlLoadMag.Value)
+                shocboCount = (shocboCount + 1)
+            End While
+            cboPhotonBlast01.SelectedIndex = 0
+            cboPhotonBlast02.SelectedIndex = 0
+            cboPhotonBlast03.SelectedIndex = 0
+        End Using
     End Sub
 
     Public Sub PhotonBlastCheck()
-        Call PhotonBlastCheck01()
-        Call PhotonBlastCheck02()
-
         Call PhotonBlastXML()
         Call Unsaved()
     End Sub
 
-    Public Sub PhotonBlastCheck01()
-        Select Case cboPhotonBlast01.Text
-            Case Is = "None"
-                Call PhotonBlast03()
-            Case Is = "Leilla"
-                Call PhotonBlast03()
-            Case Else
-                Call PhotonBlast03()
-                cboPhotonBlast03.SelectedIndex = 0
-                cboPhotonBlast03.Items.Remove(cboPhotonBlast01.Text)
-        End Select
-    End Sub
-
-    Public Sub PhotonBlastCheck02()
-        Select Case cboPhotonBlast02.Text
-            Case Is = "None"
-                Call PhotonBlast03()
-                Call PhotonBlastCheck01()
-            Case Else
-                Call PhotonBlast03()
-                Call PhotonBlastCheck01()
-                cboPhotonBlast03.SelectedIndex = 0
-                cboPhotonBlast03.Items.Remove(cboPhotonBlast02.Text)
-        End Select
-    End Sub
-
     Public Sub PhotonBlastXML() 'PhotonBlast Tooltips Text
 
-        strPhotonBlast01 = cboPhotonBlast01.Tag
-        strPhotonBlast02 = cboPhotonBlast02.Tag
-        strPhotonBlast03 = cboPhotonBlast03.Tag
-
-
-        If cboPhotonBlast01.SelectedIndex = 0 Then
-            strPhotonBlast01 = "PhotonBlast01"
-        End If
-
-        If cboPhotonBlast01.SelectedIndex = 0 Then
-            strPhotonBlast01 = "PhotonBlast02"
-        End If
-
-        If cboPhotonBlast01.SelectedIndex = 0 Then
-            strPhotonBlast01 = "PhotonBlast03"
-        End If
-
+        strPhotonBlast01 = ("PhotonBlast0" & cboPhotonBlast01.SelectedIndex)
+        strPhotonBlast02 = ("PhotonBlast0" & cboPhotonBlast02.SelectedIndex)
+        strPhotonBlast03 = ("PhotonBlast0" & cboPhotonBlast03.SelectedIndex)
 
         Using XmlLoadPhotonBlast As XmlReader = XmlReader.Create("./Data/PhotonBlast.xml")
             While (XmlLoadPhotonBlast.Read())
@@ -477,9 +433,32 @@ Public Class frmMagatama
                         strPhotonBlastText01 = XmlLoadPhotonBlast.ReadInnerXml.ToString()
                     End If
 
+                End If
+
+            End While
+        End Using
+
+        Using XmlLoadPhotonBlast As XmlReader = XmlReader.Create("./Data/PhotonBlast.xml")
+            While (XmlLoadPhotonBlast.Read())
+                Dim type = XmlLoadPhotonBlast.NodeType
+
+
+                If (type = XmlNodeType.Element) Then
+
                     If (XmlLoadPhotonBlast.Name = strPhotonBlast02) Then
                         strPhotonBlastText02 = XmlLoadPhotonBlast.ReadInnerXml.ToString()
                     End If
+
+                End If
+
+            End While
+        End Using
+        Using XmlLoadPhotonBlast As XmlReader = XmlReader.Create("./Data/PhotonBlast.xml")
+            While (XmlLoadPhotonBlast.Read())
+                Dim type = XmlLoadPhotonBlast.NodeType
+
+
+                If (type = XmlNodeType.Element) Then
 
                     If (XmlLoadPhotonBlast.Name = strPhotonBlast03) Then
                         strPhotonBlastText03 = XmlLoadPhotonBlast.ReadInnerXml.ToString()
@@ -489,11 +468,6 @@ Public Class frmMagatama
 
             End While
         End Using
-
-        If cboPhotonBlast01.SelectedIndex = 0 Then
-
-        End If
-
         ttMagatama.SetToolTip(picPhotonBlast01, strPhotonBlastText01)
         ttMagatama.SetToolTip(picPhotonBlast02, strPhotonBlastText02)
         ttMagatama.SetToolTip(picPhotonBlast03, strPhotonBlastText03)
@@ -529,6 +503,10 @@ Public Class frmMagatama
             ' Write the Xml declaration.
             .WriteStartDocument()
             .WriteStartElement("root")
+
+            .WriteStartElement("Game")
+            .WriteAttributeString("PSO", strGameVer)
+            .WriteEndElement()
 
 
             .WriteStartElement("Owner")
@@ -623,7 +601,7 @@ Public Class frmMagatama
             .WriteAttributeString("Evo", shoEvoStarAtomizer)
             .WriteEndElement()
             .WriteComment("Log")
-            .WriteElementString("Output", rtfOutput.Text)
+            .WriteElementString("Output", rtfOutput.Rtf)
 
             .WriteEndDocument()
             .Close()
@@ -648,36 +626,37 @@ Public Class frmMagatama
 
 
         ' Initialize the SaveFileDialog to specify the RTF extension for the file.
-        sdfSave.DefaultExt = "*.txt"
-        sdfSave.Filter = "Text Files|*.txt"
+        sdfSave.DefaultExt = "*.rtf"
+        sdfSave.Filter = "RTF Files|*.rtf"
         sdfSave.FileName = (cboClass.SelectedItem & "_" & cboSectionID.SelectedItem & "_Stage" & picMag.Tag & "_" & cboMag.SelectedItem & "_Output")
 
         ' Determine if the user selected a file name from the saveFileDialog.
         If (sdfSave.ShowDialog() = System.Windows.Forms.DialogResult.OK) _
             And (sdfSave.FileName.Length) > 0 Then
-
-            strTmp = rtfOutput.Text
-            rtfOutput.Clear()
+            rtfExport.Clear()
             ' Save the contents of the RichTextBox into the file.
-            rtfOutput.AppendText("Log of " & cboMag.SelectedItem & Chr(13) & Chr(13)) 'Add the name of the mag
+            rtfExport.AppendText("Log of " & cboMag.SelectedItem & Chr(13) & Chr(13)) 'Add the name of the mag
 
-            rtfOutput.AppendText(cboMag.SelectedItem & Chr(13) & lblLevel.Text & " : " & nudLevel.Value & Chr(13) & lblSynchro.Text & " : " & nudSynchro.Value &
+            rtfExport.AppendText(cboMag.SelectedItem & Chr(13) & lblLevel.Text & " : " & nudLevel.Value & Chr(13) & lblSynchro.Text & " : " & nudSynchro.Value &
                                  Chr(13) & lblIQ.Text & " : " & nudIQ.Value & Chr(13) & Chr(13))
 
             'Append the Stats to the Outputt
-            rtfOutput.AppendText("DEF " & nudDEF.Value & "/" & nudProgressDEF.Value & " POW " & nudPOW.Value & "/" & nudProgressPOW.Value &
+            rtfExport.AppendText("DEF " & nudDEF.Value & "/" & nudProgressDEF.Value & " POW " & nudPOW.Value & "/" & nudProgressPOW.Value &
                               " DEX " & nudDEX.Value & "/" & nudProgressDEX.Value & " MIND " & nudMIND.Value & "/" & nudProgressMIND.Value & Chr(13) & Chr(13))
             'Append the Photon Blast
-            rtfOutput.AppendText("Photon Blast :" & Chr(13) & cboPhotonBlast01.SelectedItem & Chr(13) & cboPhotonBlast02.SelectedItem _
+            rtfExport.AppendText("Photon Blast :" & Chr(13) & cboPhotonBlast01.SelectedItem & Chr(13) & cboPhotonBlast02.SelectedItem _
                               & Chr(13) & cboPhotonBlast03.SelectedItem & Chr(13) & Chr(13))
             'Append the Time and Cost Estimation
-            rtfOutput.AppendText("Estimated Time : " & lblTime.Text & " " & lblMinutes.Text & Chr(13) & "Estimated Cost : " & lblCost.Text & " " & lblMeseta.Text & Chr(13) & Chr(13))
+            rtfExport.AppendText("Estimated Time : " & lblTime.Text & " " & lblMinutes.Text & Chr(13) & "Estimated Cost : " & lblCost.Text & " " & lblMeseta.Text & Chr(13) & Chr(13))
 
             ' We finnaly append the text inside rtfOutput
-            rtfOutput.AppendText("[                                          ]" & Chr(13) & Chr(13) & strTmp & Chr(13) & "[                                          ]")
+            rtfExport.AppendText("[                                          ]" & Chr(13) & Chr(13))
+            rtfExport.Select(rtfExport.TextLength, 0)
+            rtfExport.SelectedRtf = rtfOutput.Rtf
+            rtfExport.AppendText(Chr(13) & "[                                          ]")
 
-            rtfOutput.SaveFile(sdfSave.FileName, RichTextBoxStreamType.PlainText)
-            rtfOutput.Text = strTmp
+            rtfExport.SaveFile(sdfSave.FileName)
+            rtfExport.Clear()
         End If
     End Sub
 
@@ -686,6 +665,8 @@ Public Class frmMagatama
 #Region "Load"
 
     Public Sub MagLoad()
+
+
 
 
         Using XmlLoadMag As XmlReader = XmlReader.Create(ofdMagatama.FileName)
@@ -744,7 +725,7 @@ Public Class frmMagatama
             XmlLoadMag.MoveToNextAttribute()
             bytFeedingCount = XmlLoadMag.Value
             XmlLoadMag.MoveToNextAttribute()
-            shoevoCycle = XmlLoadMag.Value
+            shoEvoCycle = XmlLoadMag.Value
 
             XmlLoadMag.ReadToFollowing("Monomate")
             XmlLoadMag.MoveToFirstAttribute()
@@ -816,7 +797,7 @@ Public Class frmMagatama
 
             XmlLoadMag.ReadToFollowing("Output")
             rtfOutput.Clear()
-            rtfOutput.AppendText(XmlLoadMag.ReadInnerXml.ToString())
+            rtfOutput.Rtf = (XmlLoadMag.ReadInnerXml.ToString())
         End Using
 
         Call Cost()
@@ -895,9 +876,9 @@ Public Class frmMagatama
 
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Theme.xml")
             XmlLoadMag.ReadToFollowing("Level")
-            XmlLoadMag.MoveToFirstAttribute()
+            XmlLoadMag.MoveToAttribute("text")
             lblLevel.Text = XmlLoadMag.Value 'Text
-            XmlLoadMag.MoveToNextAttribute()
+            XmlLoadMag.MoveToAttribute("color")
             strTmp = XmlLoadMag.Value 'Color
             lblLevel.ForeColor = Color.FromName(strTmp)
             XmlLoadMag.ReadToFollowing("Synchro")
@@ -1176,6 +1157,22 @@ Public Class frmMagatama
             btnStarAtomizer.Text = XmlLoadMag.Value 'Text
             XmlLoadMag.MoveToAttribute("tt") 'Tooltips
             ttMagatama.SetToolTip(nudQtyStarAtomizer, XmlLoadMag.Value)
+
+            XmlLoadMag.ReadToFollowing("mate")
+            XmlLoadMag.MoveToFirstAttribute()
+            strOutmate = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("fluid")
+            XmlLoadMag.MoveToFirstAttribute()
+            strOutfluid = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("Anti")
+            XmlLoadMag.MoveToFirstAttribute()
+            strOutAnti = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("Atomizer")
+            XmlLoadMag.MoveToFirstAttribute()
+            strOutAtomizer = XmlLoadMag.Value 'Text
 
         End Using
     End Sub
@@ -1516,7 +1513,6 @@ Public Class frmMagatama
             XmlLoadMag.ReadToFollowing("Mag")
             XmlLoadMag.MoveToAttribute("Stage")
             picMag.Tag = XmlLoadMag.Value
-
             XmlLoadMag.ReadToFollowing("Table")
             XmlLoadMag.MoveToFirstAttribute()
             strFeedingChart = XmlLoadMag.Value
@@ -1559,7 +1555,7 @@ Public Class frmMagatama
 
         End Using
 
-            If mnuEditStat.Checked = False Then
+        If mnuEditStat.Checked = False Then
 
             If cboMag.SelectedItem = "Mag" Then
 
@@ -1581,46 +1577,21 @@ Public Class frmMagatama
 #Region "Photon Blast"
 
     Private Sub cboPhotonBlast01_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPhotonBlast01.SelectedValueChanged
-        strPathPicPhotonBlast01 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast01.SelectedItem & ".png")
+        strPathPicPhotonBlast01 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast01.SelectedIndex & ".png")
         picPhotonBlast01.Image = strPathPicPhotonBlast01
-        Call PhotonBlastCheck()
-
+        Call PhotonBlastXML()
     End Sub
 
     Private Sub cboPhotonBlast02_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPhotonBlast02.SelectedValueChanged
-        strPathPicPhotonBlast02 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast02.SelectedItem & ".png")
+        strPathPicPhotonBlast02 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast02.SelectedIndex & ".png")
         picPhotonBlast02.Image = strPathPicPhotonBlast02
-        Call PhotonBlastCheck()
+        Call PhotonBlastXML()
     End Sub
 
     Private Sub cboPhotonBlast03_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPhotonBlast03.SelectedValueChanged
-
-        ' Redundancy check for PhotonBlast.
-        Select Case cboPhotonBlast03.Text
-            Case Is = cboPhotonBlast01.Text
-                If cboPhotonBlast03.Text = "None" Then
-
-                Else
-                    MsgBox("Invalid Selection")
-                    cboPhotonBlast03.SelectedIndex = 0
-                End If
-
-            Case Is = cboPhotonBlast02.Text
-                If cboPhotonBlast03.Text = "None" Then
-
-                Else
-                    MsgBox("Invalid Selection")
-                    cboPhotonBlast03.SelectedIndex = 0
-                End If
-
-            Case Else
-
-        End Select
-        strPathPicPhotonBlast03 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast03.SelectedItem & ".png")
+        strPathPicPhotonBlast03 = Image.FromFile("./Graphics/PhotonBlast/" & cboPhotonBlast03.SelectedIndex & ".png")
         picPhotonBlast03.Image = strPathPicPhotonBlast03
-
         Call PhotonBlastXML()
-        Call Unsaved()
     End Sub
 
 #End Region
@@ -2115,9 +2086,13 @@ Public Class frmMagatama
         ElseIf nudLevel.Value = bytStage3 Or nudLevel.Value = bytStage4 Then
             Call MagStage04()
 
-            If picMag.Tag <> "4" Then
+            If picMag.Tag = "4" Then
+
+            Else
                 Call MagStage03()
             End If
+
+
 
         End If
 
@@ -2149,6 +2124,19 @@ Public Class frmMagatama
 
             shoProgress = 0
             nudHistoryTmp.Value = nudHistoryTmp.Value + 1
+
+            If btnTmp.Tag.Contains("mate") Then
+                rtfOutput.SelectionColor = Color.FromName(strOutmate)
+            End If
+            If btnTmp.Tag.Contains("fluid") Then
+                rtfOutput.SelectionColor = Color.FromName(strOutfluid)
+            End If
+            If btnTmp.Tag.Contains("Anti") Then
+                rtfOutput.SelectionColor = Color.FromName(strOutAnti)
+            End If
+            If btnTmp.Tag.Contains("Atomizer") Then
+                rtfOutput.SelectionColor = Color.FromName(strOutAtomizer)
+            End If
 
             rtfOutput.AppendText(btnTmp.Text & " x" & ((nudHistoryTmp.Value) - (shoevoTmp)) & Chr(13))
             shoCount = shoCount + 1
@@ -2445,7 +2433,7 @@ Public Class frmMagatama
     Public Sub MagStage03()
 
         strEvoCND = "" 'Represent the stats requirement
-                strEvo = "" ' Represent the Section ID
+        strEvo = "" ' Represent the Section ID
 
 #Region "Hunter"
 
@@ -2589,39 +2577,39 @@ Public Class frmMagatama
         Select Case cboSectionID.SelectedItem
 
                  ' Section ID Group A
-                        Case = "Purplenum"
-                            strEvo = ("A")
-                        Case = "Redria"
-                            strEvo = ("A")
-                        Case = "Skyly"
-                            strEvo = ("A")
-                        Case = "Viridia"
-                            strEvo = ("A")
-                        Case = "Yellowboze"
-                            strEvo = ("A")
+            Case = "Purplenum"
+                strEvo = ("A")
+            Case = "Redria"
+                strEvo = ("A")
+            Case = "Skyly"
+                strEvo = ("A")
+            Case = "Viridia"
+                strEvo = ("A")
+            Case = "Yellowboze"
+                strEvo = ("A")
 
                  ' Section ID Group B
-                        Case = "Bluefull"
-                            strEvo = ("B")
-                        Case = "Greenill"
-                            strEvo = ("B")
-                        Case = "Oran"
-                            strEvo = ("B")
-                        Case = "Pinkal"
-                            strEvo = ("B")
-                        Case = "Whitill"
-                            strEvo = ("B")
+            Case = "Bluefull"
+                strEvo = ("B")
+            Case = "Greenill"
+                strEvo = ("B")
+            Case = "Oran"
+                strEvo = ("B")
+            Case = "Pinkal"
+                strEvo = ("B")
+            Case = "Whitill"
+                strEvo = ("B")
 
-                        Case Else ' Redundant but if an error cause to have no Section ID the program should not crash on this part
-                            strEvo = ("A")
+            Case Else ' Redundant but if an error cause to have no Section ID the program should not crash on this part
+                strEvo = ("A")
 
-                    End Select
+        End Select
 
 #End Region
 
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Evolution/" & cboClass.SelectedItem.Substring(0, 2) & "_Stage03.xml")
-                        XmlLoadMag.ReadToFollowing(strEvoCND)
-                        XmlLoadMag.MoveToAttribute(strEvo)
+            XmlLoadMag.ReadToFollowing(strEvoCND)
+            XmlLoadMag.MoveToAttribute(strEvo)
             cboMag.SelectedIndex = XmlLoadMag.Value
         End Using
 
@@ -2638,11 +2626,11 @@ Public Class frmMagatama
 
         If cboPhotonBlast01.SelectedItem = strEvo Then
 
-                    ElseIf cboPhotonBlast02.SelectedItem = strEvo Then
+        ElseIf cboPhotonBlast02.SelectedItem = strEvo Then
 
-                    ElseIf cboPhotonBlast03.SelectedIndex = 0 Then
-                        cboPhotonBlast03.SelectedItem = strEvo
-                    End If
+        ElseIf cboPhotonBlast03.SelectedIndex = 0 Then
+            cboPhotonBlast03.SelectedItem = strEvo
+        End If
 
     End Sub
 
@@ -2720,10 +2708,10 @@ Public Class frmMagatama
             End If
 
             If strEvoCND2 = "GPO" Then
-                    If (nudDEF.Value + nudMIND.Value) = (nudPOW.Value + nudDEX.Value) Then
-                        strEvoCND = "DEFMIND-POWDEX"
-                    End If
+                If (nudDEF.Value + nudMIND.Value) = (nudPOW.Value + nudDEX.Value) Then
+                    strEvoCND = "DEFMIND-POWDEX"
                 End If
+            End If
 
 Evolve:
             If strEvoCND <> "" Then
@@ -3056,7 +3044,7 @@ Evolve:
 
     'KitofMarkIII
     Public Sub Cell_13()
-        If nudLevel.Value <= 9 Then
+        If nudLevel.Value >= 9 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
             cboMag.SelectedIndex = 51 'Mark III
         Else
@@ -3262,7 +3250,7 @@ Evolve:
     Public Sub Cell_28()
         If nudLevel.Value >= 50 Then
             rtfOutput.AppendText(vbNewLine & cboMagCell.SelectedItem & strMagCellUsed & vbNewLine)
-            cboMag.SelectedIndex = 74 'Yahoo!
+            cboMag.SelectedIndex = 75 'Yahoo!
         Else
             Call MagCellError()
         End If

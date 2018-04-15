@@ -85,6 +85,7 @@ Public Class frmSettings
         Call LoadInit()
         btnGeneral.PerformClick()
 
+
     End Sub
 
     Public Sub LoadInit()
@@ -286,6 +287,55 @@ Public Class frmSettings
 
         Using XmlLoadSettingsInit As XmlReader = XmlReader.Create("./Data/Theme.xml")
 
+            XmlLoadSettingsInit.ReadToFollowing("Level")
+            XmlLoadSettingsInit.MoveToAttribute("text1")
+            lblLevel.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblLevel.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("Synchro")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblSynchro.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblSynchro.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("IQ")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblIQ.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIQ.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("DEF")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblDEF.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblDEF.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("POW")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblPOW.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblPOW.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("DEX")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblDEX.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblDEX.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("MIND")
+            XmlLoadSettingsInit.MoveToAttribute("text")
+            lblMIND.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToAttribute("color1")
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblMIND.ForeColor = Color.FromName(strSettingsTmp)
+
             XmlLoadSettingsInit.ReadToFollowing("Monomate")
             XmlLoadSettingsInit.MoveToFirstAttribute()
             lblCostMonomate.Text = XmlLoadSettingsInit.Value 'Text
@@ -399,13 +449,6 @@ Public Class frmSettings
             strSettingsTmp = XmlLoadSettingsInit.Value 'Color
             lblSectionID.ForeColor = Color.FromName(strSettingsTmp)
 
-            XmlLoadSettingsInit.ReadToFollowing("InitialSynchro")
-            XmlLoadSettingsInit.MoveToFirstAttribute()
-            lblSynchro.Text = XmlLoadSettingsInit.Value 'Text
-            XmlLoadSettingsInit.MoveToNextAttribute()
-            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
-            lblSynchro.ForeColor = Color.FromName(strSettingsTmp)
-
             XmlLoadSettingsInit.ReadToFollowing("Time")
             XmlLoadSettingsInit.MoveToFirstAttribute()
             lblFeedingTime.Text = XmlLoadSettingsInit.Value 'Text
@@ -441,6 +484,12 @@ Public Class frmSettings
             strSettingsTmp = XmlLoadSettingsInit.Value 'Color
             chkRacialRestriction.ForeColor = Color.FromName(strSettingsTmp)
 
+            XmlLoadSettingsInit.ReadToFollowing("InitialStats")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblInitialStats.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblInitialStats.ForeColor = Color.FromName(strSettingsTmp)
 
         End Using
 
@@ -452,7 +501,7 @@ Public Class frmSettings
         XmlSettings.IndentChars = (ControlChars.Tab)
         Me.Text = My.Settings.strSoft & " Settings"
         Me.Icon = New Icon("./Graphics/Theme/icon.ico")
-        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings.png")
+        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab1.png")
 
         Call LoadSettingsTheme()
         Call Init()
@@ -468,8 +517,6 @@ Public Class frmSettings
             Case Else
                 radBB.Checked = True
         End Select
-
-
     End Sub
 
     Private Sub btnSettingsSave_Click(sender As Object, e As EventArgs) Handles btnSettingsSave.Click

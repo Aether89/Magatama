@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="63" Name="Nidra" Stage="4" />
+	<Mag ID="63" Name="Nidra" Stage="4" GameVer="Ep2" />
 	<Table ID="7" />
 	<PhotonBlast ID="0" Name="None" />
 	<!--Triggered Actions-->
