@@ -43,6 +43,7 @@ Partial Class frmEditor
         Me.picEditorMag = New System.Windows.Forms.PictureBox()
         Me.tabEditorMag = New System.Windows.Forms.TabControl()
         Me.tabEditorMagFeedingTable = New System.Windows.Forms.TabPage()
+        Me.cboFeedVer = New System.Windows.Forms.ComboBox()
         Me.nudIQMonomate = New System.Windows.Forms.NumericUpDown()
         Me.nudSyncMonomate = New System.Windows.Forms.NumericUpDown()
         Me.nudSyncDimate = New System.Windows.Forms.NumericUpDown()
@@ -242,7 +243,7 @@ Partial Class frmEditor
         '
         Me.mnuEditorFileSaveMag.Name = "mnuEditorFileSaveMag"
         Me.mnuEditorFileSaveMag.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuEditorFileSaveMag.Size = New System.Drawing.Size(250, 22)
+        Me.mnuEditorFileSaveMag.Size = New System.Drawing.Size(257, 22)
         Me.mnuEditorFileSaveMag.Text = "Save Mag"
         '
         'mnuEditorFileSaveChart
@@ -250,7 +251,7 @@ Partial Class frmEditor
         Me.mnuEditorFileSaveChart.Name = "mnuEditorFileSaveChart"
         Me.mnuEditorFileSaveChart.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuEditorFileSaveChart.Size = New System.Drawing.Size(250, 22)
+        Me.mnuEditorFileSaveChart.Size = New System.Drawing.Size(257, 22)
         Me.mnuEditorFileSaveChart.Text = "Save Feeding Table"
         '
         'mnuEditorFileUpdate
@@ -258,14 +259,14 @@ Partial Class frmEditor
         Me.mnuEditorFileUpdate.Name = "mnuEditorFileUpdate"
         Me.mnuEditorFileUpdate.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
-        Me.mnuEditorFileUpdate.Size = New System.Drawing.Size(250, 22)
+        Me.mnuEditorFileUpdate.Size = New System.Drawing.Size(257, 22)
         Me.mnuEditorFileUpdate.Text = "&Update Mag"
         '
         'mnuEditorFileExit
         '
         Me.mnuEditorFileExit.Name = "mnuEditorFileExit"
         Me.mnuEditorFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.mnuEditorFileExit.Size = New System.Drawing.Size(250, 22)
+        Me.mnuEditorFileExit.Size = New System.Drawing.Size(257, 22)
         Me.mnuEditorFileExit.Text = "Exit"
         '
         'mnuEditor
@@ -424,6 +425,7 @@ Partial Class frmEditor
         '
         'tabEditorMagFeedingTable
         '
+        Me.tabEditorMagFeedingTable.Controls.Add(Me.cboFeedVer)
         Me.tabEditorMagFeedingTable.Controls.Add(Me.nudIQMonomate)
         Me.tabEditorMagFeedingTable.Controls.Add(Me.nudSyncMonomate)
         Me.tabEditorMagFeedingTable.Controls.Add(Me.nudSyncDimate)
@@ -515,6 +517,16 @@ Partial Class frmEditor
         Me.tabEditorMagFeedingTable.Size = New System.Drawing.Size(538, 359)
         Me.tabEditorMagFeedingTable.TabIndex = 0
         Me.tabEditorMagFeedingTable.Text = "Feeding Table"
+        '
+        'cboFeedVer
+        '
+        Me.cboFeedVer.FormattingEnabled = True
+        Me.cboFeedVer.Items.AddRange(New Object() {"Episode 1", "Episode 2"})
+        Me.cboFeedVer.Location = New System.Drawing.Point(6, 9)
+        Me.cboFeedVer.Name = "cboFeedVer"
+        Me.cboFeedVer.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.cboFeedVer.Size = New System.Drawing.Size(121, 21)
+        Me.cboFeedVer.TabIndex = 89
         '
         'nudIQMonomate
         '
@@ -1838,4 +1850,5 @@ Partial Class frmEditor
     Friend WithEvents radEditorMagEp2 As RadioButton
     Friend WithEvents radEditorMagEp4 As RadioButton
     Friend WithEvents mnuEditorFileUpdate As ToolStripMenuItem
+    Friend WithEvents cboFeedVer As ComboBox
 End Class

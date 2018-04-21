@@ -20,7 +20,7 @@ Public Class frmEditor
     Dim strEditorGameVer As String = "Ep4"
 
     Dim strEditorSearch As String
-
+    Dim strEditorPath As String = "Ep2"
 
 #Region "Public Sub"
 
@@ -394,7 +394,14 @@ Public Class frmEditor
 
     Public Sub LoadFeedingChart()
 
-        Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & nudEditorFeedingTables.Value & ".xml")
+        Select Case cboFeedVer.SelectedIndex
+            Case = 0
+                strEditorPath = "./Data/FeedingTables/Ep1/Table_"
+            Case = 1
+                strEditorPath = "./Data/FeedingTables/Ep2/Table_"
+        End Select
+
+        Using XmlLoadEditor As XmlReader = XmlReader.Create(strEditorPath & nudEditorFeedingTables.Value & ".xml")
 
             XmlLoadEditor.ReadToFollowing("Monomate")
             XmlLoadEditor.MoveToFirstAttribute()
@@ -585,7 +592,8 @@ Public Class frmEditor
         Me.Text = My.Settings.strSoft
         Me.Icon = New Icon("./Graphics/Theme/editor.ico")
         Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor.png")
-        tabEditorMag.SelectedTab = tabEditorMagInfo
+        tabEditorMag.SelectedTab = tabEditorMagFeedingTable
+        cboFeedVer.SelectedIndex = 1
         Call EditorInit()
     End Sub
 
@@ -679,6 +687,12 @@ Public Class frmEditor
     Private Sub mnuEditorFileUpdate_Click(sender As Object, e As EventArgs) Handles mnuEditorFileUpdate.Click
         Call MagUpdate()
     End Sub
+
+    Private Sub cboFeedVer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFeedVer.SelectedIndexChanged
+        Call LoadFeedingChart()
+    End Sub
+
+
 
 #End Region
 

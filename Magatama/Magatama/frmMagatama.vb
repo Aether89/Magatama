@@ -497,6 +497,29 @@ Public Class frmMagatama
     End Sub
 
     Public Sub MagSave()
+
+        Select Case picSectionID.Tag
+            Case = "Ep1"
+
+                Select Case strGameVer
+                    Case = "Ep1"
+                        strTmp = "Ep1"
+                    Case Else
+                        strTmp = "Ep2"
+                End Select
+
+            Case = "Ep2"
+                strTmp = "Ep2"
+
+            Case = "Ep4"
+                strTmp = "Ep4"
+
+            Case Else
+                strTmp = "Ep4"
+
+        End Select
+
+
         XmlWriter = XmlWriter.Create(strPathTmp, XmlSettings)
         With XmlWriter
 
@@ -505,7 +528,7 @@ Public Class frmMagatama
             .WriteStartElement("root")
 
             .WriteStartElement("Game")
-            .WriteAttributeString("PSO", strGameVer)
+            .WriteAttributeString("PSO", strTmp)
             .WriteEndElement()
 
 
@@ -550,7 +573,7 @@ Public Class frmMagatama
             .WriteStartElement("Cycle")
             .WriteAttributeString("Count", lblCyclesCount.Text)
             .WriteAttributeString("Feed", bytFeedingCount)
-            .WriteAttributeString("Evo", shoevoCycle)
+            .WriteAttributeString("Evo", shoEvoCycle)
             .WriteEndElement()
             .WriteStartElement("Estimation")
             .WriteAttributeString("Time", lngEstimatedTime)
@@ -670,6 +693,19 @@ Public Class frmMagatama
 
 
         Using XmlLoadMag As XmlReader = XmlReader.Create(ofdMagatama.FileName)
+            XmlLoadMag.ReadToFollowing("Game")
+            XmlLoadMag.MoveToAttribute("PSO")
+            strTmp = XmlLoadMag.Value
+
+            Select Case strTmp
+                Case = strGameVer
+                    GoTo MagLoadStart
+                Case Else
+                    MessageBox.Show("Your Current version is " + strGameVer + " The Mag your are trying to load is from " + strTmp)
+                    GoTo MagLoadEnd
+            End Select
+
+MagLoadStart:
             XmlLoadMag.ReadToFollowing("Owner")
             XmlLoadMag.MoveToAttribute("Class_ID")
             cboClass.SelectedIndex = XmlLoadMag.Value 'Class
@@ -801,6 +837,7 @@ Public Class frmMagatama
         End Using
 
         Call Cost()
+MagLoadEnd:
     End Sub
 
     Public Sub LoadInit()
@@ -1513,6 +1550,9 @@ Public Class frmMagatama
             XmlLoadMag.ReadToFollowing("Mag")
             XmlLoadMag.MoveToAttribute("Stage")
             picMag.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToAttribute("GameVer")
+            picSectionID.Tag = XmlLoadMag.Value
+
             XmlLoadMag.ReadToFollowing("Table")
             XmlLoadMag.MoveToFirstAttribute()
             strFeedingChart = XmlLoadMag.Value
@@ -2143,7 +2183,13 @@ Public Class frmMagatama
             bytFeedingCount = bytFeedingCount + 1
             strTmp = strTmp.Replace(" ", "")
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            If strGameVer = "Ep1" Then
+                strPathTmp = "./Data/FeedingTables/Ep1/Table_"
+            Else
+                strPathTmp = "./Data/FeedingTables/Ep2/Table_"
+            End If
+
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
 
                 XmlLoadTable.ReadToFollowing(strTmp)
 
@@ -2153,7 +2199,7 @@ Public Class frmMagatama
                 Call LevelSyncIQCheck()
             End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
                 XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("IQ")
                 shoProgress = nudIQ.Value + XmlLoadTable.Value
@@ -2161,7 +2207,7 @@ Public Class frmMagatama
                 Call LevelSyncIQCheck()
             End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
                 XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("DEF")
                 shoProgress = nudProgressDEF.Value + XmlLoadTable.Value
@@ -2170,7 +2216,7 @@ Public Class frmMagatama
                 Call StatsChecks()
             End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
                 XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("POW")
                 shoProgress = nudProgressPOW.Value + XmlLoadTable.Value
@@ -2179,7 +2225,7 @@ Public Class frmMagatama
                 Call StatsChecks()
             End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
                 XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("DEX")
                 shoProgress = nudProgressDEX.Value + XmlLoadTable.Value
@@ -2188,7 +2234,7 @@ Public Class frmMagatama
                 Call StatsChecks()
             End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create("./Data/FeedingTables/Table_" & strFeedingChart & ".xml")
+            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
                 XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("MIND")
                 shoProgress = nudProgressMIND.Value + XmlLoadTable.Value
