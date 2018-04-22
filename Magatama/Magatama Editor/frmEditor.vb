@@ -3,8 +3,8 @@
 
 Public Class frmEditor
 
-    Dim strPathEditorPicMag As Image = My.Resources.ResourceManager.GetObject(0)
-    Dim strPathEditorPicPhotonBlast As Image = My.Resources.ResourceManager.GetObject(0)
+    Dim strPathEditorPicMag As Image = Image.FromFile("./Graphics/Mag/0.png")
+    Dim strPathEditorPicPhotonBlast As Image = Image.FromFile("./Graphics/PhotonBlast/0.png")
 
     Dim XmlLoadEditor As XmlReader = New XmlTextReader("./Data/Mag/Mag.xml")
     Dim XmlSaveEditor As XmlWriter
@@ -136,7 +136,7 @@ Public Class frmEditor
         Call EditorPhotonBlastXML()
         Call EditorcboMagList()
         Call LoadFeedingChart()
-
+        picEditorMag.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_mag.png")
     End Sub
 
     Public Sub MagUpdate()

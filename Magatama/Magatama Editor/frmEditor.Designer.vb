@@ -398,9 +398,8 @@ Partial Class frmEditor
         'picEditorMag
         '
         Me.picEditorMag.BackColor = System.Drawing.Color.Transparent
-        Me.picEditorMag.BackgroundImage = Global.Magatama_Editor.My.Resources.Resources.bg_editor_mag
         Me.picEditorMag.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.picEditorMag.Image = Global.Magatama_Editor.My.Resources.Resources.Mag
+        Me.picEditorMag.InitialImage = Nothing
         Me.picEditorMag.Location = New System.Drawing.Point(161, 17)
         Me.picEditorMag.Name = "picEditorMag"
         Me.picEditorMag.Size = New System.Drawing.Size(64, 64)
@@ -1447,7 +1446,6 @@ Partial Class frmEditor
         'picEditorPhotonBlast
         '
         Me.picEditorPhotonBlast.BackColor = System.Drawing.Color.Transparent
-        Me.picEditorPhotonBlast.Image = Global.Magatama_Editor.My.Resources.Resources.none
         Me.picEditorPhotonBlast.Location = New System.Drawing.Point(161, 101)
         Me.picEditorPhotonBlast.Name = "picEditorPhotonBlast"
         Me.picEditorPhotonBlast.Size = New System.Drawing.Size(50, 43)
@@ -1626,13 +1624,11 @@ Partial Class frmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.Magatama_Editor.My.Resources.Resources.bg_editor
         Me.ClientSize = New System.Drawing.Size(730, 649)
         Me.Controls.Add(Me.tabEditor)
         Me.Controls.Add(Me.picEditorSave)
         Me.Controls.Add(Me.mnuEditor)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.mnuEditor
         Me.MaximizeBox = False

@@ -82,6 +82,7 @@ Public Class frmMagatama
     Dim bytStage4 As Byte = 100
 
     Dim strTmp As String 'Used by the Feeding Process, The Mag Saving and the Export of the Output
+    Dim strFeedTmp As String 'Used by the Feeding Process to know which items table to look to
     Dim strEvo As String 'Used by the Evolution process if it use the same as the feeding process is causes crashes
     Dim strEvoCND As String
     Dim strEvoCND2 As String
@@ -123,10 +124,10 @@ Public Class frmMagatama
     Dim strLevelUp As String = "--- Level UP ---"
 
     ' String user for Colorisation of the Output
-    Dim strOutmate As String = "Black"
-    Dim strOutfluid As String = "Black"
-    Dim strOutAnti As String = "Black"
-    Dim strOutAtomizer As String = "Black"
+    Dim strOutmate As String = "Green"
+    Dim strOutfluid As String = "Blue"
+    Dim strOutAnti As String = "Goldenrod"
+    Dim strOutAtomizer As String = "Red"
 
 
 
@@ -354,7 +355,17 @@ Public Class frmMagatama
     End Sub
 
     Public Sub MagatamaTitle()
-        Me.Text = My.Settings.strSoft & " : Stage " & picMag.Tag & " " & cboMag.SelectedItem
+
+        Select Case picSave.Tag
+            Case = "Saved"
+                Me.Text = My.Settings.strSoft & " : Stage " & picMag.Tag & " " & cboMag.SelectedItem
+
+            Case = "Unsaved"
+                Me.Text = "* " & My.Settings.strSoft & " : Stage " & picMag.Tag & " " & cboMag.SelectedItem
+            Case Else
+                Me.Text = "! " & My.Settings.strSoft & " : Stage " & picMag.Tag & " " & cboMag.SelectedItem
+
+        End Select
     End Sub
 
     Public Sub Tooltips()
@@ -697,9 +708,37 @@ Public Class frmMagatama
             XmlLoadMag.MoveToAttribute("PSO")
             strTmp = XmlLoadMag.Value
 
-            Select Case strTmp
-                Case = strGameVer
-                    GoTo MagLoadStart
+            Select Case strGameVer
+                Case = "Ep1"
+                    Select Case strTmp
+                        Case = "Ep1"
+                            GoTo MagLoadStart
+                        Case Else
+                            MessageBox.Show("Your Current version is " + strGameVer + " The Mag your are trying to load is from " + strTmp)
+                            GoTo MagLoadEnd
+                    End Select
+
+                Case = "Ep2"
+                    Select Case strTmp
+                        Case = "Ep2"
+                            GoTo MagLoadStart
+                        Case Else
+                            MessageBox.Show("Your Current version is " + strGameVer + " The Mag your are trying to load is from " + strTmp)
+                            GoTo MagLoadEnd
+                    End Select
+                Case = "Ep4"
+
+                    Select Case strTmp
+                        Case = "Ep2"
+                            GoTo MagLoadStart
+
+                        Case = "Ep4"
+                            GoTo MagLoadStart
+                        Case Else
+                            MessageBox.Show("Your Current version is " + strGameVer + " The Mag your are trying to load is from " + strTmp)
+                            GoTo MagLoadEnd
+                    End Select
+
                 Case Else
                     MessageBox.Show("Your Current version is " + strGameVer + " The Mag your are trying to load is from " + strTmp)
                     GoTo MagLoadEnd
@@ -834,6 +873,8 @@ MagLoadStart:
             XmlLoadMag.ReadToFollowing("Output")
             rtfOutput.Clear()
             rtfOutput.Rtf = (XmlLoadMag.ReadInnerXml.ToString())
+
+            rtfOutput.AppendText(" ")
         End Using
 
         Call Cost()
@@ -1267,6 +1308,7 @@ MagLoadEnd:
     Public Sub Unsaved()
         picSave.Image = Image.FromFile("./Graphics/Theme/unsaved.png")
         picSave.Tag = "Unsaved"
+        Call MagatamaTitle()
     End Sub
 
     Public Sub UndoRedo()
@@ -1274,11 +1316,13 @@ MagLoadEnd:
         shoUndo = (shoUndo + 1)
         shoRedo = shoUndo
         Call MagSave()
+
     End Sub
 
     Public Sub Saved()
         picSave.Image = Image.FromFile("./Graphics/Theme/saved.png")
         picSave.Tag = "Saved"
+        Call MagatamaTitle()
     End Sub
 
     Public Sub MagLevel()
@@ -1989,6 +2033,7 @@ MagLoadEnd:
             strPathTmp = ("./Tmp/" & shoUndo & ".mag")
 
             ofdMagatama.FileName = strPathTmp.ToString
+
             Call MagLoad()
         Else
             strPathTmp = ("./Tmp/" & shoUndo & ".mag")
@@ -2162,88 +2207,75 @@ MagLoadEnd:
         While shoCount < nudQtyTmp.Value
 
 
-            shoProgress = 0
+
             nudHistoryTmp.Value = nudHistoryTmp.Value + 1
 
-            If btnTmp.Tag.Contains("mate") Then
-                rtfOutput.SelectionColor = Color.FromName(strOutmate)
-            End If
-            If btnTmp.Tag.Contains("fluid") Then
-                rtfOutput.SelectionColor = Color.FromName(strOutfluid)
-            End If
-            If btnTmp.Tag.Contains("Anti") Then
-                rtfOutput.SelectionColor = Color.FromName(strOutAnti)
-            End If
-            If btnTmp.Tag.Contains("Atomizer") Then
-                rtfOutput.SelectionColor = Color.FromName(strOutAtomizer)
-            End If
+            Select Case btnTmp.Tag
+                Case ("mate")
+                    rtfOutput.SelectionColor = Color.FromName(strOutmate)
+                Case ("fluid")
+                    rtfOutput.SelectionColor = Color.FromName(strOutfluid)
+                Case ("Anti")
+                    rtfOutput.SelectionColor = Color.FromName(strOutAnti)
+                Case ("Atomizer")
+                    rtfOutput.SelectionColor = Color.FromName(strOutAtomizer)
+                Case Else
+                    rtfOutput.SelectionColor = Color.FromName("Purple")
 
+            End Select
             rtfOutput.AppendText(btnTmp.Text & " x" & ((nudHistoryTmp.Value) - (shoevoTmp)) & Chr(13))
             shoCount = shoCount + 1
             bytFeedingCount = bytFeedingCount + 1
-            strTmp = strTmp.Replace(" ", "")
+
+
+
+
+
 
             If strGameVer = "Ep1" Then
-                strPathTmp = "./Data/FeedingTables/Ep1/Table_"
+                strPathTmp = "./Data/FeedingTables/ep1/Table_"
             Else
-                strPathTmp = "./Data/FeedingTables/Ep2/Table_"
+                strPathTmp = "./Data/FeedingTables/ep2/Table_"
             End If
 
             Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
 
-                XmlLoadTable.ReadToFollowing(strTmp)
 
+                XmlLoadTable.ReadToFollowing(strFeedTmp)
                 XmlLoadTable.MoveToAttribute("Sync")
                 shoProgress = nudSynchro.Value + XmlLoadTable.Value
                 nudStats = nudSynchro
                 Call LevelSyncIQCheck()
-            End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
-                XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("IQ")
                 shoProgress = nudIQ.Value + XmlLoadTable.Value
                 nudStats = nudIQ
                 Call LevelSyncIQCheck()
-            End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
-                XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("DEF")
                 shoProgress = nudProgressDEF.Value + XmlLoadTable.Value
                 nudStats = nudDEF
                 nudProgressStats = nudProgressDEF
                 Call StatsChecks()
-            End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
-                XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("POW")
                 shoProgress = nudProgressPOW.Value + XmlLoadTable.Value
                 nudStats = nudPOW
                 nudProgressStats = nudProgressPOW
                 Call StatsChecks()
-            End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
-                XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("DEX")
                 shoProgress = nudProgressDEX.Value + XmlLoadTable.Value
                 nudStats = nudDEX
                 nudProgressStats = nudProgressDEX
                 Call StatsChecks()
-            End Using
 
-            Using XmlLoadTable As XmlReader = XmlReader.Create(strPathTmp & strFeedingChart & ".xml")
-                XmlLoadTable.ReadToFollowing(strTmp)
                 XmlLoadTable.MoveToAttribute("MIND")
                 shoProgress = nudProgressMIND.Value + XmlLoadTable.Value
                 nudStats = nudMIND
                 nudProgressStats = nudProgressMIND
                 Call StatsChecks()
             End Using
-
-
 
 
             If bytFeedingCount = 3 Then
@@ -2254,11 +2286,11 @@ MagLoadEnd:
 
             Call EvolutionCheck()
             Call Cost()
+
+
             Call UndoRedo()
 
-
         End While
-
 
     End Sub
 
@@ -3311,7 +3343,7 @@ Evolve:
 #Region "Sets Variable for the Feeding Process"
 
     Public Sub MonomateFeed()
-        strTmp = "Monomate"
+        strFeedTmp = "Monomate"
         nudQtyTmp = nudQtyMonomate
         nudHistoryTmp = nudHistoryMonomate
         btnTmp = btnMonomate
@@ -3319,7 +3351,7 @@ Evolve:
     End Sub
 
     Public Sub DimateFeed()
-        strTmp = "Dimate"
+        strFeedTmp = "Dimate"
         nudQtyTmp = nudQtyDimate
         nudHistoryTmp = nudHistoryDimate
         btnTmp = btnDimate
@@ -3327,7 +3359,7 @@ Evolve:
     End Sub
 
     Public Sub TrimateFeed()
-        strTmp = "Trimate"
+        strFeedTmp = "Trimate"
         nudQtyTmp = nudQtyTrimate
         nudHistoryTmp = nudHistoryTrimate
         btnTmp = btnTrimate
@@ -3335,7 +3367,7 @@ Evolve:
     End Sub
 
     Public Sub MonofluidFeed()
-        strTmp = "Monofluid"
+        strFeedTmp = "Monofluid"
         nudQtyTmp = nudQtyMonofluid
         nudHistoryTmp = nudHistoryMonofluid
         btnTmp = btnMonofluid
@@ -3343,7 +3375,7 @@ Evolve:
     End Sub
 
     Public Sub DifluidFeed()
-        strTmp = "Difluid"
+        strFeedTmp = "Difluid"
         nudQtyTmp = nudQtyDifluid
         nudHistoryTmp = nudHistoryDifluid
         btnTmp = btnDifluid
@@ -3351,7 +3383,7 @@ Evolve:
     End Sub
 
     Public Sub TrifluidFeed()
-        strTmp = "Trifluid"
+        strFeedTmp = "Trifluid"
         nudQtyTmp = nudQtyTrifluid
         nudHistoryTmp = nudHistoryTrifluid
         btnTmp = btnTrifluid
@@ -3359,7 +3391,7 @@ Evolve:
     End Sub
 
     Public Sub AntidoteFeed()
-        strTmp = "Antidote"
+        strFeedTmp = "Antidote"
         nudQtyTmp = nudQtyAntidote
         nudHistoryTmp = nudHistoryAntidote
         btnTmp = btnAntidote
@@ -3367,7 +3399,7 @@ Evolve:
     End Sub
 
     Public Sub AntiparalysisFeed()
-        strTmp = "Antiparalysis"
+        strFeedTmp = "Antiparalysis"
         nudQtyTmp = nudQtyAntiparalysis
         nudHistoryTmp = nudHistoryAntiparalysis
         btnTmp = btnAntiparalysis
@@ -3375,7 +3407,7 @@ Evolve:
     End Sub
 
     Public Sub SolAtomizerFeed()
-        strTmp = "SolAtomizer"
+        strFeedTmp = "SolAtomizer"
         nudQtyTmp = nudQtySolAtomizer
         nudHistoryTmp = nudHistorySolAtomizer
         btnTmp = btnSolAtomizer
@@ -3383,7 +3415,7 @@ Evolve:
     End Sub
 
     Public Sub MoonAtomizerFeed()
-        strTmp = "MoonAtomizer"
+        strFeedTmp = "MoonAtomizer"
         nudQtyTmp = nudQtyMoonAtomizer
         nudHistoryTmp = nudHistoryMoonAtomizer
         btnTmp = btnMoonAtomizer
@@ -3391,7 +3423,7 @@ Evolve:
     End Sub
 
     Public Sub StarAtomizerFeed()
-        strTmp = "StarAtomizer"
+        strFeedTmp = "StarAtomizer"
         nudQtyTmp = nudQtyStarAtomizer
         nudHistoryTmp = nudHistoryStarAtomizer
         btnTmp = btnStarAtomizer
