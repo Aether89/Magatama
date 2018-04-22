@@ -417,6 +417,7 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.rtfOutput, "rtfOutput")
         Me.rtfOutput.Name = "rtfOutput"
         Me.rtfOutput.ReadOnly = True
+        Me.rtfOutput.TabStop = False
         '
         'nudProgressDEF
         '
@@ -968,6 +969,7 @@ Partial Class frmMagatama
         '
         resources.ApplyResources(Me.rtfExport, "rtfExport")
         Me.rtfExport.Name = "rtfExport"
+        Me.rtfExport.ShortcutsEnabled = False
         '
         'frmMagatama
         '

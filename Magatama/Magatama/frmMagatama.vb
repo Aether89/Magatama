@@ -871,14 +871,22 @@ MagLoadStart:
             'Output
 
             XmlLoadMag.ReadToFollowing("Output")
-            rtfOutput.Clear()
-            rtfOutput.Rtf = (XmlLoadMag.ReadInnerXml.ToString())
+            strTmp = (XmlLoadMag.ReadInnerXml.ToString())
 
-            rtfOutput.AppendText(" ")
+
+            rtfOutput.Rtf = strTmp
+            'The two following lines make sure that the Output is in Focus and at the bottom. Also make sure that color syntax work after a reload
+            rtfOutput.Focus()
+            SendKeys.Send("{END}")
         End Using
+
+
+
 
         Call Cost()
 MagLoadEnd:
+
+
     End Sub
 
     Public Sub LoadInit()
@@ -3624,6 +3632,8 @@ Evolve:
     Private Sub btnOutputSpace_Click(sender As Object, e As EventArgs) Handles btnOutputSpace.Click
         rtfOutput.AppendText(Chr(13))
     End Sub
+
+
 
 
 #End Region

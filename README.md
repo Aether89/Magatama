@@ -12,29 +12,42 @@ This program is develloped as a Spiritual Sucessor to Mag Farm Version 0.9.7r2 b
 
 ## Features
 
-* Saving the Current Data
-* Importing Previous Data
-* Export the content of Output
-* Easy to know how many of each items have been feed to the mag, and also how many have been feed an item since the Mag evolved.
-* Can edit on the fly you Mag Stats by pressing [F2]
-* Can undo or redo the last Feed items. Work with Mass Feed.
-* Can toggle ON/OFF the racial restriction on some Mag Cell, available in the setting.
-* Photon Blast Description when hovering over the Photon Blast icon.
-* The Photon Blast 03 list will only show valid option.
-* Can customise most of the text and the pictures.
-* Clicking the Pictures will put focus on the corresponding drop-down list, always for the Section ID and the Class but only when editing Stats for the Mag and Photon Blasts
-* Ability to Mass Feed one Item by changing it Quantity from 0 to the desired value, if you press the button and the value is 0 the program will assume it is equal to 1
-* Mass Feed of Various item if the value is 0 it will not feed this item but all other that are higher or equal to 1 will be feed to the Mag.
-* In the Settings you can Change the Cost of each item, the mag initial Synchro, the time between feeding ( in Seconds ),the Initial Class ,Section ID and Game Version.
-* An External Editor, MagDex, to preview or change a Mag Data and also edit the Feeding Tables. The Mag Feeding Table is determined by the last load table.
+### General
+* Include the Feed charts for Version 1 & 2 and also Episode 2 and Later.
+* Include all Mag & Mag Cells.
+* Can Save the current Mag and load it later time.
+* Can Export the Output to Rich Text Format.
+* Can Easily see how many items have been feed in total and their individual cost.
+* Can Mass Feed an items by editing the Quantity Column then pressing it own button, if it is at 0 it will presume 1.
+* Can Mass Feed multiple items by pressing Mass Feed and it will feed every item with a quantity higher from 0 by Starting from Monomate to end at Star Atomizer.
+* Color Syntax in the Output.
+* Can Easily Edit the Mag by Pressing [F2]
+
+### Settings 
+* Can change the Game Version to Load on new Mag
+* Can Edit the Default Selected Class and Section ID
+* Can edit the time between feeding
+* Can Edit the Default Stats for a New Mag.
+* Can toggle On or Off Racial restriction on Mag Cells.
+* Can Edit the Cost of each items
+
+### MagDex
+* Can See Details about each Mag : Feed charts, Activation trigger and Percentage, Photon Blast.
+* Can Edit the Previous Details and the Feeding Charts
+
+### Customisation
+* Can Edit the text and Color of Most of the UI by editing Theme.xml in Data
+* Can Edit most of the text by editing the appropriate xml files
+* Can Easily change the includes images
 
 ## Keyboard Shortcut
 
 ### Magatama
 * Press [ CTRL+ N ] to Start a New Mag.
+* Press [ CTRL+ Shift + N ] to Start a New Blank Mag.
 * Press [ CTRL+ O ] to Open a Previous Mag save data.
 * Press [ CTRL+ S ] to Save your current Edit
-* Press [ CTRL + S ] to Save As...your current Edit as a new files
+* Press [ CTRL + Shift + S ] to Save As...your current Edit as a new files
 * Press [ CTRL+ E ] to only export the Output
 * Press [ ALT + F4 ] to Exit the Program
 * Press [ CTRL+ Z] to undo the last feed item
