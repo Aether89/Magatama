@@ -657,6 +657,7 @@ Partial Class frmMagatama
         'nudQtyMonomate
         '
         resources.ApplyResources(Me.nudQtyMonomate, "nudQtyMonomate")
+        Me.nudQtyMonomate.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyMonomate.Name = "nudQtyMonomate"
         '
         'nudQtyDimate
