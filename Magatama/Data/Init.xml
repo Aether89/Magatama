@@ -3,7 +3,7 @@
 <Root>
 	<GameVersion value="Ep4" />
 	<Class Ep1="6" Ep2="8" Ep4="8" />
-	<Default SectionIDNumber="3" SectionIDName="Pinkal" FeedingTime="210" RacialRestriction="False" />
+	<Default SectionIDNumber="5" SectionIDName="Pinkal" FeedingTime="210" RacialRestriction="False" />
 	<Mag MaxLevel="200" Synchro="20" IQ="0" DEF="5" POW="0" DEX="0" MIND="0">
 		<!--Item Cost -->
 		<Monomate Cost="50" />

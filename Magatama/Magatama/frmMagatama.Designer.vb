@@ -662,51 +662,61 @@ Partial Class frmMagatama
         'nudQtyDimate
         '
         resources.ApplyResources(Me.nudQtyDimate, "nudQtyDimate")
+        Me.nudQtyDimate.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyDimate.Name = "nudQtyDimate"
         '
         'nudQtyTrimate
         '
         resources.ApplyResources(Me.nudQtyTrimate, "nudQtyTrimate")
+        Me.nudQtyTrimate.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyTrimate.Name = "nudQtyTrimate"
         '
         'nudQtyMonofluid
         '
         resources.ApplyResources(Me.nudQtyMonofluid, "nudQtyMonofluid")
+        Me.nudQtyMonofluid.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyMonofluid.Name = "nudQtyMonofluid"
         '
         'nudQtyDifluid
         '
         resources.ApplyResources(Me.nudQtyDifluid, "nudQtyDifluid")
+        Me.nudQtyDifluid.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyDifluid.Name = "nudQtyDifluid"
         '
         'nudQtyTrifluid
         '
         resources.ApplyResources(Me.nudQtyTrifluid, "nudQtyTrifluid")
+        Me.nudQtyTrifluid.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyTrifluid.Name = "nudQtyTrifluid"
         '
         'nudQtyAntidote
         '
         resources.ApplyResources(Me.nudQtyAntidote, "nudQtyAntidote")
+        Me.nudQtyAntidote.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyAntidote.Name = "nudQtyAntidote"
         '
         'nudQtyAntiparalysis
         '
         resources.ApplyResources(Me.nudQtyAntiparalysis, "nudQtyAntiparalysis")
+        Me.nudQtyAntiparalysis.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyAntiparalysis.Name = "nudQtyAntiparalysis"
         '
         'nudQtyMoonAtomizer
         '
         resources.ApplyResources(Me.nudQtyMoonAtomizer, "nudQtyMoonAtomizer")
+        Me.nudQtyMoonAtomizer.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyMoonAtomizer.Name = "nudQtyMoonAtomizer"
         '
         'nudQtyStarAtomizer
         '
         resources.ApplyResources(Me.nudQtyStarAtomizer, "nudQtyStarAtomizer")
+        Me.nudQtyStarAtomizer.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtyStarAtomizer.Name = "nudQtyStarAtomizer"
         '
         'nudQtySolAtomizer
         '
         resources.ApplyResources(Me.nudQtySolAtomizer, "nudQtySolAtomizer")
+        Me.nudQtySolAtomizer.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudQtySolAtomizer.Name = "nudQtySolAtomizer"
         '
         'nudHistoryMonomate
@@ -775,14 +785,14 @@ Partial Class frmMagatama
         'nudHistoryMoonAtomizer
         '
         resources.ApplyResources(Me.nudHistoryMoonAtomizer, "nudHistoryMoonAtomizer")
-        Me.nudHistoryMoonAtomizer.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
+        Me.nudHistoryMoonAtomizer.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.nudHistoryMoonAtomizer.Name = "nudHistoryMoonAtomizer"
         Me.nudHistoryMoonAtomizer.TabStop = False
         '
         'nudHistoryStarAtomizer
         '
         resources.ApplyResources(Me.nudHistoryStarAtomizer, "nudHistoryStarAtomizer")
-        Me.nudHistoryStarAtomizer.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
+        Me.nudHistoryStarAtomizer.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.nudHistoryStarAtomizer.Name = "nudHistoryStarAtomizer"
         Me.nudHistoryStarAtomizer.TabStop = False
         '

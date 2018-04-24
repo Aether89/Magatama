@@ -2191,6 +2191,7 @@ MagLoadEnd:
 
 
         Call ResetCountEvo()
+
     End Sub
 
     Public Sub Cost() 'Calcule the Cost both in Meseta and time.
@@ -2297,7 +2298,6 @@ MagLoadEnd:
 
 
             Call UndoRedo()
-
         End While
 
     End Sub
@@ -2319,7 +2319,7 @@ MagLoadEnd:
             shoEvoStarAtomizer = nudHistoryStarAtomizer.Value
         End If
 
-        Select Case strTmp
+        Select Case strFeedTmp
             Case = "Monomate"
                 shoevoTmp = shoEvoMonomate
             Case = "Dimate"
