@@ -10,10 +10,10 @@
 <Synchro text="Synchro" color="White" color1="White"/><!-- color is for main interface, color1 is for the Settings-->
 <IQ text="IQ" color="White" color1="White"/><!-- color is for main interface, color1 is for the Settings-->
 
-<DEF text="DEF" color="White" color1="White" tt="One point of DEF give 1 point of DFP"/> <!-- color is for main interface, color1 is for the Settings-->
-<POW text="POW" color="White" color1="White" tt="One point of POW give 2 point of ATP"/><!-- color is for main interface, color1 is for the Settings-->
-<DEX text="DEX" color="White" color1="White" tt="One point of DEX give 0.5 point of ATA"/><!-- color is for main interface, color1 is for the Settings-->
-<MIND text="MIND" color="White" color1="White" tt="One point of MIND give 2 point of MST"/><!-- color is for main interface, color1 is for the Settings-->
+<DEF text="DEF" color="White" color1="White" tt="One point of DEF give 1 point of DFP" colorprg="Blue" colorout="Blue"/> <!-- color is for main interface, color1 is for the Settings colorprg is for the progress bar and colorout is for the color output-->
+<POW text="POW" color="White" color1="White" tt="One point of POW give 2 point of ATP" colorprg="Red" colorout="Red"/><!-- color is for main interface, color1 is for the Settings colorprg is for the progress bar and colorout is for the color output-->
+<DEX text="DEX" color="White" color1="White" tt="One point of DEX give 0.5 point of ATA" colorprg="Yellow" colorout="Goldenrod"/><!-- color is for main interface, color1 is for the Settings colorprg is for the progress bar and colorout is for the color output-->
+<MIND text="MIND" color="White" color1="White" tt="One point of MIND give 2 point of MST" colorprg="Green" colorout="Lime"><!-- color is for main interface, color1 is for the Settings colorprg is for the progress bar and colorout is for the color output-->
 
 <PBFull text="PB Full :" color="White" color2="White"/><!-- color2 is for the effect-->
 <LowHP text="10% HP  :" color="White" color2="White"/><!-- color2 is for the effect-->
@@ -46,7 +46,7 @@
 <Space text="Space Bar"/>
 <MassFeed text="Mass Feed" tt="Use the Quantity Column to determine how many of each item it should feed  the Mag. &#xD;If the Quantity of one or many item is 0 these items will not be feed to the Mag."/>
 <Feed text="Feed" tt="Feed the selected Mag Cell."/>
-
+<LevelUp text="=== LEVEL UP ===" color="Fuchsia"/><!-- Color change the color of the level up message in the Output-->
 <!-- Tooltips -->
 
 <!-- Shared  -->
@@ -85,7 +85,4 @@
 <fluid color="Blue"/>
 <Anti color="Goldenrod"/>
 <Atomizer color="Red"/>
-
-
-
 </Root>

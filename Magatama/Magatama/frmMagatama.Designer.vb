@@ -345,6 +345,7 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.prgDEF, "prgDEF")
         Me.prgDEF.Name = "prgDEF"
         Me.prgDEF.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgDEF.Tag = "Blue"
         '
         'prgPOW
         '
@@ -352,6 +353,7 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.prgPOW, "prgPOW")
         Me.prgPOW.Name = "prgPOW"
         Me.prgPOW.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgPOW.Tag = "Red"
         '
         'prgDEX
         '
@@ -359,6 +361,7 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.prgDEX, "prgDEX")
         Me.prgDEX.Name = "prgDEX"
         Me.prgDEX.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgDEX.Tag = "Goldenrod"
         '
         'prgMind
         '
@@ -366,6 +369,7 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.prgMind, "prgMind")
         Me.prgMind.Name = "prgMind"
         Me.prgMind.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgMind.Tag = "Green"
         '
         'nudDEF
         '
@@ -413,6 +417,7 @@ Partial Class frmMagatama
         '
         'rtfOutput
         '
+        Me.rtfOutput.BackColor = System.Drawing.Color.White
         Me.rtfOutput.HideSelection = False
         resources.ApplyResources(Me.rtfOutput, "rtfOutput")
         Me.rtfOutput.Name = "rtfOutput"

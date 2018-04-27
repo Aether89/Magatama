@@ -128,6 +128,7 @@ Public Class frmMagatama
     Dim strOutfluid As String = "Blue"
     Dim strOutAnti As String = "Goldenrod"
     Dim strOutAtomizer As String = "Red"
+    Dim strOutLevelUp As String = "Black"
 
 
 
@@ -989,6 +990,11 @@ MagLoadEnd:
             lblDEF.ForeColor = Color.FromName(strTmp)
             XmlLoadMag.MoveToAttribute("tt") 'Tooltips
             ttMagatama.SetToolTip(lblDEF, XmlLoadMag.Value)
+            XmlLoadMag.MoveToNextAttribute() 'Progress Bar Color
+            strTmp = XmlLoadMag.Value 'Color
+            prgDEF.ForeColor = Color.FromName(strTmp)
+            XmlLoadMag.MoveToNextAttribute() 'Color Output
+            prgDEF.Tag = XmlLoadMag.Value 'Color
 
             XmlLoadMag.ReadToFollowing("POW")
             XmlLoadMag.MoveToFirstAttribute()
@@ -998,6 +1004,11 @@ MagLoadEnd:
             lblPOW.ForeColor = Color.FromName(strTmp)
             XmlLoadMag.MoveToAttribute("tt") 'Tooltips
             ttMagatama.SetToolTip(lblPOW, XmlLoadMag.Value)
+            XmlLoadMag.MoveToNextAttribute() 'Progress Bar Color
+            strTmp = XmlLoadMag.Value 'Color
+            prgPOW.ForeColor = Color.FromName(strTmp)
+            XmlLoadMag.MoveToNextAttribute() 'Color Output
+            prgPOW.Tag = XmlLoadMag.Value 'Color
 
             XmlLoadMag.ReadToFollowing("DEX")
             XmlLoadMag.MoveToFirstAttribute()
@@ -1007,6 +1018,11 @@ MagLoadEnd:
             lblDEX.ForeColor = Color.FromName(strTmp)
             XmlLoadMag.MoveToAttribute("tt") 'Tooltips
             ttMagatama.SetToolTip(lblDEX, XmlLoadMag.Value)
+            XmlLoadMag.MoveToNextAttribute() 'Progress Bar Color
+            strTmp = XmlLoadMag.Value 'Color
+            prgDEX.ForeColor = Color.FromName(strTmp)
+            XmlLoadMag.MoveToNextAttribute() 'Color Output
+            prgDEX.Tag = XmlLoadMag.Value 'Color
 
             XmlLoadMag.ReadToFollowing("MIND")
             XmlLoadMag.MoveToFirstAttribute()
@@ -1016,6 +1032,11 @@ MagLoadEnd:
             lblMIND.ForeColor = Color.FromName(strTmp)
             XmlLoadMag.MoveToAttribute("tt") 'Tooltips
             ttMagatama.SetToolTip(lblMIND, XmlLoadMag.Value)
+            XmlLoadMag.MoveToNextAttribute() 'Progress Bar Color
+            strTmp = XmlLoadMag.Value 'Color
+            prgMind.ForeColor = Color.FromName(strTmp)
+            XmlLoadMag.MoveToNextAttribute() 'Color Output
+            prgMind.Tag = XmlLoadMag.Value 'Color
 
             XmlLoadMag.ReadToFollowing("PBFull")
             XmlLoadMag.MoveToFirstAttribute()
@@ -1161,6 +1182,7 @@ MagLoadEnd:
 
 
 
+
             XmlLoadMag.ReadToFollowing("Space")
             XmlLoadMag.MoveToFirstAttribute()
             btnOutputSpace.Text = XmlLoadMag.Value 'Text
@@ -1177,6 +1199,13 @@ MagLoadEnd:
             XmlLoadMag.MoveToNextAttribute() 'Tooltips
             ttMagatama.SetToolTip(btnMagCell, XmlLoadMag.Value)
 
+
+
+            XmlLoadMag.ReadToFollowing("LevelUp") 'The message that display when leveling up
+            XmlLoadMag.MoveToFirstAttribute()
+            strLevelUp = XmlLoadMag.Value 'Text
+            XmlLoadMag.MoveToAttribute("color")
+            strOutLevelUp = XmlLoadMag.Value
 
             XmlLoadMag.ReadToFollowing("Monomate")
             XmlLoadMag.MoveToFirstAttribute()
@@ -1409,9 +1438,33 @@ MagLoadEnd:
             If nudLevel.Value > bytStage4 Then
                 bytStage4 = (bytStage4 + 10)
             End If
+            rtfOutput.SelectionColor = Color.FromName(strOutLevelUp)
+            rtfOutput.AppendText(strLevelUp)
+            rtfOutput.SelectionColor = rtfOutput.ForeColor
+            rtfOutput.AppendText(" [ " & nudLevel.Value & " ]" & vbNewLine)
 
-            rtfOutput.AppendText(strLevelUp & " (" & nudLevel.Value & ")" & vbNewLine)
 
+            'Output the defense value
+            rtfOutput.SelectionColor = Color.FromName(prgDEF.Tag)
+            rtfOutput.AppendText(nudDEF.Value)
+            rtfOutput.SelectionColor = rtfOutput.ForeColor
+            rtfOutput.AppendText("/")
+
+            'Output the power value
+            rtfOutput.SelectionColor = Color.FromName(prgPOW.Tag)
+            rtfOutput.AppendText(nudPOW.Value)
+            rtfOutput.SelectionColor = rtfOutput.ForeColor
+            rtfOutput.AppendText("/")
+
+            'Output the Defense value
+            rtfOutput.SelectionColor = Color.FromName(prgDEX.Tag)
+            rtfOutput.AppendText(nudDEX.Value)
+            rtfOutput.SelectionColor = rtfOutput.ForeColor
+            rtfOutput.AppendText("/")
+
+            'Output the Mindd value
+            rtfOutput.SelectionColor = Color.FromName(prgMind.Tag)
+            rtfOutput.AppendText(nudMIND.Value & vbNewLine)
         Else
 
             While bytStage3 > nudLevel.Value
