@@ -23,7 +23,8 @@
 <Activation text="Activation" color="White" color2="White"/><!-- color2 is for the Percentage number below the text -->
 
 <Items text="Items" color="White"/>
-<Qty text="Qty" color="White"/>
+<Qty text="Qty" color="White" max="100.
+"/>
 <History text="History" color="White"/>
 <TotalCost text="Total Cost" color="White"/>
 
@@ -70,11 +71,28 @@
 <InitialSectionID text="Initial Section ID" color="White"/>
 <Time text="Time Between Feeding" color="White"/>
 <Seconds text="Seconds" color="White"/>
+<MaxQty text="Maximum Feed Items Quantity" color ="White"/>
+<MinLoad text="Minimum for Loading" color="White"/>
 
 <SettingsItems text="Items" color="White"/>
 <SettingsCost text="Cost" color="White"/>
 <SettingsRacialRestriction text="Mag Racials Restrictions" color="White"/>
 <InitialStats text="Initial Stats" color="White"/>
+<SettingsWarning text="/!\ For change to take effect you will need to reload or start a new mag. /!\" color="yellow"/>
+
+<SettingsPlusMinus text="Increase &amp;&amp; Decrease" color="White"/> <!-- the double &amp; is required to display ampersand in a string otherwise used for shortcut -->
+<SettingsValue01 text="Value 01" color="White"/>
+<SettingsValue02 text="Value 02" color="White"/>
+<SettingsValue03 text="Value 03" color="White"/>
+<SettingsValue04 text="Value 04" color="White"/>
+<SettingsValue05 text="Value 05" color="White"/>
+<SettingsValue06 text="Value 06" color="White"/>
+
+<SettingsTabGeneral text="General" color="White"/>
+<SettingsTabMag text="Mag" color="White"/>
+<SettingsTabCost text="Costs" color="White"/>
+<SettingsTabValue text="Value" color="White"/>
+
 
 <!-- About  Interface -->
 
@@ -85,4 +103,35 @@
 <fluid color="Blue"/>
 <Anti color="Goldenrod"/>
 <Atomizer color="Red"/>
+
+<!-- Menu Strings use &amp; to determine The keyboard key-->
+<File text="&amp;File"/><!-- Also a Contextual Menu-->
+<FileNew text="&amp;New Mag"/><!-- Also a Contextual Menu-->
+<FileNewBlank text="New &amp;Blank Mag"/><!-- Also a Contextual Menu-->
+<FileOpen text="&amp;Open"/><!-- Also a Contextual Menu-->
+<FileSave text="&amp;Save"/><!-- Also a Contextual Menu-->
+<FileSaveAs text="Save &amp;As..."/><!-- Also a Contextual Menu-->
+<FileOutput text="&amp;ExportOutput"/><!-- Also a Contextual Menu-->
+<FileExit text="E&amp;xit"/>
+
+<EditUndo text="&amp;Undo"/><!-- Also a Contextual Menu-->
+<EditRedo text="&amp;Redo"/><!-- Also a Contextual Menu-->
+<EditResetQty text="&amp;Reset Quantity"/>
+<EditStats text="&amp;Set Stats"/>
+<EditSettings text="S&amp;ettings"/>
+
+
+<!-- Contextual Menu Stringst -->
+<cmsIncrease text="&amp;Increase"/>
+<cmsDecrease text="&amp;Decrease"/>
+<byX text="by "/><!-- the space is required otherwise will get by5 rather than by 5-->
+
+<SetTo3 text="Set to &amp;3"/>
+<SetToMax text="Set to &amp;Maximum"/>
+<SetToHalf text="Set to &amp;Half"/>
+<SetToZero text="Set to &amp;Zero"/>
+
+<Help text="&amp;?"/>
+<HelpAbout text="About &amp;Magatama"/>
+
 </Root>

@@ -78,11 +78,31 @@ Partial Class frmSettings
         Me.nudMaxLevel = New System.Windows.Forms.NumericUpDown()
         Me.lblLevel = New System.Windows.Forms.Label()
         Me.pnlGeneral = New System.Windows.Forms.Panel()
+        Me.nudSettingsMinLoad = New System.Windows.Forms.NumericUpDown()
+        Me.lblSettingsMinLoad = New System.Windows.Forms.Label()
+        Me.nudSettingsQtyMax = New System.Windows.Forms.NumericUpDown()
+        Me.lblSettingsQtyMax = New System.Windows.Forms.Label()
         Me.pnlMag = New System.Windows.Forms.Panel()
         Me.pnlCost = New System.Windows.Forms.Panel()
         Me.btnGeneral = New System.Windows.Forms.Button()
         Me.btnMag = New System.Windows.Forms.Button()
         Me.btnCost = New System.Windows.Forms.Button()
+        Me.lblWarning = New System.Windows.Forms.Label()
+        Me.nudValue1 = New System.Windows.Forms.NumericUpDown()
+        Me.lblIncrease1 = New System.Windows.Forms.Label()
+        Me.nudValue3 = New System.Windows.Forms.NumericUpDown()
+        Me.nudValue5 = New System.Windows.Forms.NumericUpDown()
+        Me.lblIncrease3 = New System.Windows.Forms.Label()
+        Me.lblIncrease5 = New System.Windows.Forms.Label()
+        Me.lblIncrease2 = New System.Windows.Forms.Label()
+        Me.nudValue2 = New System.Windows.Forms.NumericUpDown()
+        Me.lblIncrease4 = New System.Windows.Forms.Label()
+        Me.nudValue4 = New System.Windows.Forms.NumericUpDown()
+        Me.lblIncrease6 = New System.Windows.Forms.Label()
+        Me.nudValue6 = New System.Windows.Forms.NumericUpDown()
+        Me.pnlValue = New System.Windows.Forms.Panel()
+        Me.lblPlusMinus = New System.Windows.Forms.Label()
+        Me.btnValue = New System.Windows.Forms.Button()
         CType(Me.nudSettingsSynchro, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsFeedingTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudCostMonomate, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -104,14 +124,23 @@ Partial Class frmSettings
         CType(Me.nudSettingsDEX, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMaxLevel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlGeneral.SuspendLayout()
+        CType(Me.nudSettingsMinLoad, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsQtyMax, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMag.SuspendLayout()
         Me.pnlCost.SuspendLayout()
+        CType(Me.nudValue1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudValue3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudValue5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudValue2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudValue4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudValue6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlValue.SuspendLayout()
         Me.SuspendLayout()
         '
         'cboSettingsSectionID
         '
         Me.cboSettingsSectionID.FormattingEnabled = True
-        Me.cboSettingsSectionID.Location = New System.Drawing.Point(15, 142)
+        Me.cboSettingsSectionID.Location = New System.Drawing.Point(13, 143)
         Me.cboSettingsSectionID.MaxDropDownItems = 9
         Me.cboSettingsSectionID.Name = "cboSettingsSectionID"
         Me.cboSettingsSectionID.Size = New System.Drawing.Size(153, 21)
@@ -143,7 +172,7 @@ Partial Class frmSettings
         Me.lblSectionID.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSectionID.Location = New System.Drawing.Point(15, 115)
         Me.lblSectionID.Name = "lblSectionID"
-        Me.lblSectionID.Size = New System.Drawing.Size(153, 21)
+        Me.lblSectionID.Size = New System.Drawing.Size(301, 21)
         Me.lblSectionID.TabIndex = 5
         Me.lblSectionID.Text = "Initial Section ID"
         Me.lblSectionID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -176,7 +205,7 @@ Partial Class frmSettings
         Me.lblFeedingTime.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFeedingTime.Location = New System.Drawing.Point(15, 167)
         Me.lblFeedingTime.Name = "lblFeedingTime"
-        Me.lblFeedingTime.Size = New System.Drawing.Size(180, 20)
+        Me.lblFeedingTime.Size = New System.Drawing.Size(301, 20)
         Me.lblFeedingTime.TabIndex = 8
         Me.lblFeedingTime.Text = "Time Between Feeding"
         Me.lblFeedingTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -493,7 +522,7 @@ Partial Class frmSettings
         Me.flbGameVersion.Controls.Add(Me.radBB)
         Me.flbGameVersion.Location = New System.Drawing.Point(13, 36)
         Me.flbGameVersion.Name = "flbGameVersion"
-        Me.flbGameVersion.Size = New System.Drawing.Size(269, 19)
+        Me.flbGameVersion.Size = New System.Drawing.Size(208, 19)
         Me.flbGameVersion.TabIndex = 39
         '
         'radVer1
@@ -699,6 +728,48 @@ Partial Class frmSettings
         Me.pnlGeneral.Size = New System.Drawing.Size(400, 320)
         Me.pnlGeneral.TabIndex = 41
         '
+        'nudSettingsMinLoad
+        '
+        Me.nudSettingsMinLoad.Location = New System.Drawing.Point(8, 95)
+        Me.nudSettingsMinLoad.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudSettingsMinLoad.Name = "nudSettingsMinLoad"
+        Me.nudSettingsMinLoad.Size = New System.Drawing.Size(156, 20)
+        Me.nudSettingsMinLoad.TabIndex = 44
+        Me.nudSettingsMinLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsMinLoad.Value = New Decimal(New Integer() {100, 0, 0, 0})
+        '
+        'lblSettingsMinLoad
+        '
+        Me.lblSettingsMinLoad.BackColor = System.Drawing.Color.Transparent
+        Me.lblSettingsMinLoad.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSettingsMinLoad.Location = New System.Drawing.Point(7, 72)
+        Me.lblSettingsMinLoad.Name = "lblSettingsMinLoad"
+        Me.lblSettingsMinLoad.Size = New System.Drawing.Size(166, 20)
+        Me.lblSettingsMinLoad.TabIndex = 43
+        Me.lblSettingsMinLoad.Text = "Minimum for Loading"
+        Me.lblSettingsMinLoad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'nudSettingsQtyMax
+        '
+        Me.nudSettingsQtyMax.Location = New System.Drawing.Point(9, 49)
+        Me.nudSettingsQtyMax.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudSettingsQtyMax.Name = "nudSettingsQtyMax"
+        Me.nudSettingsQtyMax.Size = New System.Drawing.Size(156, 20)
+        Me.nudSettingsQtyMax.TabIndex = 42
+        Me.nudSettingsQtyMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsQtyMax.Value = New Decimal(New Integer() {100, 0, 0, 0})
+        '
+        'lblSettingsQtyMax
+        '
+        Me.lblSettingsQtyMax.BackColor = System.Drawing.Color.Transparent
+        Me.lblSettingsQtyMax.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSettingsQtyMax.Location = New System.Drawing.Point(8, 26)
+        Me.lblSettingsQtyMax.Name = "lblSettingsQtyMax"
+        Me.lblSettingsQtyMax.Size = New System.Drawing.Size(165, 20)
+        Me.lblSettingsQtyMax.TabIndex = 41
+        Me.lblSettingsQtyMax.Text = "Maximum Quantity"
+        Me.lblSettingsQtyMax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'pnlMag
         '
         Me.pnlMag.BackColor = System.Drawing.Color.Transparent
@@ -796,27 +867,213 @@ Partial Class frmSettings
         Me.btnCost.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCost.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCost.Location = New System.Drawing.Point(12, 112)
+        Me.btnCost.Location = New System.Drawing.Point(12, 116)
         Me.btnCost.Name = "btnCost"
         Me.btnCost.Size = New System.Drawing.Size(122, 52)
         Me.btnCost.TabIndex = 58
         Me.btnCost.Text = "Cost"
         Me.btnCost.UseVisualStyleBackColor = False
         '
+        'lblWarning
+        '
+        Me.lblWarning.BackColor = System.Drawing.Color.Transparent
+        Me.lblWarning.Location = New System.Drawing.Point(12, 336)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(522, 19)
+        Me.lblWarning.TabIndex = 59
+        Me.lblWarning.Text = "For change to take effect you will need to reload or start a new mag.."
+        Me.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblWarning.Visible = False
+        '
+        'nudValue1
+        '
+        Me.nudValue1.Location = New System.Drawing.Point(10, 191)
+        Me.nudValue1.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue1.Name = "nudValue1"
+        Me.nudValue1.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue1.TabIndex = 45
+        Me.nudValue1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue1.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'lblIncrease1
+        '
+        Me.lblIncrease1.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease1.Location = New System.Drawing.Point(10, 165)
+        Me.lblIncrease1.Name = "lblIncrease1"
+        Me.lblIncrease1.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease1.TabIndex = 50
+        Me.lblIncrease1.Text = "Value 1"
+        Me.lblIncrease1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'nudValue3
+        '
+        Me.nudValue3.Location = New System.Drawing.Point(10, 242)
+        Me.nudValue3.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue3.Name = "nudValue3"
+        Me.nudValue3.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue3.TabIndex = 51
+        Me.nudValue3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue3.Value = New Decimal(New Integer() {25, 0, 0, 0})
+        '
+        'nudValue5
+        '
+        Me.nudValue5.Location = New System.Drawing.Point(10, 293)
+        Me.nudValue5.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue5.Name = "nudValue5"
+        Me.nudValue5.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue5.TabIndex = 53
+        Me.nudValue5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue5.Value = New Decimal(New Integer() {250, 0, 0, 0})
+        '
+        'lblIncrease3
+        '
+        Me.lblIncrease3.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease3.Location = New System.Drawing.Point(10, 216)
+        Me.lblIncrease3.Name = "lblIncrease3"
+        Me.lblIncrease3.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease3.TabIndex = 54
+        Me.lblIncrease3.Text = "Value 3"
+        Me.lblIncrease3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblIncrease5
+        '
+        Me.lblIncrease5.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease5.Location = New System.Drawing.Point(10, 267)
+        Me.lblIncrease5.Name = "lblIncrease5"
+        Me.lblIncrease5.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease5.TabIndex = 55
+        Me.lblIncrease5.Text = "Value 5"
+        Me.lblIncrease5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblIncrease2
+        '
+        Me.lblIncrease2.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease2.Location = New System.Drawing.Point(128, 166)
+        Me.lblIncrease2.Name = "lblIncrease2"
+        Me.lblIncrease2.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease2.TabIndex = 57
+        Me.lblIncrease2.Text = "Value 2"
+        Me.lblIncrease2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'nudValue2
+        '
+        Me.nudValue2.Location = New System.Drawing.Point(128, 192)
+        Me.nudValue2.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue2.Name = "nudValue2"
+        Me.nudValue2.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue2.TabIndex = 56
+        Me.nudValue2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue2.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
+        'lblIncrease4
+        '
+        Me.lblIncrease4.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease4.Location = New System.Drawing.Point(128, 217)
+        Me.lblIncrease4.Name = "lblIncrease4"
+        Me.lblIncrease4.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease4.TabIndex = 59
+        Me.lblIncrease4.Text = "Value 4"
+        Me.lblIncrease4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'nudValue4
+        '
+        Me.nudValue4.Location = New System.Drawing.Point(128, 243)
+        Me.nudValue4.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue4.Name = "nudValue4"
+        Me.nudValue4.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue4.TabIndex = 58
+        Me.nudValue4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue4.Value = New Decimal(New Integer() {100, 0, 0, 0})
+        '
+        'lblIncrease6
+        '
+        Me.lblIncrease6.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblIncrease6.Location = New System.Drawing.Point(128, 268)
+        Me.lblIncrease6.Name = "lblIncrease6"
+        Me.lblIncrease6.Size = New System.Drawing.Size(108, 21)
+        Me.lblIncrease6.TabIndex = 61
+        Me.lblIncrease6.Text = "value 6"
+        Me.lblIncrease6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'nudValue6
+        '
+        Me.nudValue6.Location = New System.Drawing.Point(128, 294)
+        Me.nudValue6.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.nudValue6.Name = "nudValue6"
+        Me.nudValue6.Size = New System.Drawing.Size(108, 20)
+        Me.nudValue6.TabIndex = 60
+        Me.nudValue6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudValue6.Value = New Decimal(New Integer() {1000, 0, 0, 0})
+        '
+        'pnlValue
+        '
+        Me.pnlValue.BackColor = System.Drawing.Color.Transparent
+        Me.pnlValue.Controls.Add(Me.lblPlusMinus)
+        Me.pnlValue.Controls.Add(Me.lblIncrease6)
+        Me.pnlValue.Controls.Add(Me.lblSettingsQtyMax)
+        Me.pnlValue.Controls.Add(Me.nudValue6)
+        Me.pnlValue.Controls.Add(Me.nudSettingsQtyMax)
+        Me.pnlValue.Controls.Add(Me.lblIncrease4)
+        Me.pnlValue.Controls.Add(Me.lblSettingsMinLoad)
+        Me.pnlValue.Controls.Add(Me.nudValue4)
+        Me.pnlValue.Controls.Add(Me.nudSettingsMinLoad)
+        Me.pnlValue.Controls.Add(Me.lblIncrease2)
+        Me.pnlValue.Controls.Add(Me.lblIncrease1)
+        Me.pnlValue.Controls.Add(Me.nudValue2)
+        Me.pnlValue.Controls.Add(Me.nudValue1)
+        Me.pnlValue.Controls.Add(Me.lblIncrease5)
+        Me.pnlValue.Controls.Add(Me.nudValue3)
+        Me.pnlValue.Controls.Add(Me.lblIncrease3)
+        Me.pnlValue.Controls.Add(Me.nudValue5)
+        Me.pnlValue.Location = New System.Drawing.Point(134, 12)
+        Me.pnlValue.Name = "pnlValue"
+        Me.pnlValue.Size = New System.Drawing.Size(400, 320)
+        Me.pnlValue.TabIndex = 62
+        '
+        'lblPlusMinus
+        '
+        Me.lblPlusMinus.BackColor = System.Drawing.Color.Transparent
+        Me.lblPlusMinus.Font = New System.Drawing.Font("Lucida Console", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlusMinus.Location = New System.Drawing.Point(8, 143)
+        Me.lblPlusMinus.Name = "lblPlusMinus"
+        Me.lblPlusMinus.Size = New System.Drawing.Size(228, 20)
+        Me.lblPlusMinus.TabIndex = 62
+        Me.lblPlusMinus.Text = "Increase and Decrease"
+        Me.lblPlusMinus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnValue
+        '
+        Me.btnValue.BackColor = System.Drawing.Color.Transparent
+        Me.btnValue.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.btnValue.FlatAppearance.BorderSize = 0
+        Me.btnValue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnValue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnValue.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnValue.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnValue.Location = New System.Drawing.Point(12, 168)
+        Me.btnValue.Name = "btnValue"
+        Me.btnValue.Size = New System.Drawing.Size(122, 52)
+        Me.btnValue.TabIndex = 63
+        Me.btnValue.Text = "Value"
+        Me.btnValue.UseVisualStyleBackColor = False
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnSettingsCancel
-        Me.ClientSize = New System.Drawing.Size(546, 344)
+        Me.ClientSize = New System.Drawing.Size(546, 364)
+        Me.Controls.Add(Me.btnValue)
+        Me.Controls.Add(Me.lblWarning)
         Me.Controls.Add(Me.btnCost)
         Me.Controls.Add(Me.btnMag)
         Me.Controls.Add(Me.btnGeneral)
         Me.Controls.Add(Me.btnSettingsSave)
         Me.Controls.Add(Me.btnSettingsCancel)
-        Me.Controls.Add(Me.pnlMag)
+        Me.Controls.Add(Me.pnlValue)
         Me.Controls.Add(Me.pnlGeneral)
         Me.Controls.Add(Me.pnlCost)
+        Me.Controls.Add(Me.pnlMag)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -846,9 +1103,18 @@ Partial Class frmSettings
         CType(Me.nudSettingsDEX, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudMaxLevel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlGeneral.ResumeLayout(False)
+        CType(Me.nudSettingsMinLoad, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsQtyMax, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlMag.ResumeLayout(False)
         Me.pnlMag.PerformLayout()
         Me.pnlCost.ResumeLayout(False)
+        CType(Me.nudValue1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudValue3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudValue5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudValue2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudValue4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudValue6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlValue.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -913,4 +1179,24 @@ Partial Class frmSettings
     Friend WithEvents btnGeneral As Button
     Friend WithEvents btnMag As Button
     Friend WithEvents btnCost As Button
+    Friend WithEvents lblSettingsQtyMax As Label
+    Friend WithEvents nudSettingsQtyMax As NumericUpDown
+    Friend WithEvents lblWarning As Label
+    Friend WithEvents nudSettingsMinLoad As NumericUpDown
+    Friend WithEvents lblSettingsMinLoad As Label
+    Friend WithEvents lblIncrease6 As Label
+    Friend WithEvents nudValue6 As NumericUpDown
+    Friend WithEvents lblIncrease4 As Label
+    Friend WithEvents nudValue4 As NumericUpDown
+    Friend WithEvents lblIncrease2 As Label
+    Friend WithEvents nudValue2 As NumericUpDown
+    Friend WithEvents lblIncrease5 As Label
+    Friend WithEvents lblIncrease3 As Label
+    Friend WithEvents nudValue5 As NumericUpDown
+    Friend WithEvents nudValue3 As NumericUpDown
+    Friend WithEvents lblIncrease1 As Label
+    Friend WithEvents nudValue1 As NumericUpDown
+    Friend WithEvents pnlValue As Panel
+    Friend WithEvents lblPlusMinus As Label
+    Friend WithEvents btnValue As Button
 End Class

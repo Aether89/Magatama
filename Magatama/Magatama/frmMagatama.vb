@@ -1,4 +1,5 @@
 ﻿Imports System.Xml
+
 Public Class frmMagatama
 
 #Region "Variable"
@@ -83,9 +84,12 @@ Public Class frmMagatama
 
     Dim strTmp As String 'Used by the Feeding Process, The Mag Saving and the Export of the Output
     Dim strFeedTmp As String 'Used by the Feeding Process to know which items table to look to
+    Dim lngTmp As Decimal
     Dim strEvo As String 'Used by the Evolution process if it use the same as the feeding process is causes crashes
     Dim strEvoCND As String
     Dim strEvoCND2 As String
+    Dim boolMassFeed As Boolean = False 'Used to determine if Mass Feed is Used or Not.
+
 
     ' nud uses to manipulate the appropriate nud when feeding a mag
     Dim nudQtyTmp As NumericUpDown 'Used to know which Quantity Column shoud be used when the Feeding function is called
@@ -93,13 +97,13 @@ Public Class frmMagatama
     Dim nudStats As NumericUpDown 'Used to know which Stats shoud be incremented when the Feeding function is called
     Dim nudProgressStats As NumericUpDown 'Used to know which Progress Stats shoud be incremented when the Feeding function is called
     Dim btnTmp As Button 'Used to get the text from the button and show it into the output.
+    Dim nudTmp As NumericUpDown
 
     ' Variable USedfor Calculating the New Value When Feeding a Mag
     Dim shoProgress As Short = 0
 
     'Variable Used when Feeding Mag to see if the required number of Mass Feeding have been completed and also by some Mag Cell evolutions
     Dim shoCount As Short = 0
-
 
     Dim shoUndo As Short ' Variable used to count were we are in Redo
     Dim shoRedo As Short ' Variable used to count How far we can redo
@@ -246,6 +250,8 @@ Public Class frmMagatama
 
     Public Sub Init()
         blnEditMode = False
+        pnlLoading.BringToFront()
+
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Init.xml")
 
             XmlLoadMag.ReadToFollowing("GameVersion")
@@ -338,6 +344,36 @@ Public Class frmMagatama
         shoRedo = 0
 
 
+        'Contextual Menu Text
+        cmsPlus5.Text = cmsPlus.Tag & cmsPlus5.Tag
+        cmsPlus10.Text = cmsPlus.Tag & cmsPlus10.Tag
+        cmsPlus25.Text = cmsPlus.Tag & cmsPlus25.Tag
+        cmsPlus100.Text = cmsPlus.Tag & cmsPlus100.Tag
+        cmsPlus250.Text = cmsPlus.Tag & cmsPlus250.Tag
+        cmsPlus1000.Text = cmsPlus.Tag & cmsPlus1000.Tag
+
+        cmsMinus5.Text = cmsPlus.Tag & cmsPlus5.Tag
+        cmsMinus10.Text = cmsPlus.Tag & cmsPlus10.Tag
+        cmsMinus25.Text = cmsPlus.Tag & cmsPlus25.Tag
+        cmsMinus100.Text = cmsPlus.Tag & cmsPlus100.Tag
+        cmsMinus250.Text = cmsPlus.Tag & cmsPlus250.Tag
+        cmsMinus1000.Text = cmsPlus.Tag & cmsPlus1000.Tag
+
+        ctsHistoryPlus5.Text = cmsPlus.Tag & cmsPlus5.Tag
+        ctsHistoryPlus10.Text = cmsPlus.Tag & cmsPlus10.Tag
+        ctsHistoryPlus25.Text = cmsPlus.Tag & cmsPlus25.Tag
+        ctsHistoryPlus100.Text = cmsPlus.Tag & cmsPlus100.Tag
+        ctsHistoryPlus250.Text = cmsPlus.Tag & cmsPlus250.Tag
+        ctsHistoryPlus1000.Text = cmsPlus.Tag & cmsPlus1000.Tag
+
+        ctsHistoryMinus5.Text = cmsPlus.Tag & cmsPlus5.Tag
+        ctsHistoryMinus10.Text = cmsPlus.Tag & cmsPlus10.Tag
+        ctsHistoryMinus25.Text = cmsPlus.Tag & cmsPlus25.Tag
+        ctsHistoryMinus100.Text = cmsPlus.Tag & cmsPlus100.Tag
+        ctsHistoryMinus250.Text = cmsPlus.Tag & cmsPlus250.Tag
+        ctsHistoryMinus1000.Text = cmsPlus.Tag & cmsPlus1000.Tag
+
+
     End Sub
 
     Public Sub InitFinalize() 'This had to be separated so New Blank Mag Work
@@ -345,6 +381,11 @@ Public Class frmMagatama
         rtfOutput.Text = ""
         rtfOutput.AppendText(strChangedClass & cboClass.SelectedItem & vbNewLine & Chr(13))
         rtfOutput.AppendText(strChangedSectionID & cboSectionID.SelectedItem & vbNewLine & Chr(13))
+
+        strPathPicSectionID = Image.FromFile("./Graphics/SectionID/" & cboSectionID.SelectedItem & ".png")
+        picSectionID.Image = strPathPicSectionID
+        strPathPicSectionID = Image.FromFile("./Graphics/SectionID/L" & cboSectionID.SelectedItem & ".png")
+        pnlLoading.BackgroundImage = strPathPicSectionID
 
         Call Saved()
         If (Not System.IO.Directory.Exists("./Tmp/")) Then
@@ -873,18 +914,13 @@ MagLoadStart:
 
             XmlLoadMag.ReadToFollowing("Output")
             strTmp = (XmlLoadMag.ReadInnerXml.ToString())
-
-
             rtfOutput.Rtf = strTmp
-            'The two following lines make sure that the Output is in Focus and at the bottom. Also make sure that color syntax work after a reload
-            rtfOutput.Focus()
-            SendKeys.Send("{END}")
+
         End Using
 
-
-
-
         Call Cost()
+        rtfOutput.AppendText(Chr(0)) ' make sure that color syntax work when loading a file
+
 MagLoadEnd:
 
 
@@ -899,12 +935,29 @@ MagLoadEnd:
             cboClass.SelectedIndex = XmlLoadMag.Value 'Class
 
             XmlLoadMag.ReadToFollowing("Default")
-            XmlLoadMag.MoveToFirstAttribute()
+            XmlLoadMag.MoveToAttribute("SectionIDNumber")
             cboSectionID.SelectedIndex = XmlLoadMag.Value 'SectionID
+
+
             XmlLoadMag.MoveToAttribute("FeedingTime")
             shoFeedingTime = XmlLoadMag.Value 'Time between feeding cycle
             XmlLoadMag.MoveToAttribute("RacialRestriction")
             blnMagRacialRestriction = XmlLoadMag.Value 'Mag Racial Restriction
+            XmlLoadMag.MoveToNextAttribute() 'MaxQTY
+            nudQtyMonomate.Maximum = XmlLoadMag.Value
+            nudQtyDimate.Maximum = XmlLoadMag.Value
+            nudQtyTrimate.Maximum = XmlLoadMag.Value
+            nudQtyMonofluid.Maximum = XmlLoadMag.Value
+            nudQtyDifluid.Maximum = XmlLoadMag.Value
+            nudQtyTrifluid.Maximum = XmlLoadMag.Value
+            nudQtyAntidote.Maximum = XmlLoadMag.Value
+            nudQtyAntiparalysis.Maximum = XmlLoadMag.Value
+            nudQtySolAtomizer.Maximum = XmlLoadMag.Value
+            nudQtyMoonAtomizer.Maximum = XmlLoadMag.Value
+            nudQtyStarAtomizer.Maximum = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'MinLoad
+            prgFeed.Tag = XmlLoadMag.Value
+
 
             XmlLoadMag.ReadToFollowing("Mag")
             XmlLoadMag.MoveToFirstAttribute() 'Max Level
@@ -956,7 +1009,24 @@ MagLoadEnd:
             XmlLoadMag.ReadToFollowing("StarAtomizer")
             XmlLoadMag.MoveToFirstAttribute()
             shoCostStarAtomizer = XmlLoadMag.Value
+
+            XmlLoadMag.ReadToFollowing("PlusMinus")
+            XmlLoadMag.MoveToFirstAttribute() 'Value 1
+            cmsPlus5.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Value 2
+            cmsPlus10.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Value 3
+            cmsPlus25.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Value 4
+            cmsPlus100.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Value 5
+            cmsPlus250.Tag = XmlLoadMag.Value
+            XmlLoadMag.MoveToNextAttribute() 'Value 6
+            cmsPlus1000.Tag = XmlLoadMag.Value
+
         End Using
+
+
     End Sub
 
     Public Sub LoadTheme()
@@ -1121,6 +1191,8 @@ MagLoadEnd:
             XmlLoadMag.MoveToNextAttribute()
             strTmp = XmlLoadMag.Value 'Color
             rtfOutput.ForeColor = Color.FromName(strTmp)
+            rtfExport.ForeColor = Color.FromName(strTmp) ' Used as backup for the forecolor
+
 
 
             XmlLoadMag.ReadToFollowing("FeedingCycles")
@@ -1288,6 +1360,98 @@ MagLoadEnd:
             XmlLoadMag.ReadToFollowing("Atomizer")
             XmlLoadMag.MoveToFirstAttribute()
             strOutAtomizer = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("File")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileMenu.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileNew")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileNew.Text = XmlLoadMag.Value 'Text
+            cmsNewMag.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileNewBlank")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileNewBlank.Text = XmlLoadMag.Value 'Text
+            cmsBlankMag.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileOpen")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileOpen.Text = XmlLoadMag.Value 'Text
+            cmsOpen.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileSave")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileSave.Text = XmlLoadMag.Value 'Text
+            cmsSave.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileSaveAs")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileSaveAs.Text = XmlLoadMag.Value 'Text
+            cmsSaveAs.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileOutput")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileExportOutput.Text = XmlLoadMag.Value 'Text
+            cmsExportOutput.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("FileExit")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuFileExit.Text = XmlLoadMag.Value 'Text
+
+
+            XmlLoadMag.ReadToFollowing("EditUndo")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuEditUndo.Text = XmlLoadMag.Value 'Text
+            cmsUndo.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("EditRedo")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuEditRedo.Text = XmlLoadMag.Value 'Text
+            cmsRedo.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("EditResetQty")
+            XmlLoadMag.MoveToFirstAttribute()
+            mnuEditResetQty.Text = XmlLoadMag.Value 'Text
+
+
+            XmlLoadMag.ReadToFollowing("cmsIncrease")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsPlus.Text = XmlLoadMag.Value 'Text
+            ctsHistoryPlus.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("cmsDecrease")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsMinus.Text = XmlLoadMag.Value 'Text
+            ctsHistoryMinus.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("byX")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsPlus.Tag = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("SetTo3")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsNUDto3.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("SetToMax")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsNUDtoMax.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("SetToHalf")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsNUDtoHalf.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("SetToZero")
+            XmlLoadMag.MoveToFirstAttribute()
+            cmsNUDtoZero.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("Help")
+            XmlLoadMag.MoveToFirstAttribute()
+            nmuHelpMenu.Text = XmlLoadMag.Value 'Text
+
+            XmlLoadMag.ReadToFollowing("HelpAbout")
+            XmlLoadMag.MoveToFirstAttribute()
+            nmuHelpAbout.Text = XmlLoadMag.Value 'Text
 
         End Using
     End Sub
@@ -1638,6 +1802,9 @@ MagLoadEnd:
     Private Sub cboSectionID_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSectionID.SelectedValueChanged
         strPathPicSectionID = Image.FromFile("./Graphics/SectionID/" & cboSectionID.SelectedItem & ".png")
         picSectionID.Image = strPathPicSectionID
+        strPathPicSectionID = Image.FromFile("./Graphics/SectionID/L" & cboSectionID.SelectedItem & ".png")
+        pnlLoading.BackgroundImage = strPathPicSectionID
+
         Call Tooltips()
 
         If blnEditMode = False Then
@@ -2058,15 +2225,16 @@ MagLoadEnd:
             .Filter = "Mag files (*.mag)|*.mag"
             .FilterIndex = 2
             .RestoreDirectory = True
-        End With
 
+        End With
+        sdfSave.FileName = ofdMagatama.FileName
         If ofdMagatama.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Call Init() 'Used to Reset the Maximum  value of the stats nud
             Call InitFinalize()
+            sdfSave.FileName = ofdMagatama.FileName
             Call MagLoad()
+            Call Saved()
         End If
-        Call Saved()
-
     End Sub
 
     Private Sub mnuFileExportOutput_Click(sender As Object, e As EventArgs) Handles mnuFileExportOutput.Click
@@ -2265,12 +2433,24 @@ MagLoadEnd:
     Public Sub Feed()
 
         shoCount = 0
+        prgFeed.Maximum = nudQtyTmp.Value
+        prgFeed.Value = 0
+
+        Select Case boolMassFeed
+            Case = True
+            Case Else
+                If nudQtyTmp.Value >= prgFeed.Tag Then
+                    pnlLoading.Visible = True
+                End If
+
+        End Select
 
         While shoCount < nudQtyTmp.Value
 
 
 
             nudHistoryTmp.Value = nudHistoryTmp.Value + 1
+            prgFeed.Value = prgFeed.Value + 1
 
             Select Case btnTmp.Tag
                 Case ("mate")
@@ -2283,9 +2463,11 @@ MagLoadEnd:
                     rtfOutput.SelectionColor = Color.FromName(strOutAtomizer)
                 Case Else
                     rtfOutput.SelectionColor = Color.FromName("Purple")
-
             End Select
+
             rtfOutput.AppendText(btnTmp.Text & " x" & ((nudHistoryTmp.Value) - (shoevoTmp)) & Chr(13))
+
+
             shoCount = shoCount + 1
             bytFeedingCount = bytFeedingCount + 1
 
@@ -2351,7 +2533,15 @@ MagLoadEnd:
 
 
             Call UndoRedo()
+
+
         End While
+
+        Select Case boolMassFeed
+            Case = True
+            Case Else
+                pnlLoading.Visible = False
+        End Select
 
     End Sub
 
@@ -3639,39 +3829,59 @@ Evolve:
     End Sub
 
     Private Sub btnFeedAll_Click(sender As Object, e As EventArgs) Handles btnFeedAll.Click
+        prgMassFeed.Visible = True
+        prgMassFeed.Maximum = 11
+        prgMassFeed.Value = 0
+        pnlLoading.Visible = True
+        boolMassFeed = True
+
 
         Call MonomateFeed()
         Call Feed()
-
+        prgMassFeed.Value = prgMassFeed.Value + 1
         Call DimateFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call TrimateFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call MonofluidFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call DifluidFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call TrifluidFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call AntidoteFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call AntiparalysisFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call SolAtomizerFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call MoonAtomizerFeed()
         Call Feed()
+        prgMassFeed.Value = prgMassFeed.Value + 1
 
         Call StarAtomizerFeed()
         Call Feed()
+
+        boolMassFeed = False
+
+        prgMassFeed.Visible = False
+        pnlLoading.Visible = False
 
     End Sub
 
@@ -3689,7 +3899,444 @@ Evolve:
 
 
 
+
+
+
 #End Region
+
+#End Region
+
+#Region "Contextual Menu"
+
+    Private Sub cmsNUDtoMax_Click(sender As Object, e As EventArgs) Handles cmsNUDtoMax.Click
+        nudTmp.Value = nudTmp.Maximum
+    End Sub
+
+    Private Sub cmsNUDtoZero_Click(sender As Object, e As EventArgs) Handles cmsNUDtoZero.Click
+        nudTmp.Value = nudTmp.Minimum
+    End Sub
+
+
+    Private Sub cmsNUDtoHalf_Click(sender As Object, e As EventArgs) Handles cmsNUDtoHalf.Click
+        nudTmp.Value = nudTmp.Maximum / 2
+    End Sub
+
+    Private Sub cmsNUDto3_Click(sender As Object, e As EventArgs) Handles cmsNUDto3.Click
+        nudTmp.Value = cmsNUDto3.Tag
+    End Sub
+
+#Region "Public Sub"
+
+    Public Sub Plus5()
+        lngTmp = nudTmp.Value + cmsPlus5.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus5.Tag
+        End Select
+    End Sub
+
+    Public Sub Plus10()
+        lngTmp = nudTmp.Value + cmsPlus10.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus10.Tag
+        End Select
+    End Sub
+
+    Public Sub Plus25()
+        lngTmp = nudTmp.Value + cmsPlus25.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus25.Tag
+        End Select
+    End Sub
+
+    Public Sub Plus100()
+        lngTmp = nudTmp.Value + cmsPlus100.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus100.Tag
+        End Select
+    End Sub
+
+    Public Sub Plus250()
+        lngTmp = nudTmp.Value + cmsPlus250.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus250.Tag
+        End Select
+    End Sub
+
+    Public Sub Plus1000()
+        lngTmp = nudTmp.Value + cmsPlus1000.Tag
+
+        Select Case lngTmp
+            Case >= nudTmp.Maximum
+                nudTmp.Value = nudTmp.Maximum
+            Case Else
+                nudTmp.Value = nudTmp.Value + cmsPlus1000.Tag
+        End Select
+    End Sub
+
+    Public Sub Minus5()
+        Select Case nudTmp.Value
+            Case < cmsPlus5.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus5.Tag
+        End Select
+    End Sub
+
+
+    Public Sub Minus10()
+        Select Case nudTmp.Value
+            Case < cmsPlus10.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus10.Tag
+        End Select
+    End Sub
+
+    Public Sub Minus25()
+        Select Case nudTmp.Value
+            Case < cmsPlus25.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus25.Tag
+        End Select
+    End Sub
+
+    Public Sub Minus100()
+        Select Case nudTmp.Value
+            Case < cmsPlus100.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus100.Tag
+        End Select
+    End Sub
+
+    Public Sub Minus250()
+        Select Case nudTmp.Value
+            Case < cmsPlus250.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus250.Tag
+        End Select
+    End Sub
+
+    Public Sub Minus1000()
+        Select Case nudTmp.Value
+            Case < cmsPlus1000.Tag
+                nudTmp.Value = nudTmp.Value - nudTmp.Value
+            Case Else
+                nudTmp.Value = nudTmp.Value - cmsPlus1000.Tag
+        End Select
+    End Sub
+
+#End Region
+
+#Region "Quantity Column"
+
+
+    Private Sub nudQtyMonomate_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyMonomate.MouseEnter
+        nudTmp = nudQtyMonomate
+    End Sub
+
+    Private Sub nudQtyDimate_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyDimate.MouseEnter
+        nudTmp = nudQtyDimate
+    End Sub
+
+    Private Sub nudQtyTrimate_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyTrimate.MouseEnter
+        nudTmp = nudQtyTrimate
+    End Sub
+
+    Private Sub nudQtyMonofluid_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyMonofluid.MouseEnter
+        nudTmp = nudQtyMonofluid
+    End Sub
+    Private Sub nudQtyDifluid_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyDifluid.MouseEnter
+        nudTmp = nudQtyDifluid
+    End Sub
+
+    Private Sub nudQtyTrifluid_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyTrifluid.MouseEnter
+        nudTmp = nudQtyTrifluid
+    End Sub
+
+    Private Sub nudQtyAntidote_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyAntidote.MouseEnter
+        nudTmp = nudQtyAntidote
+    End Sub
+
+    Private Sub nudQtyAntiParalysis_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyAntiparalysis.MouseEnter
+        nudTmp = nudQtyAntiparalysis
+    End Sub
+
+    Private Sub nudQtySolAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudQtySolAtomizer.MouseEnter
+        nudTmp = nudQtySolAtomizer
+    End Sub
+
+    Private Sub nudQtyMoonAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyMoonAtomizer.MouseEnter
+        nudTmp = nudQtyMoonAtomizer
+    End Sub
+
+    Private Sub nudQtyStarAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudQtyStarAtomizer.MouseEnter
+        nudTmp = nudQtyStarAtomizer
+    End Sub
+#End Region
+
+#Region "History Column"
+
+
+    Private Sub nudHistoryMonomate_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryMonomate.MouseEnter
+        nudTmp = nudHistoryMonomate
+    End Sub
+
+    Private Sub nudHistoryDimate_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryDimate.MouseEnter
+        nudTmp = nudHistoryDimate
+    End Sub
+
+    Private Sub nudHistoryTrimate_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryTrimate.MouseEnter
+        nudTmp = nudHistoryTrimate
+    End Sub
+
+    Private Sub nudHistoryMonofluid_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryMonofluid.MouseEnter
+        nudTmp = nudHistoryMonofluid
+    End Sub
+    Private Sub nudHistoryDifluid_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryDifluid.MouseEnter
+        nudTmp = nudHistoryDifluid
+    End Sub
+
+    Private Sub nudHistoryTrifluid_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryTrifluid.MouseEnter
+        nudTmp = nudHistoryTrifluid
+    End Sub
+
+    Private Sub nudHistoryAntidote_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryAntidote.MouseEnter
+        nudTmp = nudHistoryAntidote
+    End Sub
+
+    Private Sub nudHistoryAntiParalysis_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryAntiparalysis.MouseEnter
+        nudTmp = nudHistoryAntiparalysis
+    End Sub
+
+    Private Sub nudHistorySolAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudHistorySolAtomizer.MouseEnter
+        nudTmp = nudHistorySolAtomizer
+    End Sub
+
+    Private Sub nudHistoryMoonAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryMoonAtomizer.MouseEnter
+        nudTmp = nudHistoryMoonAtomizer
+    End Sub
+
+    Private Sub nudHistoryStarAtomizer_MouseEnter(sender As Object, e As EventArgs) Handles nudHistoryStarAtomizer.MouseEnter
+        nudTmp = nudHistoryStarAtomizer
+    End Sub
+#End Region
+
+#Region "Stats"
+
+    Private Sub nudSynchro_MouseEnter(sender As Object, e As EventArgs) Handles nudSynchro.MouseEnter
+        nudTmp = nudSynchro
+    End Sub
+
+    Private Sub nudIQ_MouseEnter(sender As Object, e As EventArgs) Handles nudIQ.MouseEnter
+        nudTmp = nudIQ
+    End Sub
+
+    Private Sub nudDEF_MouseEnter(sender As Object, e As EventArgs) Handles nudDEF.MouseEnter
+        nudTmp = nudDEF
+    End Sub
+
+    Private Sub nudPOW_MouseEnter(sender As Object, e As EventArgs) Handles nudPOW.MouseEnter
+        nudTmp = nudPOW
+    End Sub
+
+    Private Sub nudDEX_MouseEnter(sender As Object, e As EventArgs) Handles nudDEX.MouseEnter
+        nudTmp = nudDEX
+    End Sub
+
+    Private Sub nudMIND_MouseEnter(sender As Object, e As EventArgs) Handles nudMIND.MouseEnter
+        nudTmp = nudMIND
+    End Sub
+
+    Private Sub nudProgressDEF_MouseEnter(sender As Object, e As EventArgs) Handles nudProgressDEF.MouseEnter
+        nudTmp = nudProgressDEF
+    End Sub
+
+    Private Sub nudProgressPOW_MouseEnter(sender As Object, e As EventArgs) Handles nudProgressPOW.MouseEnter
+        nudTmp = nudProgressPOW
+    End Sub
+
+    Private Sub nudProgressDEX_MouseEnter(sender As Object, e As EventArgs) Handles nudProgressDEX.MouseEnter
+        nudTmp = nudProgressDEX
+    End Sub
+
+    Private Sub nudProgressMIND_MouseEnter(sender As Object, e As EventArgs) Handles nudProgressMIND.MouseEnter
+        nudTmp = nudProgressMIND
+    End Sub
+
+#End Region
+
+#End Region
+
+#Region "Nud History Increase and Decrease"
+    'Increase
+    Private Sub ctsHistoryPlus5_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus5.Click
+        Call Plus5()
+    End Sub
+
+    Private Sub ctsHistoryPlus10_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus10.Click
+        Call Plus10()
+    End Sub
+
+    Private Sub ctsHistoryPlus25_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus25.Click
+        Call Plus25()
+    End Sub
+
+    Private Sub ctsHistoryPlus100_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus100.Click
+        Call Plus100()
+    End Sub
+
+    Private Sub ctsHistoryPlus250_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus250.Click
+        Call Plus250()
+    End Sub
+
+    Private Sub ctsHistoryPlus1000_Click(sender As Object, e As EventArgs) Handles ctsHistoryPlus1000.Click
+        Call Plus1000()
+    End Sub
+
+
+    'Decrease
+
+    Private Sub ctsHistoryMinus5_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus5.Click
+        Call Minus5()
+    End Sub
+
+    Private Sub ctsHistoryMinus10_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus10.Click
+        Call Minus10()
+    End Sub
+
+    Private Sub ctsHistoryMinus25_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus25.Click
+        Call Minus25()
+    End Sub
+
+    Private Sub ctsHistoryMinus100_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus100.Click
+        Call Minus100()
+    End Sub
+
+    Private Sub ctsHistoryMinus250_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus250.Click
+        Call Minus250()
+    End Sub
+
+    Private Sub ctsHistoryMinus1000_Click(sender As Object, e As EventArgs) Handles ctsHistoryMinus1000.Click
+        Call Minus1000()
+    End Sub
+
+
+
+#End Region
+
+#Region "Nud Increase and Decrease"
+    'Increase
+    Private Sub cmsPlus5_Click(sender As Object, e As EventArgs) Handles cmsPlus5.Click
+        Call Plus5()
+    End Sub
+
+    Private Sub cmsPlus10_Click(sender As Object, e As EventArgs) Handles cmsPlus10.Click
+        Call Plus10()
+    End Sub
+
+    Private Sub cmsPlus25_Click(sender As Object, e As EventArgs) Handles cmsPlus25.Click
+        Call Plus25()
+    End Sub
+
+    Private Sub cmsPlus100_Click(sender As Object, e As EventArgs) Handles cmsPlus100.Click
+        Call Plus100()
+    End Sub
+
+    Private Sub cmsPlus250_Click(sender As Object, e As EventArgs) Handles cmsPlus250.Click
+        Call Plus250()
+    End Sub
+
+    Private Sub cmsPlus1000_Click(sender As Object, e As EventArgs) Handles cmsPlus1000.Click
+        Call Plus1000()
+    End Sub
+
+    'Decrease
+
+    Private Sub cmsMinus5_Click(sender As Object, e As EventArgs) Handles cmsMinus5.Click
+        Call Minus5()
+    End Sub
+
+    Private Sub cmsMinus10_Click(sender As Object, e As EventArgs) Handles cmsMinus10.Click
+        Call Minus10()
+    End Sub
+
+    Private Sub cmsMinus25_Click(sender As Object, e As EventArgs) Handles cmsMinus25.Click
+        Call Minus25()
+    End Sub
+
+    Private Sub cmsMinus100_Click(sender As Object, e As EventArgs) Handles cmsMinus100.Click
+        Call Minus100()
+    End Sub
+
+    Private Sub cmsMinus250_Click(sender As Object, e As EventArgs) Handles cmsMinus250.Click
+        Call Minus250()
+    End Sub
+
+    Private Sub cmsMinus1000_Click(sender As Object, e As EventArgs) Handles cmsMinus1000.Click
+        Call Minus1000()
+    End Sub
+
+
+
+
+
+#End Region
+
+#Region "Perform Click Usefull List"
+    Private Sub cmsSave_Click(sender As Object, e As EventArgs) Handles cmsSave.Click
+        mnuFileSave.PerformClick()
+    End Sub
+
+    Private Sub cmsExportOutput_Click(sender As Object, e As EventArgs) Handles cmsExportOutput.Click
+        mnuFileExportOutput.PerformClick()
+    End Sub
+
+    Private Sub cmsUndo_Click(sender As Object, e As EventArgs) Handles cmsUndo.Click
+        mnuEditUndo.PerformClick()
+    End Sub
+
+    Private Sub cmsRedo_Click(sender As Object, e As EventArgs) Handles cmsRedo.Click
+        mnuEditRedo.PerformClick()
+    End Sub
+
+    Private Sub cmsNewMag_Click(sender As Object, e As EventArgs) Handles cmsNewMag.Click
+        mnuFileNew.PerformClick()
+    End Sub
+
+    Private Sub cmsBlankMag_Click(sender As Object, e As EventArgs) Handles cmsBlankMag.Click
+        mnuFileNewBlank.PerformClick()
+    End Sub
+
+    Private Sub cmsSaveAs_Click(sender As Object, e As EventArgs) Handles cmsSaveAs.Click
+        mnuFileSaveAs.PerformClick()
+    End Sub
+
+    Private Sub cmsOpen_Click(sender As Object, e As EventArgs) Handles cmsOpen.Click
+        mnuFileOpen.PerformClick()
+    End Sub
 
 #End Region
 

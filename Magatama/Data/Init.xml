@@ -3,19 +3,20 @@
 <Root>
 	<GameVersion value="Ep4" />
 	<Class Ep1="6" Ep2="8" Ep4="8" />
-	<Default SectionIDNumber="5" SectionIDName="Pinkal" FeedingTime="210" RacialRestriction="False" />
-	<Mag MaxLevel="200" Synchro="20" IQ="0" DEF="5" POW="0" DEX="0" MIND="0">
-		<!--Item Cost -->
-		<Monomate Cost="50" />
-		<Dimate Cost="300" />
-		<Trimate Cost="2000" />
-		<Monofluid Cost="100" />
-		<Difluid Cost="500" />
-		<Trifluid Cost="3600" />
-		<Antidote Cost="60" />
-		<Antiparalysis Cost="60" />
-		<SolAtomizer Cost="300" />
-		<MoonAtomizer Cost="500" />
-		<StarAtomizer Cost="5000" />
-	</Mag>
+	<Default SectionIDNumber="5" SectionIDName="Pinkal" FeedingTime="210" RacialRestriction="False" MaxQty="1000" MinLoad="100" />
+	<Mag MaxLevel="200" Synchro="20" IQ="0" DEF="5" POW="0" DEX="0" MIND="0" />
+	<!--Item Cost -->
+	<Monomate Cost="50" />
+	<Dimate Cost="300" />
+	<Trimate Cost="2000" />
+	<Monofluid Cost="100" />
+	<Difluid Cost="500" />
+	<Trifluid Cost="3600" />
+	<Antidote Cost="60" />
+	<Antiparalysis Cost="60" />
+	<SolAtomizer Cost="300" />
+	<MoonAtomizer Cost="500" />
+	<StarAtomizer Cost="5000" />
+	<!--Value for the Increase and Decrease Contextual Menu-->
+	<PlusMinus Value1="5" Value2="10" Value3="25" Value4="100" Value5="250" Value6="1000" />
 </Root>

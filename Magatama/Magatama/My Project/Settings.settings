@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="strVer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">βeta 8</Value>
+      <Value Profile="(Default)">βeta 9</Value>
     </Setting>
     <Setting Name="strSoft" Type="System.String" Scope="User">
       <Value Profile="(Default)">Magatama</Value>

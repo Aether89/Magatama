@@ -48,9 +48,12 @@ Public Class frmAbout
             & vbNewLine & "http://universps.online.fr" & vbNewLine & vbNewLine & "Phantasy Star Cave" _
             & vbNewLine & "http://www.pscave.com" & vbNewLine & vbNewLine & "Phantasy Star Online Wiki" _
             & vbNewLine & "http://pso.wikia.com/" & vbNewLine & vbNewLine & "Rico Journals by Koala Cuddle Party" _
-            & vbNewLine & "http://koalacuddleparty.com/" & vbNewLine & vbNewLine & "Schtack for is PSO gsl Editor and PVM/XVM Tool" _
-            & vbNewLine & vbNewLine & "-- Beta Tester --" & vbNewLine & vbNewLine & " [ Ephinea ] " & vbNewLine & "-Spuz" & vbNewLine _
-            & "-Henonk" & vbNewLine & vbNewLine & " [ ULTIMA ] " & vbNewLine & "-Fyrewolf5" & vbNewLine & vbNewLine)
+            & vbNewLine & "http://koalacuddleparty.com/" & vbNewLine & vbNewLine & "Cyane For the High Quality Section ID Icons" _
+            & vbNewLine & "https://www.facebook.com/cyaneworks/" & vbNewLine & "" _
+            & vbNewLine & "-- Beta Tester --" & vbNewLine & vbNewLine & " [ Ephinea ] " & vbNewLine & "- Spuz" & vbNewLine _
+            & "- Henonk" & vbNewLine & "- conenubi701" & vbNewLine & "- Endler" & vbNewLine & "- MagicLuthee" & vbNewLine & "- Aleron Ives" & vbNewLine _
+            & "- Nux" & vbNewLine & "- flatmen" & vbNewLine & "- NDW" & vbNewLine & vbNewLine & " [ ULTIMA ] " & vbNewLine & "- Fyrewolf5" & vbNewLine _
+            & "- Lemon" & vbNewLine & "- thelionorion" & vbNewLine & "- orgodemir" & vbNewLine & "- Soly" & vbNewLine & vbNewLine)
 
         btnOK.Focus()
     End Sub

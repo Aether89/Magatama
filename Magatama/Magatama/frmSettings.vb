@@ -99,6 +99,11 @@ Public Class frmSettings
             nudSettingsFeedingTime.Value = XmlLoadSettingsInit.Value 'Time between feeding cycle
             XmlLoadSettingsInit.MoveToAttribute("RacialRestriction")
             chkRacialRestriction.Checked = XmlLoadSettingsInit.Value 'Mag Racial Restriction
+            XmlLoadSettingsInit.MoveToAttribute("MaxQty")
+            nudSettingsQtyMax.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToAttribute("MinLoad")
+            nudSettingsMinLoad.Value = XmlLoadSettingsInit.Value
+
 
             XmlLoadSettingsInit.ReadToFollowing("Mag")
             XmlLoadSettingsInit.MoveToFirstAttribute() 'Max Level
@@ -149,6 +154,22 @@ Public Class frmSettings
             XmlLoadSettingsInit.ReadToFollowing("StarAtomizer")
             XmlLoadSettingsInit.MoveToFirstAttribute()
             nudCostStarAtomizer.Value = XmlLoadSettingsInit.Value
+
+            XmlLoadSettingsInit.ReadToFollowing("PlusMinus")
+            XmlLoadSettingsInit.MoveToFirstAttribute() 'Value 1
+            nudValue1.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Value 2
+            nudValue2.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Value 3
+            nudValue3.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Value 4
+            nudValue4.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Value 5
+            nudValue5.Value = XmlLoadSettingsInit.Value
+            XmlLoadSettingsInit.MoveToNextAttribute() 'Value 6
+            nudValue6.Value = XmlLoadSettingsInit.Value
+
+
         End Using
     End Sub
 
@@ -231,6 +252,9 @@ Public Class frmSettings
             .WriteAttributeString("SectionIDName", cboSettingsSectionID.SelectedItem)
             .WriteAttributeString("FeedingTime", nudSettingsFeedingTime.Value)
             .WriteAttributeString("RacialRestriction", chkRacialRestriction.Checked)
+            .WriteAttributeString("MaxQty", nudSettingsQtyMax.Value)
+            .WriteAttributeString("MinLoad", nudSettingsMinLoad.Value)
+
             .WriteEndElement()
 
             .WriteStartElement("Mag")
@@ -241,6 +265,8 @@ Public Class frmSettings
             .WriteAttributeString("POW", nudSettingsPOW.Value)
             .WriteAttributeString("DEX", nudSettingsDEX.Value)
             .WriteAttributeString("MIND", nudSettingsMIND.Value)
+
+            .WriteEndElement()
 
             .WriteComment("Item Cost ")
 
@@ -276,6 +302,18 @@ Public Class frmSettings
             .WriteEndElement()
             .WriteStartElement("StarAtomizer")
             .WriteAttributeString("Cost", nudCostStarAtomizer.Value)
+            .WriteEndElement()
+
+            .WriteComment("Value for the Increase and Decrease Contextual Menu")
+
+
+            .WriteStartElement("PlusMinus")
+            .WriteAttributeString("Value1", nudValue1.Value)
+            .WriteAttributeString("Value2", nudValue2.Value)
+            .WriteAttributeString("Value3", nudValue3.Value)
+            .WriteAttributeString("Value4", nudValue4.Value)
+            .WriteAttributeString("Value5", nudValue5.Value)
+            .WriteAttributeString("Value6", nudValue6.Value)
             .WriteEndElement()
 
             .WriteEndDocument()
@@ -463,6 +501,20 @@ Public Class frmSettings
             strSettingsTmp = XmlLoadSettingsInit.Value 'Color
             lblSettingsSeconds.ForeColor = Color.FromName(strSettingsTmp)
 
+            XmlLoadSettingsInit.ReadToFollowing("MaxQty")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblSettingsQtyMax.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblSettingsQtyMax.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("MinLoad")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblSettingsMinLoad.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblSettingsMinLoad.ForeColor = Color.FromName(strSettingsTmp)
+
             XmlLoadSettingsInit.ReadToFollowing("SettingsItems")
             XmlLoadSettingsInit.MoveToFirstAttribute()
             lblSettingsItems.Text = XmlLoadSettingsInit.Value 'Text
@@ -490,6 +542,101 @@ Public Class frmSettings
             XmlLoadSettingsInit.MoveToNextAttribute()
             strSettingsTmp = XmlLoadSettingsInit.Value 'Color
             lblInitialStats.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsWarning")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblWarning.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblWarning.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsPlusMinus")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblPlusMinus.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblPlusMinus.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue01")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease1.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease1.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue02")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease2.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease2.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue03")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease3.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease3.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue04")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease4.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease4.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue05")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease5.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease5.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsValue06")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            lblIncrease6.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            lblIncrease6.ForeColor = Color.FromName(strSettingsTmp)
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsTabGeneral")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            btnGeneral.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            btnGeneral.ForeColor = Color.FromName(strSettingsTmp)
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            btnGeneral.ForeColor = Color.FromName(strSettingsTmp)
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            btnGeneral.Tag = XmlLoadSettingsInit.Value
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsTabMag")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            btnMag.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            btnMag.ForeColor = Color.FromName(strSettingsTmp)
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            btnMag.Tag = XmlLoadSettingsInit.Value
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsTabCost")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            btnCost.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            btnCost.ForeColor = Color.FromName(strSettingsTmp)
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            btnCost.Tag = XmlLoadSettingsInit.Value
+
+            XmlLoadSettingsInit.ReadToFollowing("SettingsTabValue")
+            XmlLoadSettingsInit.MoveToFirstAttribute()
+            btnValue.Text = XmlLoadSettingsInit.Value 'Text
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            strSettingsTmp = XmlLoadSettingsInit.Value 'Color
+            btnValue.ForeColor = Color.FromName(strSettingsTmp)
+            XmlLoadSettingsInit.MoveToNextAttribute()
+            btnValue.Tag = XmlLoadSettingsInit.Value
 
         End Using
 
@@ -546,28 +693,36 @@ Public Class frmSettings
     End Sub
 
     Private Sub btnGeneral_Click(sender As Object, e As EventArgs) Handles btnGeneral.Click
-
-        pnlGeneral.Visible = True
-        pnlMag.Visible = False
-        pnlCost.Visible = False
+        pnlGeneral.BringToFront()
         Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab1.png")
 
     End Sub
 
     Private Sub btnMag_Click(sender As Object, e As EventArgs) Handles btnMag.Click
-        pnlGeneral.Visible = False
-        pnlMag.Visible = True
-        pnlCost.Visible = False
+        pnlMag.BringToFront()
         Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab2.png")
 
     End Sub
 
     Private Sub btnCost_Click(sender As Object, e As EventArgs) Handles btnCost.Click
-        pnlGeneral.Visible = False
-        pnlMag.Visible = False
-        pnlCost.Visible = True
+        pnlCost.BringToFront()
         Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab3.png")
 
     End Sub
+
+    Private Sub btnValue_Click(sender As Object, e As EventArgs) Handles btnValue.Click
+        pnlValue.BringToFront()
+        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_settings_tab4.png")
+
+    End Sub
+
+    Private Sub btnSettingsSave_MouseHover(sender As Object, e As EventArgs) Handles btnSettingsSave.MouseHover
+        lblWarning.Visible = True
+    End Sub
+
+    Private Sub btnSettingsSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSettingsSave.MouseLeave
+        lblWarning.Visible = False
+    End Sub
+
 
 End Class
