@@ -919,7 +919,6 @@ MagLoadStart:
         End Using
 
         Call Cost()
-        rtfOutput.AppendText(Chr(0)) ' make sure that color syntax work when loading a file
 
 MagLoadEnd:
 
@@ -2435,6 +2434,8 @@ MagLoadEnd:
         shoCount = 0
         prgFeed.Maximum = nudQtyTmp.Value
         prgFeed.Value = 0
+
+        rtfOutput.AppendText(Chr(0)) ' make sure that color syntax work
 
         Select Case boolMassFeed
             Case = True
