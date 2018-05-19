@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="9" Name="Tapas" Stage="2" />
+	<Mag ID="9" Name="Tapas" Stage="2" GameVer="Ep1" />
 	<Table ID="3" />
 	<PhotonBlast ID="6" Name="Mylla" />
 	<!--Triggered Actions-->
@@ -9,4 +9,5 @@
 	<LowHP ID="3" desc="Resta" />
 	<Boss ID="3" desc="Resta" />
 	<Death ID="0" desc="" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;{\colortbl ;\red155\green187\blue89;}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sl240\slmult1\lang9\f0\fs22 Evolve from a level 35 Kalki when meeting the following conditions.\par&#xD;&#xA;\par&#xD;&#xA;\cf1\b MIND \cf0 &gt; Others\lang4105\b0\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

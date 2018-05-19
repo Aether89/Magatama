@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="3" Name="Vritra" Stage="1" />
+	<Mag ID="3" Name="Vritra" Stage="1" GameVer="Ep1" />
 	<Table ID="1" />
 	<PhotonBlast ID="3" Name="Leilla" />
 	<!--Triggered Actions-->
@@ -9,4 +9,5 @@
 	<LowHP ID="0" desc="" />
 	<Boss ID="3" desc="Resta" />
 	<Death ID="0" desc="" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sl240\slmult1\lang9\f0\fs22 Evolve from a level 10 Mag when Feed by a \b FO\b0 rce.\lang4105\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

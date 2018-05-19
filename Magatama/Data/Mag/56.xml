@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="56" Name="Elenor" Stage="4" />
+	<Mag ID="56" Name="Elenor" Stage="4" GameVer="Ep1" />
 	<Table ID="7" />
 	<PhotonBlast ID="0" Name="None" />
 	<!--Triggered Actions-->
@@ -9,4 +9,5 @@
 	<LowHP ID="1" desc="Invulnerability" />
 	<Boss ID="2" desc="Shifta / Deband" />
 	<Death ID="1" desc="Reverser" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fswiss\fprq2\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sa160\sl252\slmult1\lang1033\f0\fs22 Evolve from a Level 50+ Mag when Feed \b Heart of YN-0017\b0 .\par&#xD;&#xA;Human and Newman can\rquote t use it* \par&#xD;&#xA;* On Ephinea this restriction have been lifted on January 9, 2017\par&#xD;&#xA;\lang4105\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

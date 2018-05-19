@@ -1,12 +1,18 @@
 ﻿Imports System.Xml
-
+Imports System.IO
 Public Class frmMagatama
 
 #Region "Variable"
     Dim XmlWriter As XmlWriter
     Dim XmlSettings As New XmlWriterSettings()
 
+    'Used in Mag Feed Language.
     Dim sdfSave As New SaveFileDialog()
+    Dim fsoMFL, tsMFL
+
+    Const MFLForReading = 1
+    Dim strMFLLine, strMFLValue
+
 
     'Used to store the path of the files to Open.
     Dim strPathTmp As String
@@ -98,7 +104,7 @@ Public Class frmMagatama
     Dim nudProgressStats As NumericUpDown 'Used to know which Progress Stats shoud be incremented when the Feeding function is called
     Dim btnTmp As Button 'Used to get the text from the button and show it into the output.
     Dim nudTmp As NumericUpDown
-
+    Dim cbotmp As ComboBox 'used for MFL PhotonBlast combo box
     ' Variable USedfor Calculating the New Value When Feeding a Mag
     Dim shoProgress As Short = 0
 
@@ -133,6 +139,8 @@ Public Class frmMagatama
     Dim strOutAnti As String = "Goldenrod"
     Dim strOutAtomizer As String = "Red"
     Dim strOutLevelUp As String = "Black"
+
+    Dim strMFL As String = ""
 
 
 
@@ -322,8 +330,6 @@ Public Class frmMagatama
         Call PhotonBlastXML()
 
         strTmp = ""
-
-
 
         bytMagCheck = cboMag.SelectedIndex
 
@@ -2362,9 +2368,19 @@ MagLoadEnd:
     Public Sub ProgressCheckLevel()
 
         If shoProgress >= nudProgressStats.Maximum Then
-            nudProgressStats.Value = shoProgress - nudProgressStats.Maximum
-            nudStats.Value = nudStats.Value + 1
-            Call MagLevel()
+
+            While shoProgress >= nudProgressStats.Maximum
+
+                nudProgressStats.Tag = shoProgress
+
+                shoProgress = nudStats.Value + 1
+                Call LevelSyncIQCheck()
+                Call MagLevel()
+                shoProgress = nudProgressStats.Tag
+                shoProgress = shoProgress - nudProgressStats.Maximum
+            End While
+            nudProgressStats.Value = shoProgress
+
 
         ElseIf shoProgress <= nudProgressStats.Minimum Then
             nudProgressStats.Value = nudProgressStats.Minimum
@@ -4339,6 +4355,390 @@ Evolve:
         mnuFileOpen.PerformClick()
     End Sub
 
+    Private Sub mnuEditMFL_Click(sender As Object, e As EventArgs) Handles mnuEditMFL.Click
+        Select Case mnuEditMFL.Checked
+            Case = True
+                pnlMassFeed.Visible = True
+                pnlMassFeed.BringToFront()
+            Case = False
+                pnlMassFeed.Visible = False
+                pnlMassFeed.SendToBack()
+            Case Else
+
+        End Select
+    End Sub
+
+
+
+#End Region
+
+#Region "MFL"
+    Private Sub btnMFLRun_Click(sender As Object, e As EventArgs) Handles btnMFLRun.Click
+
+
+        rtfMFLInput.SaveFile("./tmp/input.mpf", RichTextBoxStreamType.PlainText)
+        'Create the file system object
+        fsoMFL = CreateObject("Scripting.FileSystemObject")
+
+        'Initialize a few items
+        'strSource = "./tmp.csv"
+
+        'Open the source file to read it
+        tsMFL = fsoMFL.OpenTextFile("./tmp/input.mpf", MFLForReading)
+
+        'Read the file line by line
+        Do While Not tsMFL.AtEndOfStream
+            strMFLLine = tsMFL.ReadLine
+            'Remove the quotes from the string
+            strMFLLine = Replace(strMFLLine, Chr(34), " ")
+
+            'Split the line on the comma into an array
+            strMFLValue = Split(strMFLLine, " ")
+
+
+
+
+            Select Case strMFLValue(0).ToString.ToLower
+
+                Case = "f", "feed"
+
+                    'make sure if not argument was added to add one by assuming 1
+                    If strMFLValue.length = 2 Then
+                        strMFLLine = strMFLLine & " 1"
+                        strMFLValue = Split(strMFLLine, " ")
+                    End If
+
+                    'to not crash the program if another value than a number is entered replace it with it ascii value.
+                    If IsNumeric(strMFLValue(2)) = False Then
+                        strMFLValue(2) = Asc(strMFLValue(2))
+                    End If
+
+                    Select Case strMFLValue(1).ToString.ToLower
+
+                        Case "mm", "monomate"
+                            Call MonomateFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+
+                        Case "dm", "dimate"
+                            Call DimateFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "tm", "trimate"
+                            Call TrimateFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "mf", "monofluid"
+                            Call MonofluidFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "df", "difluid"
+                            Call DifluidFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "tf", "trifluid"
+                            Call TrifluidFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "ad", "antidote", "antid"
+                            Call AntidoteFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "ap", "antiparalysis", "antip"
+                            Call AntiparalysisFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "sa", "solatomizer", "sol"
+                            Call SolAtomizerFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "ma", "moonatomizer", "moon"
+                            Call MoonAtomizerFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case "st", "staratomizer", "star"
+                            Call StarAtomizerFeed()
+                            nudQtyTmp.Value = strMFLValue(2)
+                            Call Feed()
+                        Case Else
+                            MessageBox.Show(strMFLValue(1) & " is not a recognized Object")
+                    End Select
+
+                Case = "class", "c"
+
+                    Select Case strMFLValue(1).ToString.ToLower
+                        Case = "humar", "hm", "humr"
+                            cboClass.SelectedIndex = 0
+
+                        Case = "hunewearl", "hnw", "hunl"
+                            cboClass.SelectedIndex = 1
+
+                        Case = "hucast", "hc", "huct"
+                            cboClass.SelectedIndex = 2
+
+                        Case = "hucaseal", "hcs", "hucl"
+                            If strGameVer = "Ep1" Then
+                                'Did not exist so command will be ignored.
+                            Else
+                                cboClass.SelectedIndex = 3
+                            End If
+
+                        Case = "ramar", "rm", "ramr"
+                            If strGameVer = "Ep1" Then
+                                cboClass.SelectedIndex = 3
+                            Else
+                                cboClass.SelectedIndex = 4
+                            End If
+
+                        Case = "ramarl", "rml", "raml"
+                            If strGameVer = "Ep1" Then
+                                'Did not exist so command will be ignored.
+                            Else
+                                cboClass.SelectedIndex = 5
+                            End If
+
+                        Case = "racast", "rc", "ract"
+                            If strGameVer = "Ep1" Then
+                                cboClass.SelectedIndex = 4
+                            Else
+                                cboClass.SelectedIndex = 6
+                            End If
+
+                        Case = "racaseal", "rcs", "racl"
+                            If strGameVer = "Ep1" Then
+                                cboClass.SelectedIndex = 5
+                            Else
+                                cboClass.SelectedIndex = 7
+                            End If
+
+                        Case = "fomar", "fm", "fomr"
+                            If strGameVer = "Ep1" Then
+                                'Did not exist so command will be ignored.
+                            Else
+                                cboClass.SelectedIndex = 8
+                            End If
+
+
+                        Case = "fomarl", "fml", "foml"
+                            If strGameVer = "Ep1" Then
+                                cboClass.SelectedIndex = 6
+                            Else
+                                cboClass.SelectedIndex = 9
+                            End If
+
+                        Case = "fonewm", "fn", "fonm"
+                            If strGameVer = "Ep1" Then
+
+                                cboClass.SelectedIndex = 7
+                            Else
+                                cboClass.SelectedIndex = 10
+                            End If
+
+                        Case = "fonewearl", "fnw", "fonl"
+                            If strGameVer = "Ep1" Then
+                                cboClass.SelectedIndex = 8
+                            Else
+                                cboClass.SelectedIndex = 11
+                            End If
+
+                    End Select
+
+                Case = "secid", "id"
+                    Select Case strMFLValue(1).ToString.ToLower
+                        Case = "viridia", "virid", "vr"
+                            cboSectionID.SelectedIndex = 0
+                        Case = "greenil", "green", "gr"
+                            cboSectionID.SelectedIndex = 1
+                        Case = "skyly", "sky", "sk"
+                            cboSectionID.SelectedIndex = 2
+                        Case = "bluefull", "blue", "bl"
+                            cboSectionID.SelectedIndex = 3
+                        Case = "purplenum", "purple", "pn"
+                            cboSectionID.SelectedIndex = 4
+                        Case = "pinkal", "pink", "pa"
+                            cboSectionID.SelectedIndex = 5
+                        Case = "redria", "red", "rd"
+                            cboSectionID.SelectedIndex = 6
+                        Case = "oran", "orange", "oa"
+                            cboSectionID.SelectedIndex = 7
+                        Case = "yellowboze", "yellow", "yb"
+                            cboSectionID.SelectedIndex = 8
+                        Case = "whitill", "white", "wh"
+                            cboSectionID.SelectedIndex = 9
+
+                    End Select
+
+
+                Case = "setpb1", "pb1", "setpb2", "pb2", "setpb3", "pb3"
+
+
+                    Select Case strMFLValue(0).Substring(strMFLValue(0).Length - 1)
+                        Case = 1
+                            cbotmp = cboPhotonBlast01
+                        Case = 2
+                            cbotmp = cboPhotonBlast02
+                        Case = 3
+                            cbotmp = cboPhotonBlast03
+                    End Select
+
+
+                    Select Case strMFLValue(1).ToString.ToLower
+                        Case = "none", "na"
+                            cbotmp.SelectedIndex = 0
+                        Case = "farlla", "fl", "spin"
+                            cbotmp.SelectedIndex = 1
+                        Case = "estlla", "el", "line"
+                            cbotmp.SelectedIndex = 2
+                        Case = "leilla", "ll", "health", "resta"
+                            cbotmp.SelectedIndex = 3
+                        Case = "golla", "gl", "focus"
+                            cbotmp.SelectedIndex = 4
+                        Case = "pilla", "pl", "aerial"
+                            cbotmp.SelectedIndex = 5
+                        Case = "mylla", "my", "twin", "buff", "sd", "youlla"
+                            cbotmp.SelectedIndex = 6
+                    End Select
+
+                Case "set", "s"
+                    Select Case strMFLValue(1).ToString.ToLower
+                        Case = "iq", "i"
+                            Call MFLAddStats1()
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudIQ
+                            Call LevelSyncIQCheck()
+
+                        Case = "Synchro", "sync", "sc"
+                            Call MFLAddStats1()
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudSynchro
+                            Call LevelSyncIQCheck()
+
+                        Case = "def", "df"
+
+                            Call MFLAddStats1()
+
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudDEF
+                            Call LevelSyncIQCheck()
+
+                            shoProgress = strMFLValue(3)
+                            nudStats = nudProgressDEF
+                            Call LevelSyncIQCheck()
+
+                        Case = "pow", "pw"
+                            Call MFLAddStats1()
+
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudPOW
+                            Call LevelSyncIQCheck()
+
+                            shoProgress = strMFLValue(3)
+                            nudStats = nudProgressPOW
+                            Call LevelSyncIQCheck()
+
+                        Case = "dex", "dx"
+
+                            Call MFLAddStats1()
+
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudDEX
+                            Call LevelSyncIQCheck()
+
+                            shoProgress = strMFLValue(3)
+                            nudStats = nudProgressDEX
+                            Call LevelSyncIQCheck()
+
+                        Case = "mind", "md"
+
+                            Call MFLAddStats1()
+
+                            shoProgress = strMFLValue(2)
+                            nudStats = nudMIND
+                            Call LevelSyncIQCheck()
+
+                            shoProgress = strMFLValue(3)
+                            nudStats = nudProgressMIND
+                            Call LevelSyncIQCheck()
+                    End Select
+
+
+                Case "add", "a"
+                    Select Case strMFLValue(1).ToString.ToLower
+                        Case = "iq", "i"
+                            MFLAddStats1()
+                            shoProgress = nudIQ.Value + strMFLValue(2)
+                            nudStats = nudIQ
+                            Call LevelSyncIQCheck()
+
+                        Case = "synchro", "sync", "sc"
+                            MFLAddStats1()
+                            shoProgress = nudSynchro.Value + strMFLValue(2)
+                            nudStats = nudSynchro
+                            Call LevelSyncIQCheck()
+
+                        Case = "def", "df"
+                            Call MFLAddStats1()
+                            nudStats = nudDEF
+                            nudProgressStats = nudProgressDEF
+                            Call MFLAddStats2()
+
+                        Case = "pow", "pw"
+                            Call MFLAddStats1()
+                            nudStats = nudPOW
+                            nudProgressStats = nudProgressPOW
+                            Call MFLAddStats2()
+
+                        Case = "dex", "dx"
+                            Call MFLAddStats1()
+                            nudStats = nudDEX
+                            nudProgressStats = nudProgressDEX
+                            Call MFLAddStats2()
+
+                        Case = "mind", "md"
+                            Call MFLAddStats1()
+                            nudStats = nudMIND
+                            nudProgressStats = nudProgressMIND
+                            Call MFLAddStats2()
+                    End Select
+
+            End Select
+
+        Loop
+
+        'Close the file
+        tsMFL.Close
+        'Clean up
+        tsMFL = Nothing
+        fsoMFL = Nothing
+
+    End Sub
+
+    Public Sub MFLAddStats1()
+        If strMFLValue.length = 3 Then
+            strMFLLine = strMFLLine & " 0"
+            strMFLValue = Split(strMFLLine, " ")
+        End If
+
+        If strMFLValue.length = 2 Then
+            strMFLLine = strMFLLine & " 1 0"
+            strMFLValue = Split(strMFLLine, " ")
+        End If
+
+        'to not crash the program if another value than a number is entered replace it with it ascii value.
+        If IsNumeric(strMFLValue(3)) = False Then
+            strMFLValue(3) = Asc(strMFLValue(3))
+        End If
+
+        If IsNumeric(strMFLValue(2)) = False Then
+            strMFLValue(2) = Asc(strMFLValue(2))
+        End If
+    End Sub
+
+    Public Sub MFLAddStats2() 'Used by the add stats DEF POW DEX MIND
+        strMFLValue(3) = (strMFLValue(2) * 100) + strMFLValue(3)
+        shoProgress = strMFLValue(3) + nudProgressStats.Value
+        Call StatsChecks()
+    End Sub
 #End Region
 
 End Class

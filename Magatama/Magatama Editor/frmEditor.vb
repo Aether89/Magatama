@@ -1,8 +1,8 @@
 ﻿Imports System.Xml
+Imports System.IO
 
 
 Public Class frmEditor
-
     Dim strPathEditorPicMag As Image = Image.FromFile("./Graphics/Mag/0.png")
     Dim strPathEditorPicPhotonBlast As Image = Image.FromFile("./Graphics/PhotonBlast/0.png")
 
@@ -13,7 +13,9 @@ Public Class frmEditor
     Dim strEditorTmp As String
 
     Dim strEditorPhotonBlast As String
+    Dim strEditorPB As String
     Dim strEditorPhotonBlastText As String
+    Dim strEditorPBText As String
 
     Dim shoEditorcboCount As Short
     Dim shoEditorcboCountMax As Short
@@ -107,6 +109,8 @@ Public Class frmEditor
 
 
         cboEditorPhotonBlast.Items.Clear()
+        lsbEditorPB.Items.Clear()
+
         Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/List/PhotonBlast.xml")
 
             XmlLoadEditor.ReadToFollowing("PhotonBlast")
@@ -118,25 +122,89 @@ Public Class frmEditor
                 XmlLoadEditor.ReadToFollowing("PB" & shoEditorcboCount)
                 XmlLoadEditor.MoveToFirstAttribute()
                 cboEditorPhotonBlast.Items.Add(XmlLoadEditor.Value)
+                lsbEditorPB.Items.Add(XmlLoadEditor.Value)
+
                 shoEditorcboCount = (shoEditorcboCount + 1)
+
             End While
 
             cboEditorPhotonBlast.SelectedIndex = 0
 
         End Using
+        lsbEditorPB.Items.RemoveAt(0)
+        lsbEditorPB.SelectedIndex = 0
+
     End Sub
 
+    Public Sub EditorMagCellsList()
+
+        shoEditorcboCount = 0
+        shoEditorcboCountMax = 0
+
+        lsbEditorMagCells.Items.Clear()
+
+        Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/List/MagCells.xml")
+
+            XmlLoadEditor.ReadToFollowing("GameVersion")
+            XmlLoadEditor.MoveToAttribute("Ep4")
+            shoEditorcboCountMax = XmlLoadEditor.Value
+
+            While shoEditorcboCount < shoEditorcboCountMax
+
+                XmlLoadEditor.ReadToFollowing("Cell" & shoEditorcboCount)
+                XmlLoadEditor.MoveToFirstAttribute()
+                lsbEditorMagCells.Items.Add(XmlLoadEditor.Value)
+
+                shoEditorcboCount = (shoEditorcboCount + 1)
+
+            End While
+
+        End Using
+        lsbEditorMagCells.Items.RemoveAt(0)
+        lsbEditorMagCells.SelectedIndex = 0
+    End Sub
+
+    Public Sub EditorMFLList()
+
+        shoEditorcboCount = 0
+        shoEditorcboCountMax = 0
+
+        lsbMFL.Items.Clear()
+
+        Using XmlLoadEditor As XmlReader = XmlReader.Create("./Data/List/MFL.xml")
+
+            XmlLoadEditor.ReadToFollowing("Action")
+            XmlLoadEditor.MoveToAttribute("number")
+            shoEditorcboCountMax = XmlLoadEditor.Value
+
+            While shoEditorcboCount < shoEditorcboCountMax
+
+                XmlLoadEditor.ReadToFollowing("mfl" & shoEditorcboCount)
+                XmlLoadEditor.MoveToFirstAttribute()
+                lsbMFL.Items.Add(XmlLoadEditor.Value)
+
+                shoEditorcboCount = (shoEditorcboCount + 1)
+
+            End While
+
+        End Using
+        lsbMFL.SelectedIndex = 0
+    End Sub
 
     Public Sub EditorInit()
 
         Call EditorTriggerList()
 
         Call EditorPhotonBlastList()
-
+        Call EditorMagCellsList()
+        Call EditorMFLList()
         Call EditorPhotonBlastXML()
         Call EditorcboMagList()
         Call LoadFeedingChart()
         picEditorMag.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_mag.png")
+        picEditorPhotonBlast.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_PB.png")
+        picPBIco.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_PB.png")
+
     End Sub
 
     Public Sub MagUpdate()
@@ -152,6 +220,16 @@ Public Class frmEditor
         End While
 
     End Sub
+
+    Public Sub MagCellsUpdate()
+
+        strEditorTmp = "./Data/MagCells/" & lsbEditorMagCells.SelectedIndex + 1 & ".rtf"
+        lsbEditorMagCells.SelectedIndex= shoEditorcboCount
+
+        File.WriteAllText(strEditorTmp, rtbEditorMagCells.Rtf)
+    End Sub
+
+
 
     Public Sub EditorMagSave()
         XmlSaveEditor = XmlWriter.Create("./Data/Mag/" & lsbEditorMag.SelectedIndex & ".xml", XmlSettings)
@@ -212,6 +290,9 @@ Public Class frmEditor
             .WriteAttributeString("desc", cboEditorDeath.SelectedItem)
             .WriteEndElement()
 
+            .WriteStartElement("HowTo")
+            .WriteAttributeString("rtf", rtfEditorHowTo.Rtf)
+            .WriteEndElement()
             .WriteEndDocument()
             .Close()
         End With
@@ -387,7 +468,9 @@ Public Class frmEditor
             XmlLoadMag.ReadToFollowing("Death")
             XmlLoadMag.MoveToFirstAttribute()
             cboEditorDeath.SelectedIndex = XmlLoadMag.Value
-
+            XmlLoadMag.ReadToFollowing("HowTo")
+            XmlLoadMag.MoveToFirstAttribute()
+            rtfEditorHowTo.Rtf = XmlLoadMag.Value
         End Using
 
     End Sub
@@ -562,8 +645,8 @@ Public Class frmEditor
 
     Public Sub EditorPhotonBlastXML() 'PhotonBlast Tooltips Text
 
-        strEditorPhotonBlast = cboEditorPhotonBlast.SelectedItem
-
+        strEditorPhotonBlast = "PhotonBlast0" & cboEditorPhotonBlast.SelectedIndex
+        strEditorPB = lsbEditorPB.SelectedIndex
         Using XmlLoadPhotonBlast As XmlReader = XmlReader.Create("./Data/PhotonBlast.xml")
             While (XmlLoadPhotonBlast.Read())
                 Dim type = XmlLoadPhotonBlast.NodeType
@@ -575,15 +658,39 @@ Public Class frmEditor
                         strEditorPhotonBlastText = XmlLoadPhotonBlast.ReadInnerXml.ToString()
                     End If
 
+                    If (XmlLoadPhotonBlast.Name = strEditorPB) Then
+                        strEditorPBText = XmlLoadPhotonBlast.ReadInnerXml.ToString()
+                    End If
+
                 End If
 
             End While
         End Using
 
         ttEditor.SetToolTip(picEditorPhotonBlast, strEditorPhotonBlastText)
+        ttEditor.SetToolTip(picEditorPB, strEditorPBText)
 
+        rtbEditorPB.Text = strEditorPBText
     End Sub
 
+    Public Sub EditorPB() 'PhotonBlast data Text
+
+        strEditorPB = "PhotonBlast0" & (lsbEditorPB.SelectedIndex + 1)
+        Using XmlLoadPhotonBlast As XmlReader = XmlReader.Create("./Data/PhotonBlast.xml")
+            While (XmlLoadPhotonBlast.Read())
+                Dim type = XmlLoadPhotonBlast.NodeType
+
+                If (XmlLoadPhotonBlast.Name = strEditorPB) Then
+                    strEditorPBText = XmlLoadPhotonBlast.ReadInnerXml.ToString()
+                End If
+
+            End While
+        End Using
+
+        ttEditor.SetToolTip(picEditorPB, strEditorPBText)
+
+        rtbEditorPB.Text = strEditorPBText
+    End Sub
 #End Region
 
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -603,17 +710,51 @@ Public Class frmEditor
         picEditorMag.Image = strPathEditorPicMag
         ttEditor.SetToolTip(picEditorMag, lsbEditorMag.SelectedItem)
         lblEditorMagName.Text = lsbEditorMag.SelectedItem
-
+        lblMagID.Text = "ID : " & lsbEditorMag.SelectedIndex
         Call LoadMagData()
     End Sub
 
+    Private Sub lsbEditorPB_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbEditorPB.SelectedValueChanged
+        strEditorTmp = lsbEditorPB.SelectedIndex + 1
+        strPathEditorPicMag = Image.FromFile("./Graphics/PhotonBlast/ep3_" & strEditorTmp & ".png")
+        picEditorPB.Image = strPathEditorPicMag
+        strPathEditorPicMag = Image.FromFile("./Graphics/PhotonBlast/" & strEditorTmp & ".png")
+        picPBIco.Image = strPathEditorPicMag
+        ttEditor.SetToolTip(picEditorMag, lsbEditorMag.SelectedItem)
+        lblEditorPBName.Text = lsbEditorPB.SelectedItem
+        Call EditorPB()
+    End Sub
+
+    Private Sub lsbEditorMagCells_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbEditorMagCells.SelectedValueChanged
+        lblEditorMagCellsName.Text = lsbEditorMagCells.SelectedItem
+        lblMCID.Text = "ID :" & lsbEditorMagCells.SelectedIndex + 1
+
+        Call EditorPB()
+
+
+        lsbEditorMagCells.Tag = lsbEditorMagCells.SelectedIndex + 1
+        strEditorTmp = "./Data/MagCells/" & lsbEditorMagCells.Tag & ".rtf"
+
+        Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+            rtbEditorMagCells.LoadFile(fs, RichTextBoxStreamType.RichText)
+        End Using
+    End Sub
+
+    Private Sub lsbMFL_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbMFL.SelectedValueChanged
+
+        strEditorTmp = "./Data/mfl/" & lsbMFL.SelectedItem & ".rtf"
+
+        Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+            rtbMFL.LoadFile(fs, RichTextBoxStreamType.RichText)
+        End Using
+    End Sub
 
 
     Private Sub nudEditorFeedingTables_ValueChanged(sender As Object, e As EventArgs) Handles nudEditorFeedingTables.ValueChanged
         Call LoadFeedingChart()
     End Sub
 
-    Private Sub cboEditorPhotonBlast_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedValueChanged
+    Private Sub cboEditorPhotonBlast_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedIndexChanged
         strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedIndex & ".png")
         picEditorPhotonBlast.Image = strPathEditorPicPhotonBlast
 
@@ -621,6 +762,12 @@ Public Class frmEditor
     End Sub
 
 
+    Private Sub cboEditorPhotonBlast_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedIndexChanged
+        strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedIndex & ".png")
+        picEditorPhotonBlast.Image = strPathEditorPicPhotonBlast
+
+        Call EditorPhotonBlastXML()
+    End Sub
 
 #End Region
 
@@ -652,7 +799,8 @@ Public Class frmEditor
 
 
     Public Sub SearchMag()
-        strEditorSearch = txtEditorSearchMag.Text
+
+        strEditorSearch = lsbEditorMag.Text
         ' Ensure we have a proper string to search for.
         If strEditorSearch <> String.Empty Then
             ' Find the item in the list and store the index to the item.
@@ -678,15 +826,21 @@ Public Class frmEditor
         Call SearchMag()
     End Sub
 
+
     Private Sub tabEditor_Click(sender As Object, e As EventArgs) Handles tabEditor.Click
         If tabEditor.SelectedIndex = 0 Then
-            tabEditorMag.SelectedTab = tabEditorMagInfo
+            tabEditorMag.SelectedTab = tabEditorMagHowtoGet
         End If
     End Sub
 
     Private Sub mnuEditorFileUpdate_Click(sender As Object, e As EventArgs) Handles mnuEditorFileUpdate.Click
         Call MagUpdate()
     End Sub
+
+    Private Sub mnuEditorFileUpdateCells_Click(sender As Object, e As EventArgs) Handles mnuEditorFileUpdateCells.Click
+        Call MagCellsUpdate()
+    End Sub
+
 
     Private Sub cboFeedVer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFeedVer.SelectedIndexChanged
         Call LoadFeedingChart()

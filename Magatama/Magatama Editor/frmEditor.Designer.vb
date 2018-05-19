@@ -29,6 +29,7 @@ Partial Class frmEditor
         Me.mnuEditorFileSaveChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditorFileUpdate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditorFileExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditorFileUpdateCells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditor = New System.Windows.Forms.MenuStrip()
         Me.ttEditor = New System.Windows.Forms.ToolTip(Me.components)
         Me.tabEditor = New System.Windows.Forms.TabControl()
@@ -130,8 +131,7 @@ Partial Class frmEditor
         Me.nudDEXMonofluid = New System.Windows.Forms.NumericUpDown()
         Me.nudDEXTrimate = New System.Windows.Forms.NumericUpDown()
         Me.tabEditorMagHowtoGet = New System.Windows.Forms.TabPage()
-        Me.tabEditorMagInfo = New System.Windows.Forms.TabPage()
-        Me.rtfEditorMagInfo = New System.Windows.Forms.RichTextBox()
+        Me.rtfEditorHowTo = New System.Windows.Forms.RichTextBox()
         Me.picEditorPhotonBlast = New System.Windows.Forms.PictureBox()
         Me.cboEditorPBFilled = New System.Windows.Forms.ComboBox()
         Me.cboEditor1HP10 = New System.Windows.Forms.ComboBox()
@@ -147,8 +147,21 @@ Partial Class frmEditor
         Me.lblEditorDeath = New System.Windows.Forms.Label()
         Me.lblEditorMagName = New System.Windows.Forms.Label()
         Me.tabPhotonBlast = New System.Windows.Forms.TabPage()
+        Me.rtbEditorPB = New System.Windows.Forms.RichTextBox()
+        Me.lsbEditorPB = New System.Windows.Forms.ListBox()
+        Me.picEditorPB = New System.Windows.Forms.PictureBox()
+        Me.lblEditorPBName = New System.Windows.Forms.Label()
         Me.tabMagCells = New System.Windows.Forms.TabPage()
+        Me.rtbEditorMagCells = New System.Windows.Forms.RichTextBox()
+        Me.lblEditorMagCellsName = New System.Windows.Forms.Label()
+        Me.lsbEditorMagCells = New System.Windows.Forms.ListBox()
+        Me.tabMFL = New System.Windows.Forms.TabPage()
+        Me.rtbMFL = New System.Windows.Forms.RichTextBox()
+        Me.lsbMFL = New System.Windows.Forms.ListBox()
         Me.picEditorSave = New System.Windows.Forms.PictureBox()
+        Me.picPBIco = New System.Windows.Forms.PictureBox()
+        Me.lblMCID = New System.Windows.Forms.Label()
+        Me.lblMagID = New System.Windows.Forms.Label()
         mnuEditorFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditor.SuspendLayout()
         Me.tabEditor.SuspendLayout()
@@ -224,16 +237,21 @@ Partial Class frmEditor
         CType(Me.nudDEXDimate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDEXMonofluid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDEXTrimate, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabEditorMagInfo.SuspendLayout()
+        Me.tabEditorMagHowtoGet.SuspendLayout()
         CType(Me.picEditorPhotonBlast, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudEditorStage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudEditorActivation, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPhotonBlast.SuspendLayout()
+        CType(Me.picEditorPB, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabMagCells.SuspendLayout()
+        Me.tabMFL.SuspendLayout()
         CType(Me.picEditorSave, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPBIco, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mnuEditorFile
         '
-        mnuEditorFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditorFileSaveMag, Me.mnuEditorFileSaveChart, Me.mnuEditorFileUpdate, Me.mnuEditorFileExit})
+        mnuEditorFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditorFileSaveMag, Me.mnuEditorFileSaveChart, Me.mnuEditorFileUpdateCells, Me.mnuEditorFileUpdate, Me.mnuEditorFileExit})
         mnuEditorFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         mnuEditorFile.Name = "mnuEditorFile"
         mnuEditorFile.Size = New System.Drawing.Size(38, 20)
@@ -269,6 +287,14 @@ Partial Class frmEditor
         Me.mnuEditorFileExit.Size = New System.Drawing.Size(257, 22)
         Me.mnuEditorFileExit.Text = "Exit"
         '
+        'mnuEditorFileUpdateCells
+        '
+        Me.mnuEditorFileUpdateCells.Name = "mnuEditorFileUpdateCells"
+        Me.mnuEditorFileUpdateCells.ShortcutKeys = CType(((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mnuEditorFileUpdateCells.Size = New System.Drawing.Size(257, 22)
+        Me.mnuEditorFileUpdateCells.Text = "Save Mag Cells"
+        '
         'mnuEditor
         '
         Me.mnuEditor.BackColor = System.Drawing.Color.Transparent
@@ -284,6 +310,7 @@ Partial Class frmEditor
         Me.tabEditor.Controls.Add(Me.tabMag)
         Me.tabEditor.Controls.Add(Me.tabPhotonBlast)
         Me.tabEditor.Controls.Add(Me.tabMagCells)
+        Me.tabEditor.Controls.Add(Me.tabMFL)
         Me.tabEditor.Location = New System.Drawing.Point(8, 34)
         Me.tabEditor.Name = "tabEditor"
         Me.tabEditor.SelectedIndex = 0
@@ -292,10 +319,11 @@ Partial Class frmEditor
         '
         'tabMag
         '
+        Me.tabMag.Controls.Add(Me.lblMagID)
         Me.tabMag.Controls.Add(Me.flpEditorMagVer)
         Me.tabMag.Controls.Add(Me.txtEditorSearchMag)
-        Me.tabMag.Controls.Add(Me.lsbEditorMag)
         Me.tabMag.Controls.Add(Me.cboEditorPhotonBlast)
+        Me.tabMag.Controls.Add(Me.lsbEditorMag)
         Me.tabMag.Controls.Add(Me.picEditorMag)
         Me.tabMag.Controls.Add(Me.tabEditorMag)
         Me.tabMag.Controls.Add(Me.picEditorPhotonBlast)
@@ -321,24 +349,24 @@ Partial Class frmEditor
         '
         'flpEditorMagVer
         '
+        Me.flpEditorMagVer.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.flpEditorMagVer.BackColor = System.Drawing.Color.IndianRed
         Me.flpEditorMagVer.Controls.Add(Me.radEditorMagEp1)
         Me.flpEditorMagVer.Controls.Add(Me.radEditorMagEp2)
         Me.flpEditorMagVer.Controls.Add(Me.radEditorMagEp4)
-        Me.flpEditorMagVer.Location = New System.Drawing.Point(231, 71)
+        Me.flpEditorMagVer.Location = New System.Drawing.Point(231, 69)
         Me.flpEditorMagVer.Name = "flpEditorMagVer"
-        Me.flpEditorMagVer.Size = New System.Drawing.Size(183, 24)
+        Me.flpEditorMagVer.Size = New System.Drawing.Size(183, 27)
         Me.flpEditorMagVer.TabIndex = 110
         '
         'radEditorMagEp1
         '
-        Me.radEditorMagEp1.AutoSize = True
         Me.radEditorMagEp1.BackColor = System.Drawing.Color.Transparent
-        Me.radEditorMagEp1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radEditorMagEp1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radEditorMagEp1.ForeColor = System.Drawing.Color.White
         Me.radEditorMagEp1.Location = New System.Drawing.Point(3, 3)
         Me.radEditorMagEp1.Name = "radEditorMagEp1"
-        Me.radEditorMagEp1.Size = New System.Drawing.Size(55, 21)
+        Me.radEditorMagEp1.Size = New System.Drawing.Size(55, 23)
         Me.radEditorMagEp1.TabIndex = 0
         Me.radEditorMagEp1.TabStop = True
         Me.radEditorMagEp1.Text = "Ep. 1"
@@ -346,13 +374,12 @@ Partial Class frmEditor
         '
         'radEditorMagEp2
         '
-        Me.radEditorMagEp2.AutoSize = True
         Me.radEditorMagEp2.BackColor = System.Drawing.Color.Transparent
-        Me.radEditorMagEp2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radEditorMagEp2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radEditorMagEp2.ForeColor = System.Drawing.Color.White
         Me.radEditorMagEp2.Location = New System.Drawing.Point(64, 3)
         Me.radEditorMagEp2.Name = "radEditorMagEp2"
-        Me.radEditorMagEp2.Size = New System.Drawing.Size(55, 21)
+        Me.radEditorMagEp2.Size = New System.Drawing.Size(55, 23)
         Me.radEditorMagEp2.TabIndex = 0
         Me.radEditorMagEp2.TabStop = True
         Me.radEditorMagEp2.Text = "Ep. 2"
@@ -360,13 +387,12 @@ Partial Class frmEditor
         '
         'radEditorMagEp4
         '
-        Me.radEditorMagEp4.AutoSize = True
         Me.radEditorMagEp4.BackColor = System.Drawing.Color.Transparent
-        Me.radEditorMagEp4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radEditorMagEp4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radEditorMagEp4.ForeColor = System.Drawing.Color.White
         Me.radEditorMagEp4.Location = New System.Drawing.Point(125, 3)
         Me.radEditorMagEp4.Name = "radEditorMagEp4"
-        Me.radEditorMagEp4.Size = New System.Drawing.Size(55, 21)
+        Me.radEditorMagEp4.Size = New System.Drawing.Size(55, 23)
         Me.radEditorMagEp4.TabIndex = 0
         Me.radEditorMagEp4.TabStop = True
         Me.radEditorMagEp4.Text = "Ep. 4"
@@ -390,9 +416,9 @@ Partial Class frmEditor
         'cboEditorPhotonBlast
         '
         Me.cboEditorPhotonBlast.FormattingEnabled = True
-        Me.cboEditorPhotonBlast.Location = New System.Drawing.Point(270, 101)
+        Me.cboEditorPhotonBlast.Location = New System.Drawing.Point(231, 102)
         Me.cboEditorPhotonBlast.Name = "cboEditorPhotonBlast"
-        Me.cboEditorPhotonBlast.Size = New System.Drawing.Size(144, 21)
+        Me.cboEditorPhotonBlast.Size = New System.Drawing.Size(183, 21)
         Me.cboEditorPhotonBlast.TabIndex = 6
         '
         'picEditorMag
@@ -411,7 +437,6 @@ Partial Class frmEditor
         '
         Me.tabEditorMag.Controls.Add(Me.tabEditorMagFeedingTable)
         Me.tabEditorMag.Controls.Add(Me.tabEditorMagHowtoGet)
-        Me.tabEditorMag.Controls.Add(Me.tabEditorMagInfo)
         Me.tabEditorMag.HotTrack = True
         Me.tabEditorMag.Location = New System.Drawing.Point(151, 187)
         Me.tabEditorMag.Multiline = True
@@ -424,6 +449,7 @@ Partial Class frmEditor
         '
         'tabEditorMagFeedingTable
         '
+        Me.tabEditorMagFeedingTable.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.tabEditorMagFeedingTable.Controls.Add(Me.cboFeedVer)
         Me.tabEditorMagFeedingTable.Controls.Add(Me.nudIQMonomate)
         Me.tabEditorMagFeedingTable.Controls.Add(Me.nudSyncMonomate)
@@ -1416,39 +1442,31 @@ Partial Class frmEditor
         '
         'tabEditorMagHowtoGet
         '
+        Me.tabEditorMagHowtoGet.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.tabEditorMagHowtoGet.Controls.Add(Me.rtfEditorHowTo)
         Me.tabEditorMagHowtoGet.Location = New System.Drawing.Point(4, 22)
         Me.tabEditorMagHowtoGet.Name = "tabEditorMagHowtoGet"
         Me.tabEditorMagHowtoGet.Size = New System.Drawing.Size(538, 359)
         Me.tabEditorMagHowtoGet.TabIndex = 4
-        Me.tabEditorMagHowtoGet.Text = "How to Get"
-        Me.tabEditorMagHowtoGet.UseVisualStyleBackColor = True
+        Me.tabEditorMagHowtoGet.Text = "Info"
         '
-        'tabEditorMagInfo
+        'rtfEditorHowTo
         '
-        Me.tabEditorMagInfo.Controls.Add(Me.rtfEditorMagInfo)
-        Me.tabEditorMagInfo.Location = New System.Drawing.Point(4, 22)
-        Me.tabEditorMagInfo.Name = "tabEditorMagInfo"
-        Me.tabEditorMagInfo.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabEditorMagInfo.Size = New System.Drawing.Size(538, 359)
-        Me.tabEditorMagInfo.TabIndex = 3
-        Me.tabEditorMagInfo.Text = "Info"
-        '
-        'rtfEditorMagInfo
-        '
-        Me.rtfEditorMagInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.rtfEditorMagInfo.Location = New System.Drawing.Point(5, 5)
-        Me.rtfEditorMagInfo.Name = "rtfEditorMagInfo"
-        Me.rtfEditorMagInfo.ReadOnly = True
-        Me.rtfEditorMagInfo.Size = New System.Drawing.Size(528, 349)
-        Me.rtfEditorMagInfo.TabIndex = 105
-        Me.rtfEditorMagInfo.Text = ""
+        Me.rtfEditorHowTo.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.rtfEditorHowTo.Location = New System.Drawing.Point(0, 0)
+        Me.rtfEditorHowTo.Name = "rtfEditorHowTo"
+        Me.rtfEditorHowTo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.rtfEditorHowTo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.rtfEditorHowTo.Size = New System.Drawing.Size(538, 359)
+        Me.rtfEditorHowTo.TabIndex = 0
+        Me.rtfEditorHowTo.Text = ""
         '
         'picEditorPhotonBlast
         '
-        Me.picEditorPhotonBlast.BackColor = System.Drawing.Color.Transparent
+        Me.picEditorPhotonBlast.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.picEditorPhotonBlast.Location = New System.Drawing.Point(161, 101)
         Me.picEditorPhotonBlast.Name = "picEditorPhotonBlast"
-        Me.picEditorPhotonBlast.Size = New System.Drawing.Size(50, 43)
+        Me.picEditorPhotonBlast.Size = New System.Drawing.Size(64, 64)
         Me.picEditorPhotonBlast.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picEditorPhotonBlast.TabIndex = 4
         Me.picEditorPhotonBlast.TabStop = False
@@ -1456,7 +1474,7 @@ Partial Class frmEditor
         'cboEditorPBFilled
         '
         Me.cboEditorPBFilled.FormattingEnabled = True
-        Me.cboEditorPBFilled.Location = New System.Drawing.Point(559, 43)
+        Me.cboEditorPBFilled.Location = New System.Drawing.Point(565, 69)
         Me.cboEditorPBFilled.Name = "cboEditorPBFilled"
         Me.cboEditorPBFilled.Size = New System.Drawing.Size(128, 21)
         Me.cboEditorPBFilled.TabIndex = 1
@@ -1464,7 +1482,7 @@ Partial Class frmEditor
         'cboEditor1HP10
         '
         Me.cboEditor1HP10.FormattingEnabled = True
-        Me.cboEditor1HP10.Location = New System.Drawing.Point(559, 70)
+        Me.cboEditor1HP10.Location = New System.Drawing.Point(565, 96)
         Me.cboEditor1HP10.Name = "cboEditor1HP10"
         Me.cboEditor1HP10.Size = New System.Drawing.Size(128, 21)
         Me.cboEditor1HP10.TabIndex = 2
@@ -1473,7 +1491,7 @@ Partial Class frmEditor
         '
         Me.nudEditorStage.BackColor = System.Drawing.SystemColors.Window
         Me.nudEditorStage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nudEditorStage.Location = New System.Drawing.Point(363, 44)
+        Me.nudEditorStage.Location = New System.Drawing.Point(363, 43)
         Me.nudEditorStage.Maximum = New Decimal(New Integer() {4, 0, 0, 0})
         Me.nudEditorStage.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
         Me.nudEditorStage.Name = "nudEditorStage"
@@ -1484,7 +1502,7 @@ Partial Class frmEditor
         'cboEditorBoss
         '
         Me.cboEditorBoss.FormattingEnabled = True
-        Me.cboEditorBoss.Location = New System.Drawing.Point(559, 97)
+        Me.cboEditorBoss.Location = New System.Drawing.Point(565, 123)
         Me.cboEditorBoss.Name = "cboEditorBoss"
         Me.cboEditorBoss.Size = New System.Drawing.Size(128, 21)
         Me.cboEditorBoss.TabIndex = 4
@@ -1494,7 +1512,7 @@ Partial Class frmEditor
         Me.lblStage.BackColor = System.Drawing.Color.IndianRed
         Me.lblStage.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblStage.ForeColor = System.Drawing.Color.White
-        Me.lblStage.Location = New System.Drawing.Point(231, 44)
+        Me.lblStage.Location = New System.Drawing.Point(231, 43)
         Me.lblStage.Name = "lblStage"
         Me.lblStage.Size = New System.Drawing.Size(183, 20)
         Me.lblStage.TabIndex = 103
@@ -1504,7 +1522,7 @@ Partial Class frmEditor
         'cboEditorDeath
         '
         Me.cboEditorDeath.FormattingEnabled = True
-        Me.cboEditorDeath.Location = New System.Drawing.Point(559, 124)
+        Me.cboEditorDeath.Location = New System.Drawing.Point(565, 150)
         Me.cboEditorDeath.Name = "cboEditorDeath"
         Me.cboEditorDeath.Size = New System.Drawing.Size(128, 21)
         Me.cboEditorDeath.TabIndex = 3
@@ -1514,7 +1532,7 @@ Partial Class frmEditor
         Me.lblEditorPBFilled.BackColor = System.Drawing.Color.IndianRed
         Me.lblEditorPBFilled.Font = New System.Drawing.Font("Lucida Console", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEditorPBFilled.ForeColor = System.Drawing.Color.White
-        Me.lblEditorPBFilled.Location = New System.Drawing.Point(433, 43)
+        Me.lblEditorPBFilled.Location = New System.Drawing.Point(439, 69)
         Me.lblEditorPBFilled.Name = "lblEditorPBFilled"
         Me.lblEditorPBFilled.Size = New System.Drawing.Size(254, 21)
         Me.lblEditorPBFilled.TabIndex = 94
@@ -1525,7 +1543,7 @@ Partial Class frmEditor
         '
         Me.nudEditorActivation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nudEditorActivation.Increment = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudEditorActivation.Location = New System.Drawing.Point(636, 17)
+        Me.nudEditorActivation.Location = New System.Drawing.Point(642, 43)
         Me.nudEditorActivation.Name = "nudEditorActivation"
         Me.nudEditorActivation.Size = New System.Drawing.Size(51, 20)
         Me.nudEditorActivation.TabIndex = 5
@@ -1536,7 +1554,7 @@ Partial Class frmEditor
         Me.lblEditor1HP10.BackColor = System.Drawing.Color.IndianRed
         Me.lblEditor1HP10.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblEditor1HP10.ForeColor = System.Drawing.Color.White
-        Me.lblEditor1HP10.Location = New System.Drawing.Point(433, 70)
+        Me.lblEditor1HP10.Location = New System.Drawing.Point(439, 96)
         Me.lblEditor1HP10.Name = "lblEditor1HP10"
         Me.lblEditor1HP10.Size = New System.Drawing.Size(254, 21)
         Me.lblEditor1HP10.TabIndex = 95
@@ -1548,7 +1566,7 @@ Partial Class frmEditor
         Me.lblEditorActivation.BackColor = System.Drawing.Color.IndianRed
         Me.lblEditorActivation.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblEditorActivation.ForeColor = System.Drawing.Color.White
-        Me.lblEditorActivation.Location = New System.Drawing.Point(433, 17)
+        Me.lblEditorActivation.Location = New System.Drawing.Point(439, 43)
         Me.lblEditorActivation.Name = "lblEditorActivation"
         Me.lblEditorActivation.Size = New System.Drawing.Size(254, 20)
         Me.lblEditorActivation.TabIndex = 98
@@ -1560,7 +1578,7 @@ Partial Class frmEditor
         Me.lblEditorBoss.BackColor = System.Drawing.Color.IndianRed
         Me.lblEditorBoss.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblEditorBoss.ForeColor = System.Drawing.Color.White
-        Me.lblEditorBoss.Location = New System.Drawing.Point(433, 97)
+        Me.lblEditorBoss.Location = New System.Drawing.Point(439, 123)
         Me.lblEditorBoss.Name = "lblEditorBoss"
         Me.lblEditorBoss.Size = New System.Drawing.Size(254, 21)
         Me.lblEditorBoss.TabIndex = 96
@@ -1572,7 +1590,7 @@ Partial Class frmEditor
         Me.lblEditorDeath.BackColor = System.Drawing.Color.IndianRed
         Me.lblEditorDeath.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblEditorDeath.ForeColor = System.Drawing.Color.White
-        Me.lblEditorDeath.Location = New System.Drawing.Point(434, 124)
+        Me.lblEditorDeath.Location = New System.Drawing.Point(439, 150)
         Me.lblEditorDeath.Name = "lblEditorDeath"
         Me.lblEditorDeath.Size = New System.Drawing.Size(253, 21)
         Me.lblEditorDeath.TabIndex = 97
@@ -1586,30 +1604,133 @@ Partial Class frmEditor
         Me.lblEditorMagName.ForeColor = System.Drawing.SystemColors.Control
         Me.lblEditorMagName.Location = New System.Drawing.Point(231, 17)
         Me.lblEditorMagName.Name = "lblEditorMagName"
-        Me.lblEditorMagName.Size = New System.Drawing.Size(183, 20)
+        Me.lblEditorMagName.Size = New System.Drawing.Size(335, 20)
         Me.lblEditorMagName.TabIndex = 107
         Me.lblEditorMagName.Text = "Mag"
         Me.lblEditorMagName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'tabPhotonBlast
         '
+        Me.tabPhotonBlast.Controls.Add(Me.picPBIco)
+        Me.tabPhotonBlast.Controls.Add(Me.rtbEditorPB)
+        Me.tabPhotonBlast.Controls.Add(Me.lsbEditorPB)
+        Me.tabPhotonBlast.Controls.Add(Me.picEditorPB)
+        Me.tabPhotonBlast.Controls.Add(Me.lblEditorPBName)
         Me.tabPhotonBlast.Location = New System.Drawing.Point(4, 22)
         Me.tabPhotonBlast.Name = "tabPhotonBlast"
         Me.tabPhotonBlast.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPhotonBlast.Size = New System.Drawing.Size(706, 581)
         Me.tabPhotonBlast.TabIndex = 1
         Me.tabPhotonBlast.Text = "Photon Blast"
-        Me.tabPhotonBlast.UseVisualStyleBackColor = True
+        '
+        'rtbEditorPB
+        '
+        Me.rtbEditorPB.Location = New System.Drawing.Point(151, 223)
+        Me.rtbEditorPB.Name = "rtbEditorPB"
+        Me.rtbEditorPB.Size = New System.Drawing.Size(538, 349)
+        Me.rtbEditorPB.TabIndex = 114
+        Me.rtbEditorPB.Text = ""
+        '
+        'lsbEditorPB
+        '
+        Me.lsbEditorPB.FormattingEnabled = True
+        Me.lsbEditorPB.Location = New System.Drawing.Point(9, 9)
+        Me.lsbEditorPB.Name = "lsbEditorPB"
+        Me.lsbEditorPB.Size = New System.Drawing.Size(136, 563)
+        Me.lsbEditorPB.TabIndex = 111
+        '
+        'picEditorPB
+        '
+        Me.picEditorPB.BackColor = System.Drawing.Color.Transparent
+        Me.picEditorPB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.picEditorPB.InitialImage = Nothing
+        Me.picEditorPB.Location = New System.Drawing.Point(433, 17)
+        Me.picEditorPB.Name = "picEditorPB"
+        Me.picEditorPB.Size = New System.Drawing.Size(256, 200)
+        Me.picEditorPB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picEditorPB.TabIndex = 110
+        Me.picEditorPB.TabStop = False
+        '
+        'lblEditorPBName
+        '
+        Me.lblEditorPBName.BackColor = System.Drawing.Color.IndianRed
+        Me.lblEditorPBName.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblEditorPBName.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblEditorPBName.Location = New System.Drawing.Point(231, 17)
+        Me.lblEditorPBName.Name = "lblEditorPBName"
+        Me.lblEditorPBName.Size = New System.Drawing.Size(196, 20)
+        Me.lblEditorPBName.TabIndex = 112
+        Me.lblEditorPBName.Text = "Farlla"
+        Me.lblEditorPBName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'tabMagCells
         '
+        Me.tabMagCells.Controls.Add(Me.lblMCID)
+        Me.tabMagCells.Controls.Add(Me.rtbEditorMagCells)
+        Me.tabMagCells.Controls.Add(Me.lblEditorMagCellsName)
+        Me.tabMagCells.Controls.Add(Me.lsbEditorMagCells)
         Me.tabMagCells.Location = New System.Drawing.Point(4, 22)
         Me.tabMagCells.Name = "tabMagCells"
         Me.tabMagCells.Padding = New System.Windows.Forms.Padding(3)
         Me.tabMagCells.Size = New System.Drawing.Size(706, 581)
         Me.tabMagCells.TabIndex = 2
         Me.tabMagCells.Text = "Mag Cells"
-        Me.tabMagCells.UseVisualStyleBackColor = True
+        '
+        'rtbEditorMagCells
+        '
+        Me.rtbEditorMagCells.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.rtbEditorMagCells.Location = New System.Drawing.Point(151, 40)
+        Me.rtbEditorMagCells.Name = "rtbEditorMagCells"
+        Me.rtbEditorMagCells.Size = New System.Drawing.Size(538, 532)
+        Me.rtbEditorMagCells.TabIndex = 115
+        Me.rtbEditorMagCells.Text = ""
+        '
+        'lblEditorMagCellsName
+        '
+        Me.lblEditorMagCellsName.BackColor = System.Drawing.Color.IndianRed
+        Me.lblEditorMagCellsName.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblEditorMagCellsName.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblEditorMagCellsName.Location = New System.Drawing.Point(151, 17)
+        Me.lblEditorMagCellsName.Name = "lblEditorMagCellsName"
+        Me.lblEditorMagCellsName.Size = New System.Drawing.Size(414, 20)
+        Me.lblEditorMagCellsName.TabIndex = 113
+        Me.lblEditorMagCellsName.Text = "Kit of Master System"
+        Me.lblEditorMagCellsName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lsbEditorMagCells
+        '
+        Me.lsbEditorMagCells.FormattingEnabled = True
+        Me.lsbEditorMagCells.Location = New System.Drawing.Point(9, 9)
+        Me.lsbEditorMagCells.Name = "lsbEditorMagCells"
+        Me.lsbEditorMagCells.Size = New System.Drawing.Size(136, 563)
+        Me.lsbEditorMagCells.TabIndex = 110
+        '
+        'tabMFL
+        '
+        Me.tabMFL.Controls.Add(Me.rtbMFL)
+        Me.tabMFL.Controls.Add(Me.lsbMFL)
+        Me.tabMFL.Location = New System.Drawing.Point(4, 22)
+        Me.tabMFL.Name = "tabMFL"
+        Me.tabMFL.Size = New System.Drawing.Size(706, 581)
+        Me.tabMFL.TabIndex = 3
+        Me.tabMFL.Text = "MFL"
+        '
+        'rtbMFL
+        '
+        Me.rtbMFL.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.rtbMFL.Location = New System.Drawing.Point(151, 9)
+        Me.rtbMFL.Name = "rtbMFL"
+        Me.rtbMFL.Size = New System.Drawing.Size(538, 563)
+        Me.rtbMFL.TabIndex = 116
+        Me.rtbMFL.Text = ""
+        '
+        'lsbMFL
+        '
+        Me.lsbMFL.FormattingEnabled = True
+        Me.lsbMFL.Location = New System.Drawing.Point(9, 9)
+        Me.lsbMFL.Name = "lsbMFL"
+        Me.lsbMFL.Size = New System.Drawing.Size(136, 563)
+        Me.lsbMFL.TabIndex = 111
         '
         'picEditorSave
         '
@@ -1619,6 +1740,43 @@ Partial Class frmEditor
         Me.picEditorSave.Size = New System.Drawing.Size(25, 21)
         Me.picEditorSave.TabIndex = 100
         Me.picEditorSave.TabStop = False
+        '
+        'picPBIco
+        '
+        Me.picPBIco.BackColor = System.Drawing.Color.Transparent
+        Me.picPBIco.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.picPBIco.InitialImage = Nothing
+        Me.picPBIco.Location = New System.Drawing.Point(161, 17)
+        Me.picPBIco.Name = "picPBIco"
+        Me.picPBIco.Size = New System.Drawing.Size(64, 64)
+        Me.picPBIco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picPBIco.TabIndex = 115
+        Me.picPBIco.TabStop = False
+        '
+        'lblMCID
+        '
+        Me.lblMCID.BackColor = System.Drawing.Color.IndianRed
+        Me.lblMCID.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblMCID.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblMCID.Location = New System.Drawing.Point(563, 17)
+        Me.lblMCID.Name = "lblMCID"
+        Me.lblMCID.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lblMCID.Size = New System.Drawing.Size(126, 20)
+        Me.lblMCID.TabIndex = 116
+        Me.lblMCID.Text = "ID : 0"
+        Me.lblMCID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblMagID
+        '
+        Me.lblMagID.BackColor = System.Drawing.Color.IndianRed
+        Me.lblMagID.Font = New System.Drawing.Font("Lucida Console", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lblMagID.ForeColor = System.Drawing.Color.White
+        Me.lblMagID.Location = New System.Drawing.Point(565, 17)
+        Me.lblMagID.Name = "lblMagID"
+        Me.lblMagID.Size = New System.Drawing.Size(128, 20)
+        Me.lblMagID.TabIndex = 111
+        Me.lblMagID.Text = "ID: 01"
+        Me.lblMagID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'frmEditor
         '
@@ -1642,7 +1800,6 @@ Partial Class frmEditor
         Me.tabMag.ResumeLayout(False)
         Me.tabMag.PerformLayout()
         Me.flpEditorMagVer.ResumeLayout(False)
-        Me.flpEditorMagVer.PerformLayout()
         CType(Me.picEditorMag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabEditorMag.ResumeLayout(False)
         Me.tabEditorMagFeedingTable.ResumeLayout(False)
@@ -1713,11 +1870,16 @@ Partial Class frmEditor
         CType(Me.nudDEXDimate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudDEXMonofluid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudDEXTrimate, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabEditorMagInfo.ResumeLayout(False)
+        Me.tabEditorMagHowtoGet.ResumeLayout(False)
         CType(Me.picEditorPhotonBlast, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEditorStage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudEditorActivation, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPhotonBlast.ResumeLayout(False)
+        CType(Me.picEditorPB, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabMagCells.ResumeLayout(False)
+        Me.tabMFL.ResumeLayout(False)
         CType(Me.picEditorSave, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPBIco, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1828,17 +1990,14 @@ Partial Class frmEditor
     Friend WithEvents nudEditorStage As NumericUpDown
     Friend WithEvents nudEditorFeedingTables As NumericUpDown
     Friend WithEvents mnuEditorFileSaveChart As ToolStripMenuItem
-    Friend WithEvents rtfEditorMagInfo As RichTextBox
     Friend WithEvents lsbEditorMag As ListBox
     Friend WithEvents lblEditorMagName As Label
     Friend WithEvents tabEditorMag As TabControl
     Friend WithEvents tabEditorMagFeedingTable As TabPage
     Friend WithEvents lblFeedingTables As Label
-    Friend WithEvents tabEditorMagInfo As TabPage
     Friend WithEvents tabEditorMagHowtoGet As TabPage
     Friend WithEvents tabEditor As TabControl
     Friend WithEvents tabMag As TabPage
-    Friend WithEvents tabPhotonBlast As TabPage
     Friend WithEvents tabMagCells As TabPage
     Friend WithEvents txtEditorSearchMag As TextBox
     Friend WithEvents flpEditorMagVer As FlowLayoutPanel
@@ -1847,4 +2006,20 @@ Partial Class frmEditor
     Friend WithEvents radEditorMagEp4 As RadioButton
     Friend WithEvents mnuEditorFileUpdate As ToolStripMenuItem
     Friend WithEvents cboFeedVer As ComboBox
+    Friend WithEvents rtfEditorHowTo As RichTextBox
+    Friend WithEvents rtbEditorPB As RichTextBox
+    Friend WithEvents lsbEditorPB As ListBox
+    Friend WithEvents picEditorPB As PictureBox
+    Friend WithEvents lblEditorPBName As Label
+    Friend WithEvents lsbEditorMagCells As ListBox
+    Friend WithEvents tabPhotonBlast As TabPage
+    Friend WithEvents lblEditorMagCellsName As Label
+    Friend WithEvents rtbEditorMagCells As RichTextBox
+    Friend WithEvents mnuEditorFileUpdateCells As ToolStripMenuItem
+    Friend WithEvents tabMFL As TabPage
+    Friend WithEvents lsbMFL As ListBox
+    Friend WithEvents rtbMFL As RichTextBox
+    Friend WithEvents picPBIco As PictureBox
+    Friend WithEvents lblMCID As Label
+    Friend WithEvents lblMagID As Label
 End Class

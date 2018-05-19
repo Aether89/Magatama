@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="40" Name="Chao" Stage="4" />
+	<Mag ID="40" Name="Chao" Stage="4" GameVer="Ep1" />
 	<Table ID="7" />
 	<PhotonBlast ID="0" Name="None" />
 	<!--Triggered Actions-->
@@ -9,4 +9,5 @@
 	<LowHP ID="3" desc="Resta" />
 	<Boss ID="2" desc="Shifta / Deband" />
 	<Death ID="1" desc="Reverser" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fswiss\fprq2\fcharset0 Verdana;}}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\nowidctlpar\lang9\f0\fs22 Evolve from a Mag with all stats being 35+ when Feed \b Heart of Chao\b0 .\par&#xD;&#xA;\pard\ltrpar\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

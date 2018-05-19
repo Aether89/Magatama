@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Initial Value-->
+<Root>
+
+	<Action number="6"/> <!-- -->
+	
+	<mfl0 name="Feed"/>
+	<mfl1 name="Class"/>
+	<mfl2 name="SecID"/>
+	<mfl3 name="SetPBx"/>
+	<mfl4 name="Set Stats"/>
+	<mfl5 name="Add Stats"/>
+
+</Root>

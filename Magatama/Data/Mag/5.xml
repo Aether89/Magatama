@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<Mag ID="5" Name="Marutah" Stage="2" />
+	<Mag ID="5" Name="Marutah" Stage="2" GameVer="Ep1" />
 	<Table ID="2" />
 	<PhotonBlast ID="5" Name="Pilla" />
 	<!--Triggered Actions-->
@@ -9,4 +9,5 @@
 	<LowHP ID="2" desc="Shifta / Deband" />
 	<Boss ID="0" desc="" />
 	<Death ID="0" desc="" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;{\colortbl ;\red255\green192\blue0;}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sl240\slmult1\lang9\f0\fs22 Evolve from a level 35 Varuna when meeting the following conditions.\par&#xD;&#xA;\par&#xD;&#xA;\cf1\b DEX \cf0 &gt; Others\b0\par&#xD;&#xA;\pard\rtlpar\qr\lang4105\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

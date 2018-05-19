@@ -24,13 +24,7 @@ Partial Class frmMagatama
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMagatama))
-        Me.cboClass = New System.Windows.Forms.ComboBox()
         Me.cmsMagatamaVoid = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.cboSectionID = New System.Windows.Forms.ComboBox()
-        Me.cboPhotonBlast03 = New System.Windows.Forms.ComboBox()
-        Me.cboPhotonBlast02 = New System.Windows.Forms.ComboBox()
-        Me.cboPhotonBlast01 = New System.Windows.Forms.ComboBox()
-        Me.cboMag = New System.Windows.Forms.ComboBox()
         Me.mnuMagatama = New System.Windows.Forms.MenuStrip()
         Me.mnuFileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
@@ -46,14 +40,10 @@ Partial Class frmMagatama
         Me.mnuEditResetQty = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditStat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditInit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditMFL = New System.Windows.Forms.ToolStripMenuItem()
         Me.nmuHelpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.nmuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.cboMagCell = New System.Windows.Forms.ComboBox()
-        Me.prgDEF = New System.Windows.Forms.ProgressBar()
-        Me.prgPOW = New System.Windows.Forms.ProgressBar()
-        Me.prgDEX = New System.Windows.Forms.ProgressBar()
-        Me.prgMind = New System.Windows.Forms.ProgressBar()
-        Me.nudDEF = New System.Windows.Forms.NumericUpDown()
         Me.cmsMagatamaNud = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cmsPlus = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsPlus5 = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,12 +64,6 @@ Partial Class frmMagatama
         Me.cmsNUDtoMax = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsNUDtoHalf = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsNUDtoZero = New System.Windows.Forms.ToolStripMenuItem()
-        Me.nudIQ = New System.Windows.Forms.NumericUpDown()
-        Me.nudLevel = New System.Windows.Forms.NumericUpDown()
-        Me.nudSynchro = New System.Windows.Forms.NumericUpDown()
-        Me.nudPOW = New System.Windows.Forms.NumericUpDown()
-        Me.nudDEX = New System.Windows.Forms.NumericUpDown()
-        Me.nudMIND = New System.Windows.Forms.NumericUpDown()
         Me.rtfOutput = New System.Windows.Forms.RichTextBox()
         Me.cmsMagatamaMain = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cmsExportOutput = New System.Windows.Forms.ToolStripMenuItem()
@@ -93,23 +77,9 @@ Partial Class frmMagatama
         Me.cmsBlankMag = New System.Windows.Forms.ToolStripMenuItem()
         Me.cms_separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmsOpen = New System.Windows.Forms.ToolStripMenuItem()
-        Me.nudProgressDEF = New System.Windows.Forms.NumericUpDown()
-        Me.nudProgressPOW = New System.Windows.Forms.NumericUpDown()
-        Me.nudProgressDEX = New System.Windows.Forms.NumericUpDown()
-        Me.nudProgressMIND = New System.Windows.Forms.NumericUpDown()
-        Me.picPhotonBlast02 = New System.Windows.Forms.PictureBox()
-        Me.picPhotonBlast03 = New System.Windows.Forms.PictureBox()
-        Me.picPhotonBlast01 = New System.Windows.Forms.PictureBox()
-        Me.picMag = New System.Windows.Forms.PictureBox()
-        Me.picClass = New System.Windows.Forms.PictureBox()
         Me.ttMagatama = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblCost = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
-        Me.lblPBFilled = New System.Windows.Forms.Label()
-        Me.lbl1HP10 = New System.Windows.Forms.Label()
-        Me.lblBoss = New System.Windows.Forms.Label()
-        Me.lblDeath = New System.Windows.Forms.Label()
-        Me.lblActivationPercent = New System.Windows.Forms.Label()
         Me.btnMagCell = New System.Windows.Forms.Button()
         Me.btnMonomate = New System.Windows.Forms.Button()
         Me.btnDimate = New System.Windows.Forms.Button()
@@ -122,15 +92,6 @@ Partial Class frmMagatama
         Me.btnSolAtomizer = New System.Windows.Forms.Button()
         Me.btnMoonAtomizer = New System.Windows.Forms.Button()
         Me.btnStarAtomizer = New System.Windows.Forms.Button()
-        Me.lblLevel = New System.Windows.Forms.Label()
-        Me.lblSynchro = New System.Windows.Forms.Label()
-        Me.lblIQ = New System.Windows.Forms.Label()
-        Me.lblPOW = New System.Windows.Forms.Label()
-        Me.lblDEX = New System.Windows.Forms.Label()
-        Me.lblDEF = New System.Windows.Forms.Label()
-        Me.lblMIND = New System.Windows.Forms.Label()
-        Me.picSectionID = New System.Windows.Forms.PictureBox()
-        Me.lblActivation = New System.Windows.Forms.Label()
         Me.nudQtyMonomate = New System.Windows.Forms.NumericUpDown()
         Me.nudQtyDimate = New System.Windows.Forms.NumericUpDown()
         Me.nudQtyTrimate = New System.Windows.Forms.NumericUpDown()
@@ -177,10 +138,6 @@ Partial Class frmMagatama
         Me.picSave = New System.Windows.Forms.PictureBox()
         Me.lblCycles = New System.Windows.Forms.Label()
         Me.lblCyclesCount = New System.Windows.Forms.Label()
-        Me.lblDeathText = New System.Windows.Forms.Label()
-        Me.lblBossText = New System.Windows.Forms.Label()
-        Me.lbl1HP10Text = New System.Windows.Forms.Label()
-        Me.lblPBFilledText = New System.Windows.Forms.Label()
         Me.ofdMagatama = New System.Windows.Forms.OpenFileDialog()
         Me.sfdMatagama = New System.Windows.Forms.SaveFileDialog()
         Me.btnOutputSpace = New System.Windows.Forms.Button()
@@ -201,26 +158,57 @@ Partial Class frmMagatama
         Me.pnlLoading = New System.Windows.Forms.Panel()
         Me.prgFeed = New System.Windows.Forms.ProgressBar()
         Me.prgMassFeed = New System.Windows.Forms.ProgressBar()
+        Me.cboClass = New System.Windows.Forms.ComboBox()
+        Me.cboSectionID = New System.Windows.Forms.ComboBox()
+        Me.cboPhotonBlast03 = New System.Windows.Forms.ComboBox()
+        Me.cboPhotonBlast02 = New System.Windows.Forms.ComboBox()
+        Me.cboPhotonBlast01 = New System.Windows.Forms.ComboBox()
+        Me.cboMag = New System.Windows.Forms.ComboBox()
+        Me.picSectionID = New System.Windows.Forms.PictureBox()
+        Me.picClass = New System.Windows.Forms.PictureBox()
+        Me.picMag = New System.Windows.Forms.PictureBox()
+        Me.prgDEF = New System.Windows.Forms.ProgressBar()
+        Me.prgPOW = New System.Windows.Forms.ProgressBar()
+        Me.prgDEX = New System.Windows.Forms.ProgressBar()
+        Me.prgMind = New System.Windows.Forms.ProgressBar()
+        Me.nudDEF = New System.Windows.Forms.NumericUpDown()
+        Me.nudIQ = New System.Windows.Forms.NumericUpDown()
+        Me.nudLevel = New System.Windows.Forms.NumericUpDown()
+        Me.nudSynchro = New System.Windows.Forms.NumericUpDown()
+        Me.nudPOW = New System.Windows.Forms.NumericUpDown()
+        Me.nudDEX = New System.Windows.Forms.NumericUpDown()
+        Me.nudMIND = New System.Windows.Forms.NumericUpDown()
+        Me.picPhotonBlast01 = New System.Windows.Forms.PictureBox()
+        Me.picPhotonBlast03 = New System.Windows.Forms.PictureBox()
+        Me.picPhotonBlast02 = New System.Windows.Forms.PictureBox()
+        Me.nudProgressDEF = New System.Windows.Forms.NumericUpDown()
+        Me.nudProgressPOW = New System.Windows.Forms.NumericUpDown()
+        Me.nudProgressDEX = New System.Windows.Forms.NumericUpDown()
+        Me.nudProgressMIND = New System.Windows.Forms.NumericUpDown()
+        Me.lblPBFilled = New System.Windows.Forms.Label()
+        Me.lbl1HP10 = New System.Windows.Forms.Label()
+        Me.lblBoss = New System.Windows.Forms.Label()
+        Me.lblDeath = New System.Windows.Forms.Label()
+        Me.lblActivationPercent = New System.Windows.Forms.Label()
+        Me.lblLevel = New System.Windows.Forms.Label()
+        Me.lblSynchro = New System.Windows.Forms.Label()
+        Me.lblIQ = New System.Windows.Forms.Label()
+        Me.lblPOW = New System.Windows.Forms.Label()
+        Me.lblDEX = New System.Windows.Forms.Label()
+        Me.lblDEF = New System.Windows.Forms.Label()
+        Me.lblMIND = New System.Windows.Forms.Label()
+        Me.lblActivation = New System.Windows.Forms.Label()
+        Me.lblDeathText = New System.Windows.Forms.Label()
+        Me.lblBossText = New System.Windows.Forms.Label()
+        Me.lbl1HP10Text = New System.Windows.Forms.Label()
+        Me.lblPBFilledText = New System.Windows.Forms.Label()
+        Me.pnlMassFeed = New System.Windows.Forms.Panel()
+        Me.btnMFLRun = New System.Windows.Forms.Button()
+        Me.rtfMFLInput = New System.Windows.Forms.RichTextBox()
+        Me.rtfMFLOut = New System.Windows.Forms.RichTextBox()
         Me.mnuMagatama.SuspendLayout()
-        CType(Me.nudDEF, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMagatamaNud.SuspendLayout()
-        CType(Me.nudIQ, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSynchro, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudPOW, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudDEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMIND, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMagatamaMain.SuspendLayout()
-        CType(Me.nudProgressDEF, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudProgressPOW, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudProgressDEX, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudProgressMIND, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picPhotonBlast02, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picPhotonBlast03, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picPhotonBlast01, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picMag, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picClass, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picSectionID, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudQtyMonomate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudQtyDimate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudQtyTrimate, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -257,55 +245,30 @@ Partial Class frmMagatama
         CType(Me.nudHistoryCostMoonAtomizer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHistoryCostStarAtomizer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlLoading.SuspendLayout()
+        CType(Me.picSectionID, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picClass, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picMag, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDEF, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudIQ, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSynchro, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudPOW, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudDEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMIND, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPhotonBlast01, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPhotonBlast03, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picPhotonBlast02, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudProgressDEF, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudProgressPOW, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudProgressDEX, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudProgressMIND, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlMassFeed.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cboClass
-        '
-        Me.cboClass.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboClass.FormattingEnabled = True
-        resources.ApplyResources(Me.cboClass, "cboClass")
-        Me.cboClass.Name = "cboClass"
         '
         'cmsMagatamaVoid
         '
         Me.cmsMagatamaVoid.Name = "cmsMagatamaVoid"
         resources.ApplyResources(Me.cmsMagatamaVoid, "cmsMagatamaVoid")
-        '
-        'cboSectionID
-        '
-        Me.cboSectionID.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboSectionID.FormattingEnabled = True
-        resources.ApplyResources(Me.cboSectionID, "cboSectionID")
-        Me.cboSectionID.Name = "cboSectionID"
-        '
-        'cboPhotonBlast03
-        '
-        Me.cboPhotonBlast03.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboPhotonBlast03.FormattingEnabled = True
-        resources.ApplyResources(Me.cboPhotonBlast03, "cboPhotonBlast03")
-        Me.cboPhotonBlast03.Name = "cboPhotonBlast03"
-        '
-        'cboPhotonBlast02
-        '
-        Me.cboPhotonBlast02.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboPhotonBlast02.FormattingEnabled = True
-        resources.ApplyResources(Me.cboPhotonBlast02, "cboPhotonBlast02")
-        Me.cboPhotonBlast02.Name = "cboPhotonBlast02"
-        '
-        'cboPhotonBlast01
-        '
-        Me.cboPhotonBlast01.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboPhotonBlast01.FormattingEnabled = True
-        resources.ApplyResources(Me.cboPhotonBlast01, "cboPhotonBlast01")
-        Me.cboPhotonBlast01.Name = "cboPhotonBlast01"
-        '
-        'cboMag
-        '
-        Me.cboMag.ContextMenuStrip = Me.cmsMagatamaVoid
-        Me.cboMag.FormattingEnabled = True
-        Me.cboMag.Items.AddRange(New Object() {resources.GetString("cboMag.Items")})
-        resources.ApplyResources(Me.cboMag, "cboMag")
-        Me.cboMag.Name = "cboMag"
         '
         'mnuMagatama
         '
@@ -357,7 +320,7 @@ Partial Class frmMagatama
         '
         'mnuEditMenu
         '
-        Me.mnuEditMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditRedo, Me.mnuEditResetQty, Me.mnuEditStat, Me.mnuEditInit})
+        Me.mnuEditMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditUndo, Me.mnuEditRedo, Me.mnuEditResetQty, Me.mnuEditStat, Me.mnuEditInit, Me.mnuEditMFL})
         Me.mnuEditMenu.Name = "mnuEditMenu"
         resources.ApplyResources(Me.mnuEditMenu, "mnuEditMenu")
         '
@@ -387,6 +350,12 @@ Partial Class frmMagatama
         Me.mnuEditInit.Name = "mnuEditInit"
         resources.ApplyResources(Me.mnuEditInit, "mnuEditInit")
         '
+        'mnuEditMFL
+        '
+        Me.mnuEditMFL.CheckOnClick = True
+        Me.mnuEditMFL.Name = "mnuEditMFL"
+        resources.ApplyResources(Me.mnuEditMFL, "mnuEditMFL")
+        '
         'nmuHelpMenu
         '
         Me.nmuHelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.nmuHelpAbout})
@@ -405,46 +374,6 @@ Partial Class frmMagatama
         Me.cboMagCell.FormattingEnabled = True
         resources.ApplyResources(Me.cboMagCell, "cboMagCell")
         Me.cboMagCell.Name = "cboMagCell"
-        '
-        'prgDEF
-        '
-        Me.prgDEF.ForeColor = System.Drawing.Color.Blue
-        resources.ApplyResources(Me.prgDEF, "prgDEF")
-        Me.prgDEF.Name = "prgDEF"
-        Me.prgDEF.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.prgDEF.Tag = "Blue"
-        '
-        'prgPOW
-        '
-        Me.prgPOW.ForeColor = System.Drawing.Color.Red
-        resources.ApplyResources(Me.prgPOW, "prgPOW")
-        Me.prgPOW.Name = "prgPOW"
-        Me.prgPOW.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.prgPOW.Tag = "Red"
-        '
-        'prgDEX
-        '
-        Me.prgDEX.ForeColor = System.Drawing.Color.Yellow
-        resources.ApplyResources(Me.prgDEX, "prgDEX")
-        Me.prgDEX.Name = "prgDEX"
-        Me.prgDEX.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.prgDEX.Tag = "Goldenrod"
-        '
-        'prgMind
-        '
-        Me.prgMind.ForeColor = System.Drawing.Color.Lime
-        resources.ApplyResources(Me.prgMind, "prgMind")
-        Me.prgMind.Name = "prgMind"
-        Me.prgMind.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.prgMind.Tag = "Green"
-        '
-        'nudDEF
-        '
-        Me.nudDEF.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudDEF, "nudDEF")
-        Me.nudDEF.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudDEF.Name = "nudDEF"
-        Me.nudDEF.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
         'cmsMagatamaNud
         '
@@ -557,48 +486,6 @@ Partial Class frmMagatama
         Me.cmsNUDtoZero.Name = "cmsNUDtoZero"
         resources.ApplyResources(Me.cmsNUDtoZero, "cmsNUDtoZero")
         '
-        'nudIQ
-        '
-        Me.nudIQ.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudIQ, "nudIQ")
-        Me.nudIQ.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudIQ.Name = "nudIQ"
-        '
-        'nudLevel
-        '
-        resources.ApplyResources(Me.nudLevel, "nudLevel")
-        Me.nudLevel.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
-        Me.nudLevel.Name = "nudLevel"
-        Me.nudLevel.ReadOnly = True
-        '
-        'nudSynchro
-        '
-        Me.nudSynchro.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudSynchro, "nudSynchro")
-        Me.nudSynchro.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
-        Me.nudSynchro.Name = "nudSynchro"
-        '
-        'nudPOW
-        '
-        Me.nudPOW.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudPOW, "nudPOW")
-        Me.nudPOW.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudPOW.Name = "nudPOW"
-        '
-        'nudDEX
-        '
-        Me.nudDEX.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudDEX, "nudDEX")
-        Me.nudDEX.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudDEX.Name = "nudDEX"
-        '
-        'nudMIND
-        '
-        Me.nudMIND.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudMIND, "nudMIND")
-        Me.nudMIND.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudMIND.Name = "nudMIND"
-        '
         'rtfOutput
         '
         Me.rtfOutput.BackColor = System.Drawing.Color.White
@@ -670,66 +557,6 @@ Partial Class frmMagatama
         Me.cmsOpen.Name = "cmsOpen"
         resources.ApplyResources(Me.cmsOpen, "cmsOpen")
         '
-        'nudProgressDEF
-        '
-        Me.nudProgressDEF.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudProgressDEF, "nudProgressDEF")
-        Me.nudProgressDEF.Name = "nudProgressDEF"
-        '
-        'nudProgressPOW
-        '
-        Me.nudProgressPOW.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudProgressPOW, "nudProgressPOW")
-        Me.nudProgressPOW.Name = "nudProgressPOW"
-        '
-        'nudProgressDEX
-        '
-        Me.nudProgressDEX.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudProgressDEX, "nudProgressDEX")
-        Me.nudProgressDEX.Name = "nudProgressDEX"
-        '
-        'nudProgressMIND
-        '
-        Me.nudProgressMIND.ContextMenuStrip = Me.cmsMagatamaNud
-        resources.ApplyResources(Me.nudProgressMIND, "nudProgressMIND")
-        Me.nudProgressMIND.Name = "nudProgressMIND"
-        '
-        'picPhotonBlast02
-        '
-        Me.picPhotonBlast02.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.picPhotonBlast02, "picPhotonBlast02")
-        Me.picPhotonBlast02.Name = "picPhotonBlast02"
-        Me.picPhotonBlast02.TabStop = False
-        '
-        'picPhotonBlast03
-        '
-        Me.picPhotonBlast03.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.picPhotonBlast03, "picPhotonBlast03")
-        Me.picPhotonBlast03.Name = "picPhotonBlast03"
-        Me.picPhotonBlast03.TabStop = False
-        '
-        'picPhotonBlast01
-        '
-        Me.picPhotonBlast01.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.picPhotonBlast01, "picPhotonBlast01")
-        Me.picPhotonBlast01.Name = "picPhotonBlast01"
-        Me.picPhotonBlast01.TabStop = False
-        '
-        'picMag
-        '
-        Me.picMag.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.picMag, "picMag")
-        Me.picMag.Name = "picMag"
-        Me.picMag.TabStop = False
-        '
-        'picClass
-        '
-        Me.picClass.BackColor = System.Drawing.Color.Transparent
-        Me.picClass.ContextMenuStrip = Me.cmsMagatamaVoid
-        resources.ApplyResources(Me.picClass, "picClass")
-        Me.picClass.Name = "picClass"
-        Me.picClass.TabStop = False
-        '
         'lblCost
         '
         Me.lblCost.BackColor = System.Drawing.Color.Transparent
@@ -741,36 +568,6 @@ Partial Class frmMagatama
         Me.lblTime.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.lblTime, "lblTime")
         Me.lblTime.Name = "lblTime"
-        '
-        'lblPBFilled
-        '
-        Me.lblPBFilled.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblPBFilled, "lblPBFilled")
-        Me.lblPBFilled.Name = "lblPBFilled"
-        '
-        'lbl1HP10
-        '
-        Me.lbl1HP10.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lbl1HP10, "lbl1HP10")
-        Me.lbl1HP10.Name = "lbl1HP10"
-        '
-        'lblBoss
-        '
-        Me.lblBoss.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblBoss, "lblBoss")
-        Me.lblBoss.Name = "lblBoss"
-        '
-        'lblDeath
-        '
-        Me.lblDeath.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblDeath, "lblDeath")
-        Me.lblDeath.Name = "lblDeath"
-        '
-        'lblActivationPercent
-        '
-        Me.lblActivationPercent.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblActivationPercent, "lblActivationPercent")
-        Me.lblActivationPercent.Name = "lblActivationPercent"
         '
         'btnMagCell
         '
@@ -854,61 +651,6 @@ Partial Class frmMagatama
         Me.btnStarAtomizer.Name = "btnStarAtomizer"
         Me.btnStarAtomizer.Tag = "Atomizer"
         Me.btnStarAtomizer.UseVisualStyleBackColor = True
-        '
-        'lblLevel
-        '
-        Me.lblLevel.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblLevel, "lblLevel")
-        Me.lblLevel.Name = "lblLevel"
-        '
-        'lblSynchro
-        '
-        Me.lblSynchro.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblSynchro, "lblSynchro")
-        Me.lblSynchro.Name = "lblSynchro"
-        '
-        'lblIQ
-        '
-        Me.lblIQ.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblIQ, "lblIQ")
-        Me.lblIQ.Name = "lblIQ"
-        '
-        'lblPOW
-        '
-        Me.lblPOW.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblPOW, "lblPOW")
-        Me.lblPOW.Name = "lblPOW"
-        '
-        'lblDEX
-        '
-        Me.lblDEX.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblDEX, "lblDEX")
-        Me.lblDEX.Name = "lblDEX"
-        '
-        'lblDEF
-        '
-        Me.lblDEF.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblDEF, "lblDEF")
-        Me.lblDEF.Name = "lblDEF"
-        '
-        'lblMIND
-        '
-        Me.lblMIND.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblMIND, "lblMIND")
-        Me.lblMIND.Name = "lblMIND"
-        '
-        'picSectionID
-        '
-        Me.picSectionID.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.picSectionID, "picSectionID")
-        Me.picSectionID.Name = "picSectionID"
-        Me.picSectionID.TabStop = False
-        '
-        'lblActivation
-        '
-        Me.lblActivation.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblActivation, "lblActivation")
-        Me.lblActivation.Name = "lblActivation"
         '
         'nudQtyMonomate
         '
@@ -1217,30 +959,6 @@ Partial Class frmMagatama
         resources.ApplyResources(Me.lblCyclesCount, "lblCyclesCount")
         Me.lblCyclesCount.Name = "lblCyclesCount"
         '
-        'lblDeathText
-        '
-        Me.lblDeathText.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblDeathText, "lblDeathText")
-        Me.lblDeathText.Name = "lblDeathText"
-        '
-        'lblBossText
-        '
-        Me.lblBossText.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblBossText, "lblBossText")
-        Me.lblBossText.Name = "lblBossText"
-        '
-        'lbl1HP10Text
-        '
-        Me.lbl1HP10Text.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lbl1HP10Text, "lbl1HP10Text")
-        Me.lbl1HP10Text.Name = "lbl1HP10Text"
-        '
-        'lblPBFilledText
-        '
-        Me.lblPBFilledText.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblPBFilledText, "lblPBFilledText")
-        Me.lblPBFilledText.Name = "lblPBFilledText"
-        '
         'btnOutputSpace
         '
         resources.ApplyResources(Me.btnOutputSpace, "btnOutputSpace")
@@ -1382,12 +1100,334 @@ Partial Class frmMagatama
         Me.prgMassFeed.Maximum = 10
         Me.prgMassFeed.Name = "prgMassFeed"
         '
+        'cboClass
+        '
+        Me.cboClass.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboClass.FormattingEnabled = True
+        resources.ApplyResources(Me.cboClass, "cboClass")
+        Me.cboClass.Name = "cboClass"
+        '
+        'cboSectionID
+        '
+        Me.cboSectionID.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboSectionID.FormattingEnabled = True
+        resources.ApplyResources(Me.cboSectionID, "cboSectionID")
+        Me.cboSectionID.Name = "cboSectionID"
+        '
+        'cboPhotonBlast03
+        '
+        Me.cboPhotonBlast03.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboPhotonBlast03.FormattingEnabled = True
+        resources.ApplyResources(Me.cboPhotonBlast03, "cboPhotonBlast03")
+        Me.cboPhotonBlast03.Name = "cboPhotonBlast03"
+        '
+        'cboPhotonBlast02
+        '
+        Me.cboPhotonBlast02.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboPhotonBlast02.FormattingEnabled = True
+        resources.ApplyResources(Me.cboPhotonBlast02, "cboPhotonBlast02")
+        Me.cboPhotonBlast02.Name = "cboPhotonBlast02"
+        '
+        'cboPhotonBlast01
+        '
+        Me.cboPhotonBlast01.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboPhotonBlast01.FormattingEnabled = True
+        resources.ApplyResources(Me.cboPhotonBlast01, "cboPhotonBlast01")
+        Me.cboPhotonBlast01.Name = "cboPhotonBlast01"
+        '
+        'cboMag
+        '
+        Me.cboMag.ContextMenuStrip = Me.cmsMagatamaVoid
+        Me.cboMag.FormattingEnabled = True
+        Me.cboMag.Items.AddRange(New Object() {resources.GetString("cboMag.Items")})
+        resources.ApplyResources(Me.cboMag, "cboMag")
+        Me.cboMag.Name = "cboMag"
+        '
+        'picSectionID
+        '
+        Me.picSectionID.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.picSectionID, "picSectionID")
+        Me.picSectionID.Name = "picSectionID"
+        Me.picSectionID.TabStop = False
+        '
+        'picClass
+        '
+        Me.picClass.BackColor = System.Drawing.Color.Transparent
+        Me.picClass.ContextMenuStrip = Me.cmsMagatamaVoid
+        resources.ApplyResources(Me.picClass, "picClass")
+        Me.picClass.Name = "picClass"
+        Me.picClass.TabStop = False
+        '
+        'picMag
+        '
+        Me.picMag.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.picMag, "picMag")
+        Me.picMag.Name = "picMag"
+        Me.picMag.TabStop = False
+        '
+        'prgDEF
+        '
+        Me.prgDEF.ForeColor = System.Drawing.Color.Blue
+        resources.ApplyResources(Me.prgDEF, "prgDEF")
+        Me.prgDEF.Name = "prgDEF"
+        Me.prgDEF.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgDEF.Tag = "Blue"
+        '
+        'prgPOW
+        '
+        Me.prgPOW.ForeColor = System.Drawing.Color.Red
+        resources.ApplyResources(Me.prgPOW, "prgPOW")
+        Me.prgPOW.Name = "prgPOW"
+        Me.prgPOW.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgPOW.Tag = "Red"
+        '
+        'prgDEX
+        '
+        Me.prgDEX.ForeColor = System.Drawing.Color.Yellow
+        resources.ApplyResources(Me.prgDEX, "prgDEX")
+        Me.prgDEX.Name = "prgDEX"
+        Me.prgDEX.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgDEX.Tag = "Goldenrod"
+        '
+        'prgMind
+        '
+        Me.prgMind.ForeColor = System.Drawing.Color.Lime
+        resources.ApplyResources(Me.prgMind, "prgMind")
+        Me.prgMind.Name = "prgMind"
+        Me.prgMind.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.prgMind.Tag = "Green"
+        '
+        'nudDEF
+        '
+        Me.nudDEF.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudDEF, "nudDEF")
+        Me.nudDEF.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudDEF.Name = "nudDEF"
+        Me.nudDEF.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'nudIQ
+        '
+        Me.nudIQ.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudIQ, "nudIQ")
+        Me.nudIQ.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudIQ.Name = "nudIQ"
+        '
+        'nudLevel
+        '
+        resources.ApplyResources(Me.nudLevel, "nudLevel")
+        Me.nudLevel.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
+        Me.nudLevel.Name = "nudLevel"
+        Me.nudLevel.ReadOnly = True
+        '
+        'nudSynchro
+        '
+        Me.nudSynchro.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudSynchro, "nudSynchro")
+        Me.nudSynchro.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
+        Me.nudSynchro.Name = "nudSynchro"
+        '
+        'nudPOW
+        '
+        Me.nudPOW.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudPOW, "nudPOW")
+        Me.nudPOW.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudPOW.Name = "nudPOW"
+        '
+        'nudDEX
+        '
+        Me.nudDEX.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudDEX, "nudDEX")
+        Me.nudDEX.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudDEX.Name = "nudDEX"
+        '
+        'nudMIND
+        '
+        Me.nudMIND.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudMIND, "nudMIND")
+        Me.nudMIND.Maximum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.nudMIND.Name = "nudMIND"
+        '
+        'picPhotonBlast01
+        '
+        Me.picPhotonBlast01.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.picPhotonBlast01, "picPhotonBlast01")
+        Me.picPhotonBlast01.Name = "picPhotonBlast01"
+        Me.picPhotonBlast01.TabStop = False
+        '
+        'picPhotonBlast03
+        '
+        Me.picPhotonBlast03.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.picPhotonBlast03, "picPhotonBlast03")
+        Me.picPhotonBlast03.Name = "picPhotonBlast03"
+        Me.picPhotonBlast03.TabStop = False
+        '
+        'picPhotonBlast02
+        '
+        Me.picPhotonBlast02.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.picPhotonBlast02, "picPhotonBlast02")
+        Me.picPhotonBlast02.Name = "picPhotonBlast02"
+        Me.picPhotonBlast02.TabStop = False
+        '
+        'nudProgressDEF
+        '
+        Me.nudProgressDEF.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudProgressDEF, "nudProgressDEF")
+        Me.nudProgressDEF.Name = "nudProgressDEF"
+        '
+        'nudProgressPOW
+        '
+        Me.nudProgressPOW.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudProgressPOW, "nudProgressPOW")
+        Me.nudProgressPOW.Name = "nudProgressPOW"
+        '
+        'nudProgressDEX
+        '
+        Me.nudProgressDEX.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudProgressDEX, "nudProgressDEX")
+        Me.nudProgressDEX.Name = "nudProgressDEX"
+        '
+        'nudProgressMIND
+        '
+        Me.nudProgressMIND.ContextMenuStrip = Me.cmsMagatamaNud
+        resources.ApplyResources(Me.nudProgressMIND, "nudProgressMIND")
+        Me.nudProgressMIND.Name = "nudProgressMIND"
+        '
+        'lblPBFilled
+        '
+        Me.lblPBFilled.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblPBFilled, "lblPBFilled")
+        Me.lblPBFilled.Name = "lblPBFilled"
+        '
+        'lbl1HP10
+        '
+        Me.lbl1HP10.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lbl1HP10, "lbl1HP10")
+        Me.lbl1HP10.Name = "lbl1HP10"
+        '
+        'lblBoss
+        '
+        Me.lblBoss.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblBoss, "lblBoss")
+        Me.lblBoss.Name = "lblBoss"
+        '
+        'lblDeath
+        '
+        Me.lblDeath.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblDeath, "lblDeath")
+        Me.lblDeath.Name = "lblDeath"
+        '
+        'lblActivationPercent
+        '
+        Me.lblActivationPercent.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblActivationPercent, "lblActivationPercent")
+        Me.lblActivationPercent.Name = "lblActivationPercent"
+        '
+        'lblLevel
+        '
+        Me.lblLevel.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblLevel, "lblLevel")
+        Me.lblLevel.Name = "lblLevel"
+        '
+        'lblSynchro
+        '
+        Me.lblSynchro.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblSynchro, "lblSynchro")
+        Me.lblSynchro.Name = "lblSynchro"
+        '
+        'lblIQ
+        '
+        Me.lblIQ.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblIQ, "lblIQ")
+        Me.lblIQ.Name = "lblIQ"
+        '
+        'lblPOW
+        '
+        Me.lblPOW.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblPOW, "lblPOW")
+        Me.lblPOW.Name = "lblPOW"
+        '
+        'lblDEX
+        '
+        Me.lblDEX.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblDEX, "lblDEX")
+        Me.lblDEX.Name = "lblDEX"
+        '
+        'lblDEF
+        '
+        Me.lblDEF.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblDEF, "lblDEF")
+        Me.lblDEF.Name = "lblDEF"
+        '
+        'lblMIND
+        '
+        Me.lblMIND.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblMIND, "lblMIND")
+        Me.lblMIND.Name = "lblMIND"
+        '
+        'lblActivation
+        '
+        Me.lblActivation.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblActivation, "lblActivation")
+        Me.lblActivation.Name = "lblActivation"
+        '
+        'lblDeathText
+        '
+        Me.lblDeathText.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblDeathText, "lblDeathText")
+        Me.lblDeathText.Name = "lblDeathText"
+        '
+        'lblBossText
+        '
+        Me.lblBossText.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblBossText, "lblBossText")
+        Me.lblBossText.Name = "lblBossText"
+        '
+        'lbl1HP10Text
+        '
+        Me.lbl1HP10Text.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lbl1HP10Text, "lbl1HP10Text")
+        Me.lbl1HP10Text.Name = "lbl1HP10Text"
+        '
+        'lblPBFilledText
+        '
+        Me.lblPBFilledText.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.lblPBFilledText, "lblPBFilledText")
+        Me.lblPBFilledText.Name = "lblPBFilledText"
+        '
+        'pnlMassFeed
+        '
+        Me.pnlMassFeed.BackColor = System.Drawing.Color.Transparent
+        Me.pnlMassFeed.Controls.Add(Me.btnMFLRun)
+        Me.pnlMassFeed.Controls.Add(Me.rtfMFLInput)
+        resources.ApplyResources(Me.pnlMassFeed, "pnlMassFeed")
+        Me.pnlMassFeed.Name = "pnlMassFeed"
+        '
+        'btnMFLRun
+        '
+        Me.btnMFLRun.BackColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.btnMFLRun, "btnMFLRun")
+        Me.btnMFLRun.Name = "btnMFLRun"
+        Me.btnMFLRun.UseVisualStyleBackColor = False
+        '
+        'rtfMFLInput
+        '
+        resources.ApplyResources(Me.rtfMFLInput, "rtfMFLInput")
+        Me.rtfMFLInput.Name = "rtfMFLInput"
+        '
+        'rtfMFLOut
+        '
+        resources.ApplyResources(Me.rtfMFLOut, "rtfMFLOut")
+        Me.rtfMFLOut.Name = "rtfMFLOut"
+        Me.rtfMFLOut.ShortcutsEnabled = False
+        '
         'frmMagatama
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ContextMenuStrip = Me.cmsMagatamaMain
+        Me.Controls.Add(Me.pnlMassFeed)
+        Me.Controls.Add(Me.rtfMFLOut)
         Me.Controls.Add(Me.rtfExport)
         Me.Controls.Add(Me.lblHistoryCost)
         Me.Controls.Add(Me.nudHistoryCostStarAtomizer)
@@ -1504,25 +1544,8 @@ Partial Class frmMagatama
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.mnuMagatama.ResumeLayout(False)
         Me.mnuMagatama.PerformLayout()
-        CType(Me.nudDEF, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsMagatamaNud.ResumeLayout(False)
-        CType(Me.nudIQ, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSynchro, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudPOW, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudDEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMIND, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsMagatamaMain.ResumeLayout(False)
-        CType(Me.nudProgressDEF, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudProgressPOW, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudProgressDEX, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudProgressMIND, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picPhotonBlast02, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picPhotonBlast03, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picPhotonBlast01, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picMag, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picClass, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picSectionID, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudQtyMonomate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudQtyDimate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudQtyTrimate, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1559,54 +1582,40 @@ Partial Class frmMagatama
         CType(Me.nudHistoryCostMoonAtomizer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHistoryCostStarAtomizer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlLoading.ResumeLayout(False)
+        CType(Me.picSectionID, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picClass, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picMag, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDEF, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudIQ, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSynchro, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudPOW, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudDEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMIND, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPhotonBlast01, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPhotonBlast03, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picPhotonBlast02, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudProgressDEF, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudProgressPOW, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudProgressDEX, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudProgressMIND, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlMassFeed.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cboClass As ComboBox
-    Friend WithEvents cboSectionID As ComboBox
-    Friend WithEvents cboPhotonBlast03 As ComboBox
-    Friend WithEvents cboPhotonBlast02 As ComboBox
-    Friend WithEvents cboPhotonBlast01 As ComboBox
-    Friend WithEvents cboMag As ComboBox
     Friend WithEvents mnuMagatama As MenuStrip
     Friend WithEvents mnuFileMenu As ToolStripMenuItem
     Friend WithEvents mnuFileNew As ToolStripMenuItem
     Friend WithEvents mnuFileOpen As ToolStripMenuItem
     Friend WithEvents mnuFileSave As ToolStripMenuItem
     Friend WithEvents mnuFileExit As ToolStripMenuItem
-    Friend WithEvents picClass As PictureBox
     Friend WithEvents cboMagCell As ComboBox
-    Friend WithEvents picMag As PictureBox
-    Friend WithEvents prgDEF As ProgressBar
-    Friend WithEvents prgPOW As ProgressBar
-    Friend WithEvents prgDEX As ProgressBar
-    Friend WithEvents prgMind As ProgressBar
-    Friend WithEvents nudDEF As NumericUpDown
-    Friend WithEvents nudIQ As NumericUpDown
-    Friend WithEvents nudLevel As NumericUpDown
-    Friend WithEvents nudSynchro As NumericUpDown
-    Friend WithEvents nudPOW As NumericUpDown
-    Friend WithEvents nudDEX As NumericUpDown
-    Friend WithEvents nudMIND As NumericUpDown
-    Friend WithEvents picPhotonBlast01 As PictureBox
-    Friend WithEvents picPhotonBlast03 As PictureBox
-    Friend WithEvents picPhotonBlast02 As PictureBox
     Friend WithEvents rtfOutput As RichTextBox
-    Friend WithEvents nudProgressDEF As NumericUpDown
-    Friend WithEvents nudProgressPOW As NumericUpDown
-    Friend WithEvents nudProgressDEX As NumericUpDown
-    Friend WithEvents nudProgressMIND As NumericUpDown
     Friend WithEvents ttMagatama As ToolTip
     Friend WithEvents lblCost As Label
     Friend WithEvents lblTime As Label
     Friend WithEvents ofdMagatama As OpenFileDialog
-    Friend WithEvents lblPBFilled As Label
-    Friend WithEvents lbl1HP10 As Label
-    Friend WithEvents lblBoss As Label
-    Friend WithEvents lblDeath As Label
-    Friend WithEvents lblActivationPercent As Label
     Friend WithEvents btnMagCell As Button
     Friend WithEvents btnMonomate As Button
     Friend WithEvents btnDimate As Button
@@ -1619,15 +1628,6 @@ Partial Class frmMagatama
     Friend WithEvents btnSolAtomizer As Button
     Friend WithEvents btnMoonAtomizer As Button
     Friend WithEvents btnStarAtomizer As Button
-    Friend WithEvents lblLevel As Label
-    Friend WithEvents lblSynchro As Label
-    Friend WithEvents lblIQ As Label
-    Friend WithEvents lblPOW As Label
-    Friend WithEvents lblDEX As Label
-    Friend WithEvents lblDEF As Label
-    Friend WithEvents lblMIND As Label
-    Friend WithEvents picSectionID As PictureBox
-    Friend WithEvents lblActivation As Label
     Friend WithEvents nudQtyMonomate As NumericUpDown
     Friend WithEvents nudQtyDimate As NumericUpDown
     Friend WithEvents nudQtyTrimate As NumericUpDown
@@ -1667,10 +1667,6 @@ Partial Class frmMagatama
     Friend WithEvents lblCycles As Label
     Friend WithEvents lblCyclesCount As Label
     Friend WithEvents mnuFileSaveAs As ToolStripMenuItem
-    Friend WithEvents lblDeathText As Label
-    Friend WithEvents lblBossText As Label
-    Friend WithEvents lbl1HP10Text As Label
-    Friend WithEvents lblPBFilledText As Label
     Friend WithEvents btnOutputSpace As Button
     Friend WithEvents lblOutput As Label
     Friend WithEvents nudHistoryCostMonomate As NumericUpDown
@@ -1741,4 +1737,53 @@ Partial Class frmMagatama
     Friend WithEvents ctsHistoryMinus25 As ToolStripMenuItem
     Friend WithEvents ctsHistoryMinus250 As ToolStripMenuItem
     Friend WithEvents cmsNUDto3 As ToolStripMenuItem
+    Friend WithEvents cboSectionID As ComboBox
+    Friend WithEvents cboPhotonBlast03 As ComboBox
+    Friend WithEvents cboPhotonBlast02 As ComboBox
+    Friend WithEvents cboPhotonBlast01 As ComboBox
+    Friend WithEvents cboMag As ComboBox
+    Friend WithEvents picSectionID As PictureBox
+    Friend WithEvents picClass As PictureBox
+    Friend WithEvents picMag As PictureBox
+    Friend WithEvents prgDEF As ProgressBar
+    Friend WithEvents prgPOW As ProgressBar
+    Friend WithEvents prgDEX As ProgressBar
+    Friend WithEvents prgMind As ProgressBar
+    Friend WithEvents nudDEF As NumericUpDown
+    Friend WithEvents nudIQ As NumericUpDown
+    Friend WithEvents nudLevel As NumericUpDown
+    Friend WithEvents nudSynchro As NumericUpDown
+    Friend WithEvents nudPOW As NumericUpDown
+    Friend WithEvents nudDEX As NumericUpDown
+    Friend WithEvents nudMIND As NumericUpDown
+    Friend WithEvents picPhotonBlast01 As PictureBox
+    Friend WithEvents picPhotonBlast03 As PictureBox
+    Friend WithEvents picPhotonBlast02 As PictureBox
+    Friend WithEvents nudProgressDEF As NumericUpDown
+    Friend WithEvents nudProgressPOW As NumericUpDown
+    Friend WithEvents nudProgressDEX As NumericUpDown
+    Friend WithEvents nudProgressMIND As NumericUpDown
+    Friend WithEvents lblPBFilled As Label
+    Friend WithEvents lbl1HP10 As Label
+    Friend WithEvents lblBoss As Label
+    Friend WithEvents lblDeath As Label
+    Friend WithEvents lblActivationPercent As Label
+    Friend WithEvents lblLevel As Label
+    Friend WithEvents lblSynchro As Label
+    Friend WithEvents lblIQ As Label
+    Friend WithEvents lblPOW As Label
+    Friend WithEvents lblDEX As Label
+    Friend WithEvents lblDEF As Label
+    Friend WithEvents lblMIND As Label
+    Friend WithEvents lblActivation As Label
+    Friend WithEvents lblDeathText As Label
+    Friend WithEvents lblBossText As Label
+    Friend WithEvents lbl1HP10Text As Label
+    Friend WithEvents lblPBFilledText As Label
+    Friend WithEvents pnlMassFeed As Panel
+    Friend WithEvents rtfMFLInput As RichTextBox
+    Friend WithEvents rtfMFLOut As RichTextBox
+    Friend WithEvents mnuEditMFL As ToolStripMenuItem
+    Public WithEvents cboClass As ComboBox
+    Friend WithEvents btnMFLRun As Button
 End Class

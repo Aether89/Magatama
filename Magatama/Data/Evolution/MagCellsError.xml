@@ -56,16 +56,16 @@
 
 <Cell_22 cnd="Your Mag need to be a Kumara."/><!-- HeartofMorolian -->
 
-<Cell_22 cnd="Your Mag need to be at least Level 50."/><!-- PioneerParts -->
+<Cell_23 cnd="Your Mag need to be at least Level 50."/><!-- PioneerParts -->
 
-<Cell_23 cnd="Your Mag need to be a Chu Chu."/><!-- AmitiesMeno -->
+<Cell_24 cnd="Your Mag need to be a Chu Chu and be at least Level 50."/><!-- AmitiesMeno -->
 
-<Cell_24 cnd="Your Mag need to be at least Level 50."/><!-- RappyBeak -->
+<Cell_25 cnd="Your Mag need to be at least Level 50."/><!-- RappyBeak -->
 
-<Cell_25 cnd="Your Mag need to be a Garuda."/><!-- HeavenStrikerCoat -->
+<Cell_26 cnd="Your Mag need to be a Garuda."/><!-- HeavenStrikerCoat -->
 
-<Cell_26 cnd="Your Mag need to be a Kama."/><!-- DragonScale -->
+<Cell_27 cnd="Your Mag need to be a Kama."/><!-- DragonScale -->
 
-<Cell_27 cnd="Your Mag need to be at least Level 50."/><!-- YahoosEngine -->
+<Cell_28 cnd="Your Mag need to be at least Level 50."/><!-- YahoosEngine -->
 
 </Root>

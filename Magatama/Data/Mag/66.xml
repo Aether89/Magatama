@@ -9,4 +9,5 @@
 	<LowHP ID="3" desc="Resta" />
 	<Boss ID="1" desc="Invulnerability" />
 	<Death ID="1" desc="Reverser" />
+	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fswiss\fprq2\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sa160\sl252\slmult1\lang1033\f0\fs22 Evolve from a Level 50+ Mag when Feed \b Kit of Liberta\b0 .\lang4105\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>
