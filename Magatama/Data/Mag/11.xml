@@ -9,5 +9,4 @@
 	<LowHP ID="2" desc="Shifta / Deband" />
 	<Boss ID="0" desc="" />
 	<Death ID="0" desc="" />
-	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fnil\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;{\colortbl ;\red255\green192\blue0;}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\sl240\slmult1\lang9\f0\fs22 Evolve from a level 35 Vritra when meeting the following conditions.\par&#xD;&#xA;\par&#xD;&#xA;\cf1\b DEX \cf0 &gt; Others\lang4105\b0\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

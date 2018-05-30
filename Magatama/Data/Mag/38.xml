@@ -9,5 +9,4 @@
 	<LowHP ID="3" desc="Resta" />
 	<Boss ID="3" desc="Resta" />
 	<Death ID="1" desc="Reverser" />
-	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fswiss\fprq2\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;{\colortbl ;\red128\green255\blue0;\red0\green77\blue187;\red221\green132\blue132;\red255\green128\blue64;}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\nowidctlpar\lang9\f0\fs22 Evolve from a Level 100+ Mag when Feed \b Cell of MAG 502\b0  by the follwing Section ID :\b  \cf1 Greenill\cf0 , \cf2 Bluefull\cf0 , \cf3 Pinkal\cf0 ,\cf3  \cf4 Oran, \cf0 Whitill.\lang4105\b0\f1\rtlch\fs17\par&#xD;&#xA;\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

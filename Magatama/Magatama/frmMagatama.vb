@@ -10,6 +10,7 @@ Public Class frmMagatama
     Dim sdfSave As New SaveFileDialog()
     Dim fsoMFL, tsMFL
 
+
     Const MFLForReading = 1
     Dim strMFLLine, strMFLValue
 
@@ -95,7 +96,7 @@ Public Class frmMagatama
     Dim strEvoCND As String
     Dim strEvoCND2 As String
     Dim boolMassFeed As Boolean = False 'Used to determine if Mass Feed is Used or Not.
-
+    Dim boolMFL As Boolean = False
 
     ' nud uses to manipulate the appropriate nud when feeding a mag
     Dim nudQtyTmp As NumericUpDown 'Used to know which Quantity Column shoud be used when the Feeding function is called
@@ -2383,7 +2384,34 @@ MagLoadEnd:
 
 
         ElseIf shoProgress <= nudProgressStats.Minimum Then
-            nudProgressStats.Value = nudProgressStats.Minimum
+
+            If boolMFL = True Then
+                While shoProgress < nudProgressStats.Minimum
+
+                    nudProgressStats.Tag = shoProgress
+                    nudStats.Tag = nudStats.Value
+                    shoProgress = nudStats.Value - 1
+                    Call LevelSyncIQCheck()
+                    Call MagLevel()
+
+
+                    shoProgress = nudProgressStats.Tag
+                    If nudStats.Value = nudStats.Minimum Then
+
+
+                        If nudStats.Tag <> nudStats.Value Then
+                            shoProgress = (shoProgress + nudProgressStats.Maximum)
+                        Else
+                            shoProgress = nudProgressStats.Minimum
+                        End If
+                    Else
+                        shoProgress = (shoProgress + nudProgressStats.Maximum)
+                    End If
+                End While
+                nudProgressStats.Value = shoProgress
+            Else
+                nudProgressStats.Value = nudProgressStats.Minimum
+            End If
         Else
             nudProgressStats.Value = shoProgress
         End If
@@ -4701,7 +4729,89 @@ Evolve:
                             Call MFLAddStats2()
                     End Select
 
+                Case "setmag", "sm", "mag"
+                    If IsNumeric(strMFLValue(1)) = True Then
+
+                        If strMFLValue(1) <= cboMag.Items.Count - 1 Then
+
+                            If strMFLValue(1) < 0 Then
+                                cboMag.SelectedIndex = 0
+                            Else
+                                cboMag.SelectedIndex = strMFLValue(1)
+
+                            End If
+
+                        Else
+                                cboMag.SelectedIndex = cboMag.Items.Count - 1
+
+                        End If
+
+                    Else
+                        If strMFLValue(1).ToString.ToLower <> String.Empty Then
+                            ' Find the item in the list and store the index to the item.
+                            strTmp = cboMag.FindString(strMFLValue(1).ToString.ToLower)
+                            ' Determine if a valid index is returned. Select the item if it is valid.
+                            If strTmp <> -1 Then
+                                cboMag.SelectedIndex = strTmp
+                            End If
+                        End If
+                    End If
+
+                Case "feedcell", "cell", "fc"
+                    If IsNumeric(strMFLValue(1)) = True Then
+
+                        If strMFLValue(1) <= cboMagCell.Items.Count - 1 Then
+
+                            If strMFLValue(1) < 0 Then
+                                cboMagCell.SelectedIndex = 0
+                                btnMagCell.PerformClick()
+                            Else
+                                cboMagCell.SelectedIndex = strMFLValue(1)
+                                btnMagCell.PerformClick()
+                            End If
+
+                        Else
+                            cboMagCell.SelectedIndex = cboMagCell.Items.Count - 1
+                            btnMagCell.PerformClick()
+                        End If
+
+                    Else
+                        If strMFLValue(1).ToString.ToLower <> String.Empty Then
+                            Select Case strMFLValue.length
+
+                                Case = 2
+                                    strMFLValue(1) = strMFLValue(1)
+                                Case = 3
+                                    strMFLValue(1) = strMFLValue(1) & " " & strMFLValue(2)
+                                Case = 4
+                                    strMFLValue(1) = strMFLValue(1) & " " & strMFLValue(2) & " " & strMFLValue(3)
+                                Case = 5
+                                    strMFLValue(1) = strMFLValue(1) & " " & strMFLValue(2) & " " & strMFLValue(3) & " " & strMFLValue(4)
+                                Case = 6
+                                    strMFLValue(1) = strMFLValue(1) & " " & strMFLValue(2) & " " & strMFLValue(3) & " " & strMFLValue(4) & " " & strMFLValue(5)
+                                Case Else
+                                    strMFLValue(1) = 0
+                            End Select
+
+                            ' Find the item in the list and store the index to the item.
+                            strMFLValue(1) = strMFLValue(1).Replace("_", " ")
+                            strTmp = cboMagCell.FindString(strMFLValue(1).ToString.ToLower)
+                            ' Determine if a valid index is returned. Select the item if it is valid.
+                            If strTmp <> -1 Then
+                                cboMagCell.SelectedIndex = strTmp
+                                btnMagCell.PerformClick()
+                            End If
+                        End If
+                    End If
+
+
+
+
+
+
             End Select
+
+
 
         Loop
 
@@ -4737,7 +4847,9 @@ Evolve:
     Public Sub MFLAddStats2() 'Used by the add stats DEF POW DEX MIND
         strMFLValue(3) = (strMFLValue(2) * 100) + strMFLValue(3)
         shoProgress = strMFLValue(3) + nudProgressStats.Value
+        boolMFL = True
         Call StatsChecks()
+        boolMFL = False
     End Sub
 #End Region
 

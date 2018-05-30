@@ -2,12 +2,11 @@
 <root>
 	<Mag ID="25" Name="Madhu" Stage="3" GameVer="Ep1" />
 	<Table ID="6" />
-	<PhotonBlast ID="6" Name="Mylla" />
+	<PhotonBlast ID="6" Name="Mylla and Youlla" />
 	<!--Triggered Actions-->
 	<Activation Chance="20" />
 	<PB_Filled ID="1" desc="Invulnerability" />
 	<LowHP ID="3" desc="Resta" />
 	<Boss ID="2" desc="Shifta / Deband" />
 	<Death ID="1" desc="Reverser" />
-	<HowTo rtf="{\rtf1\fbidis\ansi\ansicpg1252\deff0\deflang4105{\fonttbl{\f0\fswiss\fprq2\fcharset0 Verdana;}{\f1\fnil\fcharset178 Microsoft Sans Serif;}}&#xD;&#xA;{\colortbl ;\red155\green187\blue89;\red0\green255\blue255;\red128\green255\blue0;\red0\green77\blue187;\red221\green132\blue132;\red255\green128\blue64;\red255\green0\blue0;\red0\green0\blue0;\red255\green192\blue0;}&#xD;&#xA;\viewkind4\uc1\pard\ltrpar\nowidctlpar\lang9\f0\fs22 First Evolve from a level 50 Mag then at every five level beyond when meeting the following conditions.\par&#xD;&#xA;\cf1\b\par&#xD;&#xA;\cf0 RA\b0 nger\cf2\b\par&#xD;&#xA;\cf3 Greenill\cf0 , \cf4 Bluefull\cf0 , \cf5 Pinkal\cf0 ,\cf5  \cf6 Oran, \cf0 Whitill\par&#xD;&#xA;\cf7 POW\cf8\lang1033  &gt;\cf0\lang9  \cf9 DEX\cf8\lang1033  \ul &gt;\cf0\lang9\ulnone  \cf1 MIND\cf0\lang4105\b0\f1\rtlch\fs17\par&#xD;&#xA;}&#xD;&#xA;" />
 </root>

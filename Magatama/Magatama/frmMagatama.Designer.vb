@@ -1426,7 +1426,6 @@ Partial Class frmMagatama
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ContextMenuStrip = Me.cmsMagatamaMain
-        Me.Controls.Add(Me.pnlMassFeed)
         Me.Controls.Add(Me.rtfMFLOut)
         Me.Controls.Add(Me.rtfExport)
         Me.Controls.Add(Me.lblHistoryCost)
@@ -1536,6 +1535,7 @@ Partial Class frmMagatama
         Me.Controls.Add(Me.cboClass)
         Me.Controls.Add(Me.mnuMagatama)
         Me.Controls.Add(Me.pnlLoading)
+        Me.Controls.Add(Me.pnlMassFeed)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MainMenuStrip = Me.mnuMagatama

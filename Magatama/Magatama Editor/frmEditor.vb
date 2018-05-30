@@ -47,7 +47,7 @@ Public Class frmEditor
             End While
 
             lsbEditorMag.SelectedIndex = 0
-
+            lsbEditorMag.Focus()
         End Using
     End Sub
 
@@ -201,9 +201,9 @@ Public Class frmEditor
         Call EditorPhotonBlastXML()
         Call EditorcboMagList()
         Call LoadFeedingChart()
-        picEditorMag.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_mag.png")
-        picEditorPhotonBlast.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_PB.png")
-        picPBIco.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor_PB.png")
+        picEditorMag.BackgroundImage = Image.FromFile("./Graphics/MagDex/Theme/bg_editor_mag.png")
+        picEditorPhotonBlast.BackgroundImage = Image.FromFile("./Graphics/MagDex/Theme/bg_editor_PB.png")
+        picPBIco.BackgroundImage = Image.FromFile("./Graphics/MagDex/Theme/bg_editor_PB.png")
 
     End Sub
 
@@ -215,8 +215,8 @@ Public Class frmEditor
         While shoEditorcboCount < shoEditorcboCountMax
             lsbEditorMag.SelectedIndex = shoEditorcboCount
             mnuEditorFileSaveMag.PerformClick()
-
             shoEditorcboCount = shoEditorcboCount + 1
+
         End While
 
     End Sub
@@ -232,6 +232,11 @@ Public Class frmEditor
 
 
     Public Sub EditorMagSave()
+
+        strEditorTmp = "./Data/MagDex/Mag/" & lsbEditorMag.SelectedIndex & ".rtf"
+        File.WriteAllText(strEditorTmp, rtfEditorHowTo.Rtf)
+
+
         XmlSaveEditor = XmlWriter.Create("./Data/Mag/" & lsbEditorMag.SelectedIndex & ".xml", XmlSettings)
         With XmlSaveEditor
 
@@ -289,13 +294,11 @@ Public Class frmEditor
             .WriteAttributeString("ID", cboEditorDeath.SelectedIndex)
             .WriteAttributeString("desc", cboEditorDeath.SelectedItem)
             .WriteEndElement()
-
-            .WriteStartElement("HowTo")
-            .WriteAttributeString("rtf", rtfEditorHowTo.Rtf)
-            .WriteEndElement()
-            .WriteEndDocument()
             .Close()
         End With
+
+
+
 
     End Sub
 
@@ -426,6 +429,12 @@ Public Class frmEditor
 
     Public Sub LoadMagData()
 
+        strEditorTmp = "./Data/MagDex/Mag/" & lsbEditorMag.SelectedIndex & ".rtf"
+
+        Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+            rtfEditorHowTo.LoadFile(fs, RichTextBoxStreamType.RichText)
+        End Using
+
         Using XmlLoadMag As XmlReader = XmlReader.Create("./Data/Mag/" & lsbEditorMag.SelectedIndex & ".xml")
 
             XmlLoadMag.ReadToFollowing("Mag")
@@ -468,10 +477,9 @@ Public Class frmEditor
             XmlLoadMag.ReadToFollowing("Death")
             XmlLoadMag.MoveToFirstAttribute()
             cboEditorDeath.SelectedIndex = XmlLoadMag.Value
-            XmlLoadMag.ReadToFollowing("HowTo")
-            XmlLoadMag.MoveToFirstAttribute()
-            rtfEditorHowTo.Rtf = XmlLoadMag.Value
         End Using
+
+
 
     End Sub
 
@@ -669,8 +677,6 @@ Public Class frmEditor
 
         ttEditor.SetToolTip(picEditorPhotonBlast, strEditorPhotonBlastText)
         ttEditor.SetToolTip(picEditorPB, strEditorPBText)
-
-        rtbEditorPB.Text = strEditorPBText
     End Sub
 
     Public Sub EditorPB() 'PhotonBlast data Text
@@ -689,7 +695,13 @@ Public Class frmEditor
 
         ttEditor.SetToolTip(picEditorPB, strEditorPBText)
 
-        rtbEditorPB.Text = strEditorPBText
+        lsbEditorPB.Tag = lsbEditorPB.SelectedIndex + 1
+        strEditorTmp = "./Data/MagDex/PhotonBlast/" & lsbEditorPB.Tag & ".rtf"
+
+        Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+            rtbEditorPB.LoadFile(fs, RichTextBoxStreamType.RichText)
+        End Using
+
     End Sub
 #End Region
 
@@ -697,8 +709,8 @@ Public Class frmEditor
         XmlSettings.Indent = True
         XmlSettings.IndentChars = (ControlChars.Tab)
         Me.Text = My.Settings.strSoft
-        Me.Icon = New Icon("./Graphics/Theme/editor.ico")
-        Me.BackgroundImage = Image.FromFile("./Graphics/Theme/bg_editor.png")
+        Me.Icon = New Icon("./Graphics/MagDex/Theme/editor.ico")
+        Me.BackgroundImage = Image.FromFile("./Graphics/MagDex/Theme/bg_editor.png")
         tabEditorMag.SelectedTab = tabEditorMagFeedingTable
         cboFeedVer.SelectedIndex = 1
         Call EditorInit()
@@ -712,16 +724,18 @@ Public Class frmEditor
         lblEditorMagName.Text = lsbEditorMag.SelectedItem
         lblMagID.Text = "ID : " & lsbEditorMag.SelectedIndex
         Call LoadMagData()
+
     End Sub
 
     Private Sub lsbEditorPB_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbEditorPB.SelectedValueChanged
         strEditorTmp = lsbEditorPB.SelectedIndex + 1
-        strPathEditorPicMag = Image.FromFile("./Graphics/PhotonBlast/ep3_" & strEditorTmp & ".png")
+        strPathEditorPicMag = Image.FromFile("./Graphics/MagDex/PhotonBlast/" & strEditorTmp & ".png")
         picEditorPB.Image = strPathEditorPicMag
         strPathEditorPicMag = Image.FromFile("./Graphics/PhotonBlast/" & strEditorTmp & ".png")
         picPBIco.Image = strPathEditorPicMag
         ttEditor.SetToolTip(picEditorMag, lsbEditorMag.SelectedItem)
         lblEditorPBName.Text = lsbEditorPB.SelectedItem
+
         Call EditorPB()
     End Sub
 
@@ -729,11 +743,8 @@ Public Class frmEditor
         lblEditorMagCellsName.Text = lsbEditorMagCells.SelectedItem
         lblMCID.Text = "ID :" & lsbEditorMagCells.SelectedIndex + 1
 
-        Call EditorPB()
-
-
         lsbEditorMagCells.Tag = lsbEditorMagCells.SelectedIndex + 1
-        strEditorTmp = "./Data/MagCells/" & lsbEditorMagCells.Tag & ".rtf"
+        strEditorTmp = "./Data/MagDex/MagCells/" & lsbEditorMagCells.Tag & ".rtf"
 
         Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
             rtbEditorMagCells.LoadFile(fs, RichTextBoxStreamType.RichText)
@@ -742,7 +753,7 @@ Public Class frmEditor
 
     Private Sub lsbMFL_SelectedValueChanged(sender As Object, e As EventArgs) Handles lsbMFL.SelectedValueChanged
 
-        strEditorTmp = "./Data/mfl/" & lsbMFL.SelectedItem & ".rtf"
+        strEditorTmp = "./Data/MagDex/MFl/" & lsbMFL.SelectedItem & ".rtf"
 
         Using fs As New IO.FileStream(strEditorTmp, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
             rtbMFL.LoadFile(fs, RichTextBoxStreamType.RichText)
@@ -754,20 +765,38 @@ Public Class frmEditor
         Call LoadFeedingChart()
     End Sub
 
-    Private Sub cboEditorPhotonBlast_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedIndexChanged
-        strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedIndex & ".png")
-        picEditorPhotonBlast.Image = strPathEditorPicPhotonBlast
-
-        Call EditorPhotonBlastXML()
-    End Sub
-
-
     Private Sub cboEditorPhotonBlast_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEditorPhotonBlast.SelectedIndexChanged
         strPathEditorPicPhotonBlast = Image.FromFile("./Graphics/PhotonBlast/" & cboEditorPhotonBlast.SelectedIndex & ".png")
         picEditorPhotonBlast.Image = strPathEditorPicPhotonBlast
 
         Call EditorPhotonBlastXML()
     End Sub
+
+    Private Sub nudEditorStage_ValueChanged(sender As Object, e As EventArgs) Handles nudEditorStage.ValueChanged
+        Select Case nudEditorStage.Value
+            Case = 1
+                strEditorTmp = "seagreen"
+            Case = 2
+                strEditorTmp = "steelblue"
+            Case = 3
+                strEditorTmp = "slateblue"
+            Case = 4
+                strEditorTmp = "goldenrod"
+            Case Else
+                strEditorTmp = "indianred"
+        End Select
+        lblEditorMagName.BackColor = Color.FromName(strEditorTmp)
+        lblMagID.BackColor = Color.FromName(strEditorTmp)
+        lblStage.BackColor = Color.FromName(strEditorTmp)
+        flpEditorMagVer.BackColor = Color.FromName(strEditorTmp)
+        lblEditorActivation.BackColor = Color.FromName(strEditorTmp)
+        lblEditorPBFilled.BackColor = Color.FromName(strEditorTmp)
+        lblEditor1HP10.BackColor = Color.FromName(strEditorTmp)
+        lblEditorBoss.BackColor = Color.FromName(strEditorTmp)
+        lblEditorDeath.BackColor = Color.FromName(strEditorTmp)
+        lblHex.BackColor = Color.FromName(strEditorTmp)
+    End Sub
+
 
 #End Region
 
@@ -800,15 +829,14 @@ Public Class frmEditor
 
     Public Sub SearchMag()
 
-        strEditorSearch = lsbEditorMag.Text
+        strEditorSearch = txtEditorSearchMag.Text
         ' Ensure we have a proper string to search for.
         If strEditorSearch <> String.Empty Then
             ' Find the item in the list and store the index to the item.
-            Dim index As Integer = lsbEditorMag.FindString(strEditorSearch)
+            strEditorTmp = lsbEditorMag.FindString(strEditorSearch)
             ' Determine if a valid index is returned. Select the item if it is valid.
-            If index <> -1 Then
-                lsbEditorMag.SetSelected(index, True)
-
+            If strEditorTmp <> -1 Then
+                lsbEditorMag.SelectedIndex = strEditorTmp
             End If
         End If
     End Sub
