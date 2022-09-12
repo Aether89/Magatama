@@ -11,7 +11,7 @@
 <!--DEX > MIND > POW-->
 <DEX_MIND_POW A="19" Aname="Nandin" B="20" Bname="Yaksa"/>
 <!--MIND > POW > DEX-->
-<MIND_POW_DEX A="21" Aname="Kabanda" B="22" Bname="Durga"/>
+<MIND_POW_DEX A="21" Aname="Kabanda" B="22" Bname="Bana"/>
 <!--MIND > DEX > POW-->
 <MIND_DEX_POW A="23" Aname="Ushasu" B="24" Bname="Soma"/>
 
